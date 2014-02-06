@@ -31,5 +31,4 @@ public class SQLiteOpenHelperClass extends SQLiteOpenHelper {
 			db.delete(WeaponContract.TABLE, null, null);
 		}
 	}
-
 }

@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">Marny</string>
-    <string name="action_settings">Paramètres</string>
+    <string name="menu_info">Informations</string>
+    <string name="info">Cette application à été créé par Nicolas SABOUREAU et
+         Martin CESBRON dans le cadre d\'un projet Android à l\'IIA.</string>
     <string name="welcome">Bienvenue !</string>
     <string name="start">Commencer</string>
 

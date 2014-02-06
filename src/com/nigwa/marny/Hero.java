@@ -10,9 +10,10 @@ public class Hero extends Object {
 	private Helmet helmet;
 	private Shield shield;
 	private Weapon weapon;
+	private int potion;
 
 	
-	public Hero(int health, int attack, int armor, int gold, Helmet helmet, Shield shield, Weapon weapon) {
+	public Hero(int health, int attack, int armor, int gold, Helmet helmet, Shield shield, Weapon weapon, int potion) {
 		this.health = health;
 		this.attack = attack;
 		this.setArmor(armor);
@@ -20,6 +21,7 @@ public class Hero extends Object {
 		this.helmet = helmet;
 		this.shield = shield;
 		this.weapon = weapon;
+		this.potion = potion;
 	}
 	
 	public int getHealth() {
@@ -78,6 +80,14 @@ public class Hero extends Object {
 		this.weapon = weapon;
 	}
 
+	public int getPotion() {
+		return potion;
+	}
+
+	public void setPotion(int potion) {
+		this.potion = potion;
+	}
+
 	
 	@Override
 	public String toString() {
@@ -87,5 +97,4 @@ public class Hero extends Object {
 				this.armor + " points d'armure et " + 
 				this.gold + " gold.";
 	}
-	
 }

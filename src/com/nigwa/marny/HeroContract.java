@@ -12,6 +12,7 @@ public class HeroContract {
 	public final static String COL_HELMET = "helmet";
 	public final static String COL_SHIELD = "shield";
 	public final static String COL_WEAPON = "weapon";
+	public final static String COL_POTION = "potion";
 	
 	public final static String[] COLS = { 
 		COL_ID, 
@@ -21,7 +22,8 @@ public class HeroContract {
 		COL_GOLD,
 		COL_HELMET,
 		COL_SHIELD,
-		COL_WEAPON };
+		COL_WEAPON,
+		COL_POTION };
 	
 	public final static String SCHEMA = "CREATE TABLE " + TABLE + " ("
 			+ COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -31,7 +33,8 @@ public class HeroContract {
 			+ COL_GOLD + " INTEGER NOT NULL,"
 			+ COL_HELMET + " INTEGER NOT NULL,"	
 			+ COL_WEAPON + " INTEGER NOT NULL,"
-			+ COL_SHIELD + " INTEGER NOT NULL"
+			+ COL_SHIELD + " INTEGER NOT NULL,"
+			+ COL_POTION + " INTEGER NOT NULL"
 			+ ")";
 }
 

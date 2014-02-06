@@ -1,9 +1,14 @@
 package com.nigwa.marny;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
@@ -20,6 +25,9 @@ public class HomeActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+
+		Button btn_info_hero = (Button) findViewById(R.id.home_btn_info_hero);
+		Button btn_go = (Button) findViewById(R.id.home_btn_go);
 		
 		String[] VALUES = { "1" };
 		
@@ -32,7 +40,7 @@ public class HomeActivity extends SherlockActivity {
 		db = dbHelper.getWritableDatabase();
 		
 		
-		Cursor c = db.query(HeroContract.TABLE , HeroContract.COLS, "id LIKE" 
+		Cursor c = db.query(HeroContract.TABLE , HeroContract.COLS, "id LIKE ?" 
 				,VALUES, null,
 				null, null) ;
 		c.moveToFirst();
@@ -70,7 +78,58 @@ public class HomeActivity extends SherlockActivity {
 			
 		} while ( c.moveToNext() );
 		
-		Toast.makeText(this, myHero.toString(),Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, myHero.toString(),Toast.LENGTH_LONG).show();
+		btn_info_hero.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				new AlertDialog.Builder(HomeActivity.this)
+			    .setTitle("Informations du héro")
+			    .setMessage(getApplicationContext().getString(R.string.health) 
+			    			+ myHero.getHealth() + "\n"
+			    			+ getApplicationContext().getString(R.string.attack)
+			    			+ myHero.getAttack()+"\n"
+			    			+ getApplicationContext().getString(R.string.armor)
+			    			+ myHero.getArmor()+"\n"
+			    			+ getApplicationContext().getString(R.string.gold)
+			    			+ myHero.getGold() + "\n"
+			    			+ getApplicationContext().getString(R.string.helmet)
+			    			+ myHero.getHelmet() + "\n"
+			    			+ getApplicationContext().getString(R.string.shield)
+			    			+ myHero.getShield() + "\n"
+			    			+ getApplicationContext().getString(R.string.weapon)
+			    			+ myHero.getWeapon() + "\n"
+			    			+ getApplicationContext().getString(R.string.potion)
+			    			+ myHero.getPotion())
+			    .setPositiveButton(android.R.string.ok, 
+			    		new DialogInterface.OnClickListener() {
+					        public void onClick(
+					        		DialogInterface dialog, int which) { 
+					            // continue with delete
+					        }
+			     })
+			    .setIcon(R.drawable.ic_info_small)
+			     .show();
+			}
+		});
+		
+		
+		btn_go.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				int myRandom = Tools.random(20);
+				if(myRandom >= 0 && myRandom <= 12) {
+					startActivity(new Intent(HomeActivity.this, MonsterActivity.class));
+				} else if(myRandom >= 13 && myRandom <= 16 ) {
+					startActivity(new Intent(HomeActivity.this, GoldRoomActivity.class));
+				} else if(myRandom >= 17 && myRandom <= 18 ) {
+					startActivity(new Intent(HomeActivity.this, ShopRoomActivity.class));
+				} else {
+					startActivity(new Intent(HomeActivity.this, RestRoomActivity.class));
+				}
+			}
+		});
 	}
-
 }

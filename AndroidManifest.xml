@@ -19,7 +19,6 @@
             android:label="@string/app_name" >
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,6 +31,30 @@
         <activity
             android:name="com.nigwa.marny.HomeActivity"
             android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="com.nigwa.marny.MonsterActivity"
+            android:label="@string/app_name"
+            android:noHistory="true" >
+        </activity>
+        
+        <activity
+            android:name="com.nigwa.marny.RestRoomActivity"
+            android:label="@string/app_name"
+            android:noHistory="true" >
+        </activity>
+        
+        <activity
+            android:name="com.nigwa.marny.ShopRoomActivity"
+            android:label="@string/app_name"
+            android:noHistory="true" >
+        </activity>
+        
+        <activity
+            android:name="com.nigwa.marny.GoldRoomActivity"
+            android:label="@string/app_name"
+            android:noHistory="true" >
         </activity>
     </application>
 

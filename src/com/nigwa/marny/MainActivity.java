@@ -56,12 +56,6 @@ public class MainActivity extends SherlockActivity {
 
 		db = dbHelper.getWritableDatabase();
 		
-		db.execSQL("DELETE FROM " + HeroContract.TABLE);
-		db.execSQL("DELETE FROM " + MonsterContract.TABLE);
-		db.execSQL("DELETE FROM " + HelmetContract.TABLE);
-		db.execSQL("DELETE FROM " + ShieldContract.TABLE);
-		db.execSQL("DELETE FROM " + WeaponContract.TABLE);
-		this.fillBDD();
 		
 		//Si la database n'existe pas dans les préférences ont en fait la créer
 		if(settings.getBoolean("database", false)) {
@@ -97,7 +91,7 @@ public class MainActivity extends SherlockActivity {
 		new AlertDialog.Builder(this)
 	    .setTitle(R.string.menu_info)
 	    .setMessage(R.string.info)
-	    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+	    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) { 
 	            // Fermeture de la fenêtre
 	        }

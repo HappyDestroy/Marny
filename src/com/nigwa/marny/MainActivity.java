@@ -124,7 +124,12 @@ public class MainActivity extends SherlockActivity {
 		
 		db.insert(HeroContract.TABLE, null, valuesHero);
 		
+		//Insertion BDD
+		db.insert(HeroContract.TABLE, null, valuesHero);
 
+		
+		
+		
 		/******** MONSTRES ************/
 		ContentValues valuesMonster1 = new ContentValues();
 		//Ajout du montre lvl 1 - Larbin
@@ -132,21 +137,22 @@ public class MainActivity extends SherlockActivity {
 		valuesMonster1.put(MonsterContract.COL_HEALTH, 20);
 		valuesMonster1.put(MonsterContract.COL_ATTACK, 5);
 		valuesMonster1.put(MonsterContract.COL_ARMOR, 0);
+		//Insertion BDD
+		db.insert(MonsterContract.TABLE, null, valuesMonster1);		
 
-		db.insert(MonsterContract.TABLE, null, valuesMonster1);
 		
-
 		ContentValues valuesMonster2 = new ContentValues();
 		//Ajout du monstre lvl 2 - Soldat
 		valuesMonster2.put(MonsterContract.COL_RANK, 2);
 		valuesMonster2.put(MonsterContract.COL_HEALTH, 45);
 		valuesMonster2.put(MonsterContract.COL_ATTACK, 10);
 		valuesMonster2.put(MonsterContract.COL_ARMOR, 10);
-
+		//Insertion BDD
 		db.insert(MonsterContract.TABLE, null, valuesMonster2);
 		
+		
 		ContentValues valuesMonster3 = new ContentValues();
-		//Ajout du monstre lvl 2 - Capitaine
+		// Ajout Monstre lvl 3 - Captain
 		valuesMonster3.put(MonsterContract.COL_RANK, 3);
 		valuesMonster3.put(MonsterContract.COL_HEALTH, 80);
 		valuesMonster3.put(MonsterContract.COL_ATTACK, 50);
@@ -156,7 +162,7 @@ public class MainActivity extends SherlockActivity {
 		
 
 		ContentValues valuesMonster4 = new ContentValues();
-		//Ajout du monstre lvl 2 - Capitaine
+		// Ajout Monstre lvl 4
 		valuesMonster4.put(MonsterContract.COL_RANK, 4);
 		valuesMonster4.put(MonsterContract.COL_HEALTH, 190);
 		valuesMonster4.put(MonsterContract.COL_ATTACK, 80);
@@ -167,53 +173,128 @@ public class MainActivity extends SherlockActivity {
 		
 		
 		
-		/*********** BOUCLIERs *************/
+		/************ CASQUES *************/
+		ContentValues valuesHelmet1 = new ContentValues();
+		// Ajout Helmet lvl 1
+		valuesHelmet1.put(HelmetContract.COL_HEALTHVALUE, 10);
+		valuesHelmet1.put(HelmetContract.COL_ATTACKVALUE, 0);
+		valuesHelmet1.put(HelmetContract.COL_ARMORVALUE, 0);
+		valuesHelmet1.put(HelmetContract.COL_PRICE, 50);
+		
+		db.insert(HelmetContract.TABLE, null, valuesHelmet1);
+		
+		
+		ContentValues valuesHelmet2 = new ContentValues();
+		// Ajout Helmet lvl 2
+		valuesHelmet2.put(HelmetContract.COL_HEALTHVALUE, 15);
+		valuesHelmet2.put(HelmetContract.COL_ATTACKVALUE, 0);
+		valuesHelmet2.put(HelmetContract.COL_ARMORVALUE, 5);
+		valuesHelmet2.put(HelmetContract.COL_PRICE, 120);
+		
+		db.insert(HelmetContract.TABLE, null, valuesHelmet2);
+		
+		
+		ContentValues valuesHelmet3 = new ContentValues();
+		// Ajout Helmet lvl 3
+		valuesHelmet3.put(HelmetContract.COL_HEALTHVALUE, 30);
+		valuesHelmet3.put(HelmetContract.COL_ATTACKVALUE, 0);
+		valuesHelmet3.put(HelmetContract.COL_ARMORVALUE, 15);
+		valuesHelmet3.put(HelmetContract.COL_PRICE, 220);
+		
+		db.insert(HelmetContract.TABLE, null, valuesHelmet3);
+		
+		
+		ContentValues valuesHelmet4 = new ContentValues();
+		// Ajout Helmet lvl 4
+		valuesHelmet4.put(HelmetContract.COL_HEALTHVALUE, 45);
+		valuesHelmet4.put(HelmetContract.COL_ATTACKVALUE, 0);
+		valuesHelmet4.put(HelmetContract.COL_ARMORVALUE, 20);
+		valuesHelmet4.put(HelmetContract.COL_PRICE, 450);
+		db.insert(HelmetContract.TABLE, null, valuesHelmet4);
+
+		
+		
+		
+		/*********** BOUCLIER ***************/
 		ContentValues valuesShield1 = new ContentValues();
-		//Ajout du bouclier de lvl 1
-		valuesShield1.put(ShieldContract.COL_HEALTHVALUE, 0);
+		// Ajout shields lvl 1
+		valuesShield1.put(ShieldContract.COL_HEALTHVALUE, 10);
 		valuesShield1.put(ShieldContract.COL_ATTACKVALUE, 0);
-		valuesShield1.put(ShieldContract.COL_ARMORVALUE, 10);
-		valuesShield1.put(ShieldContract.COL_PRICE, 10);
+		valuesShield1.put(ShieldContract.COL_ARMORVALUE, 0);
+		valuesShield1.put(ShieldContract.COL_PRICE, 50);
 		
 		db.insert(ShieldContract.TABLE, null, valuesShield1);
 		
-
+		
 		ContentValues valuesShield2 = new ContentValues();
-		//Ajout du bouclier de lvl 2
-		valuesShield2.put(ShieldContract.COL_HEALTHVALUE, 0);
-		valuesShield2.put(ShieldContract.COL_ATTACKVALUE, 5);
-		valuesShield2.put(ShieldContract.COL_ARMORVALUE, 15);
+		// Ajout shields lvl 2
+		valuesShield2.put(ShieldContract.COL_HEALTHVALUE, 15);
+		valuesShield2.put(ShieldContract.COL_ATTACKVALUE, 0);
+		valuesShield2.put(ShieldContract.COL_ARMORVALUE, 5);
 		valuesShield2.put(ShieldContract.COL_PRICE, 120);
 		
 		db.insert(ShieldContract.TABLE, null, valuesShield2);
 		
-
+		
 		ContentValues valuesShield3 = new ContentValues();
-		//Ajout du bouclier de lvl 3
-		valuesShield3.put(ShieldContract.COL_HEALTHVALUE, 0);
-		valuesShield3.put(ShieldContract.COL_ATTACKVALUE, 15);
-		valuesShield3.put(ShieldContract.COL_ARMORVALUE, 30);
+		// Ajout shields lvl 3
+		valuesShield3.put(ShieldContract.COL_HEALTHVALUE, 30);
+		valuesShield3.put(ShieldContract.COL_ATTACKVALUE, 0);
+		valuesShield3.put(ShieldContract.COL_ARMORVALUE, 15);
 		valuesShield3.put(ShieldContract.COL_PRICE, 220);
 		
 		db.insert(ShieldContract.TABLE, null, valuesShield3);
 		
-
+		
 		ContentValues valuesShield4 = new ContentValues();
-		//Ajout du bouclier de lvl 4
-		valuesShield4.put(ShieldContract.COL_HEALTHVALUE, 0);
-		valuesShield4.put(ShieldContract.COL_ATTACKVALUE, 20);
-		valuesShield4.put(ShieldContract.COL_ARMORVALUE, 45);
-		valuesShield4.put(ShieldContract.COL_PRICE, 10);
+		// Ajout shields lvl 4
+		valuesShield4.put(ShieldContract.COL_HEALTHVALUE, 45);
+		valuesShield4.put(ShieldContract.COL_ATTACKVALUE, 0);
+		valuesShield4.put(ShieldContract.COL_ARMORVALUE, 20);
+		valuesShield4.put(ShieldContract.COL_PRICE, 450);
 		
 		db.insert(ShieldContract.TABLE, null, valuesShield4);
 		
 		
-		/************ CASQUES *************/
-		ContentValues valuesHelmet1 = new ContentValues();
-		//ajout du casque lvl 1
-		valuesHelmet1.put(HelmetContract.COL_HEALTHVALUE, 0);
-		valuesHelmet1.put(HelmetContract.COL_ATTACKVALUE, 0);
-		valuesHelmet1.put(HelmetContract.COL_ARMORVALUE, 0);
-		valuesHelmet1.put(HelmetContract.COL_PRICE, 0);
+		
+		/*********** ARMES ************/
+		ContentValues valuesWeapon1 = new ContentValues();
+		// Ajout weapon lvl 1
+		valuesWeapon1.put(WeaponContract.COL_HEALTHVALUE, 0);
+		valuesWeapon1.put(WeaponContract.COL_ATTACKVALUE, 10);
+		valuesWeapon1.put(WeaponContract.COL_ARMORVALUE, 0);
+		valuesWeapon1.put(WeaponContract.COL_PRICE, 50);
+		
+		db.insert(WeaponContract.TABLE, null, valuesWeapon1);
+		
+		
+		ContentValues valuesWeapon2 = new ContentValues();
+		// Ajout weapon lvl 2
+		valuesWeapon2.put(WeaponContract.COL_HEALTHVALUE, 0);
+		valuesWeapon2.put(WeaponContract.COL_ATTACKVALUE, 30);
+		valuesWeapon2.put(WeaponContract.COL_ARMORVALUE, 0);
+		valuesWeapon2.put(WeaponContract.COL_PRICE, 120);
+		
+		db.insert(WeaponContract.TABLE, null, valuesWeapon2);
+		
+		
+		ContentValues valuesWeapon3 = new ContentValues();
+		// Ajout weapon lvl 3
+		valuesWeapon3.put(WeaponContract.COL_HEALTHVALUE, 0);
+		valuesWeapon3.put(WeaponContract.COL_ATTACKVALUE, 45);
+		valuesWeapon3.put(WeaponContract.COL_ARMORVALUE, 0);
+		valuesWeapon3.put(WeaponContract.COL_PRICE, 220);
+		
+		db.insert(WeaponContract.TABLE, null, valuesWeapon3);
+		
+		
+		ContentValues valuesWeapon4 = new ContentValues();
+		// Ajout weapon lvl 4
+		valuesWeapon4.put(WeaponContract.COL_HEALTHVALUE, 0);
+		valuesWeapon4.put(WeaponContract.COL_ATTACKVALUE, 60);
+		valuesWeapon4.put(WeaponContract.COL_ARMORVALUE, 0);
+		valuesWeapon4.put(WeaponContract.COL_PRICE, 450);
+		
+		db.insert(WeaponContract.TABLE, null, valuesWeapon4);
 	}
 }

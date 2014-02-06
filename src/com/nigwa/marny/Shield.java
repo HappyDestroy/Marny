@@ -6,13 +6,15 @@ public class Shield {
 	private int healthValue;
 	private int attackValue;
 	private int armorValue;
+	private int price;
 	
 	
-	public Shield(int id, int healthValue, int attackValue, int armorValue) {
+	public Shield(int id, int healthValue, int attackValue, int armorValue, int price) {
 		this.setId(id);
 		this.healthValue = healthValue;
 		this.attackValue = attackValue;
 		this.armorValue = armorValue;
+		this.price = price;
 	}
 	
 	public int getHealthValue() {
@@ -48,11 +50,20 @@ public class Shield {
 	}
 
 	
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
 		return "C'est un bouclier qui apporte " 
 				+ this.armorValue + " point(s) d'armure, "
 				+ this.healthValue + " point(s) de vie, "
-				+ this.attackValue + " point(s) d'attaque, ";
+				+ this.attackValue + " point(s) d'attaque, "
+				+ this.price + " golds";
 	}
 }

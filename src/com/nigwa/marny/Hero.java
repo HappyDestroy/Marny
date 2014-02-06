@@ -13,8 +13,7 @@ public class Hero extends Object {
 	private int potion;
 
 	
-	public Hero(int health, int attack, int armor, int gold, Helmet helmet, 
-			Shield shield, Weapon weapon, int potion) {
+	public Hero(int health, int attack, int armor, int gold, Helmet helmet, Shield shield, Weapon weapon, int potion) {
 		this.health = health;
 		this.attack = attack;
 		this.setArmor(armor);

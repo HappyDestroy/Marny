@@ -19,7 +19,7 @@ public class MonsterContract {
 	
 	public final static String SCHEMA = "CREATE TABLE " + TABLE + " ("
 			+ COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"
-			+ COL_RANK + " INTEGER NOT NULL"
+			+ COL_RANK + " INTEGER NOT NULL,"
 			+ COL_HEALTH + " INTEGER NOT NULL,"
 			+ COL_ATTACK + " INTEGER NOT NULL,"
 			+ COL_ARMOR + " INTEGER NOT NULL"

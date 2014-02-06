@@ -17,7 +17,7 @@ public class HelmetContract {
 	
 	public final static String SCHEMA = "CREATE TABLE " + TABLE + " ("
 			+ COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"
-			+ COL_HEALTHVALUE + " INTEGER NOT NULL"
+			+ COL_HEALTHVALUE + " INTEGER NOT NULL,"
 			+ COL_ATTACKVALUE + " INTEGER NOT NULL,"
 			+ COL_ARMORVALUE + " INTEGER NOT NULL"
 			+ ")";

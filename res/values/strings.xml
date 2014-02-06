@@ -7,5 +7,6 @@
          Martin CESBRON dans le cadre d\'un projet Android à l\'IIA.</string>
     <string name="welcome">Bienvenue !</string>
     <string name="start">Commencer</string>
+    <string name="empty">vide</string>
 
 </resources>

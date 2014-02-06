@@ -3,10 +3,21 @@
 
     <string name="app_name">Marny</string>
     <string name="menu_info">Informations</string>
+    
     <string name="info">Cette application à été créé par Nicolas SABOUREAU et
          Martin CESBRON dans le cadre d\'un projet Android à l\'IIA.</string>
-    <string name="welcome">Bienvenue !</string>
+         
+    
     <string name="start">Commencer</string>
+    
+    
+    <string name="home_welcome">Bienvenue, aventurier. Choisis ce que tu veux 
+        faire avant d\'entrer dans le chateau.</string>
+        
+    <string name="home_shop">Faire un tour dans la boutique</string>
+    <string name="home_go">Partir à l\'assaut du chateau</string>
+    
+    
     <string name="empty">vide</string>
 
 </resources>

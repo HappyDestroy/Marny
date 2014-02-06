@@ -6,13 +6,15 @@ public class Helmet {
 	private int healthValue;
 	private int attackValue;
 	private int armorValue;
+	private int price;
 	
 	
-	public Helmet(int id, int healthValue, int attackValue, int armorValue) {
+	public Helmet(int id, int healthValue, int attackValue, int armorValue, int price) {
 		this.setId(id);
 		this.healthValue = healthValue;
 		this.attackValue = attackValue;
 		this.armorValue = armorValue;
+		this.setPrice(price);
 	}
 	
 	
@@ -39,6 +41,16 @@ public class Helmet {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+
+
+	public int getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	
 	

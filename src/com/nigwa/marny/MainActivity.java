@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -43,7 +44,7 @@ public class MainActivity extends SherlockActivity {
 			
 			@Override
 			public void onClick(View v) {
-				
+				startActivity(new Intent(MainActivity.this, HomeActivity.class));
 			}
 		});
 
@@ -55,19 +56,21 @@ public class MainActivity extends SherlockActivity {
 
 		db = dbHelper.getWritableDatabase();
 		
+		db.execSQL("DELETE FROM " + HeroContract.TABLE);
+		db.execSQL("DELETE FROM " + MonsterContract.TABLE);
 		this.fillBDD();
 		
 		//Si la database n'existe pas dans les préférences ont en fait la créer
-		/*if(settings.getBoolean("database", false)) {
-
+		if(settings.getBoolean("database", false)) {
+			
 		}
 		else {
 			this.fillBDD();
-			SharedPreferences.Editor editor = settings.edit();
 			
+			SharedPreferences.Editor editor = settings.edit();
 			editor.putBoolean("database", true);
 			editor.commit();
-		}*/
+		}
 		
 	}
 
@@ -107,6 +110,7 @@ public class MainActivity extends SherlockActivity {
 	 */
 	private void fillBDD() {
 		
+		/******* HERO *********/
 		ContentValues valuesHero = new ContentValues();
 		// Ajout du Héro
 		valuesHero.put(HeroContract.COL_HEALTH, 50);
@@ -116,10 +120,12 @@ public class MainActivity extends SherlockActivity {
 		valuesHero.put(HeroContract.COL_HELMET, 0);
 		valuesHero.put(HeroContract.COL_SHIELD, 0);
 		valuesHero.put(HeroContract.COL_WEAPON, 0);
+		valuesHero.put(HeroContract.COL_POTION, 0);
 		
 		db.insert(HeroContract.TABLE, null, valuesHero);
 		
 
+		/******** MONSTRES ************/
 		ContentValues valuesMonster1 = new ContentValues();
 		//Ajout du montre lvl 1 - Larbin
 		valuesMonster1.put(MonsterContract.COL_RANK, 1);
@@ -139,5 +145,75 @@ public class MainActivity extends SherlockActivity {
 
 		db.insert(MonsterContract.TABLE, null, valuesMonster2);
 		
+		ContentValues valuesMonster3 = new ContentValues();
+		//Ajout du monstre lvl 2 - Capitaine
+		valuesMonster3.put(MonsterContract.COL_RANK, 3);
+		valuesMonster3.put(MonsterContract.COL_HEALTH, 80);
+		valuesMonster3.put(MonsterContract.COL_ATTACK, 50);
+		valuesMonster3.put(MonsterContract.COL_ARMOR, 40);
+
+		db.insert(MonsterContract.TABLE, null, valuesMonster3);
+		
+
+		ContentValues valuesMonster4 = new ContentValues();
+		//Ajout du monstre lvl 2 - Capitaine
+		valuesMonster4.put(MonsterContract.COL_RANK, 4);
+		valuesMonster4.put(MonsterContract.COL_HEALTH, 190);
+		valuesMonster4.put(MonsterContract.COL_ATTACK, 80);
+		valuesMonster4.put(MonsterContract.COL_ARMOR, 80);
+
+		db.insert(MonsterContract.TABLE, null, valuesMonster4);
+		
+		
+		
+		
+		/*********** BOUCLIERs *************/
+		ContentValues valuesShield1 = new ContentValues();
+		//Ajout du bouclier de lvl 1
+		valuesShield1.put(ShieldContract.COL_HEALTHVALUE, 0);
+		valuesShield1.put(ShieldContract.COL_ATTACKVALUE, 0);
+		valuesShield1.put(ShieldContract.COL_ARMORVALUE, 10);
+		valuesShield1.put(ShieldContract.COL_PRICE, 10);
+		
+		db.insert(ShieldContract.TABLE, null, valuesShield1);
+		
+
+		ContentValues valuesShield2 = new ContentValues();
+		//Ajout du bouclier de lvl 2
+		valuesShield2.put(ShieldContract.COL_HEALTHVALUE, 0);
+		valuesShield2.put(ShieldContract.COL_ATTACKVALUE, 5);
+		valuesShield2.put(ShieldContract.COL_ARMORVALUE, 15);
+		valuesShield2.put(ShieldContract.COL_PRICE, 120);
+		
+		db.insert(ShieldContract.TABLE, null, valuesShield2);
+		
+
+		ContentValues valuesShield3 = new ContentValues();
+		//Ajout du bouclier de lvl 3
+		valuesShield3.put(ShieldContract.COL_HEALTHVALUE, 0);
+		valuesShield3.put(ShieldContract.COL_ATTACKVALUE, 15);
+		valuesShield3.put(ShieldContract.COL_ARMORVALUE, 30);
+		valuesShield3.put(ShieldContract.COL_PRICE, 220);
+		
+		db.insert(ShieldContract.TABLE, null, valuesShield3);
+		
+
+		ContentValues valuesShield4 = new ContentValues();
+		//Ajout du bouclier de lvl 4
+		valuesShield4.put(ShieldContract.COL_HEALTHVALUE, 0);
+		valuesShield4.put(ShieldContract.COL_ATTACKVALUE, 20);
+		valuesShield4.put(ShieldContract.COL_ARMORVALUE, 45);
+		valuesShield4.put(ShieldContract.COL_PRICE, 10);
+		
+		db.insert(ShieldContract.TABLE, null, valuesShield4);
+		
+		
+		/************ CASQUES *************/
+		ContentValues valuesHelmet1 = new ContentValues();
+		//ajout du casque lvl 1
+		valuesHelmet1.put(HelmetContract.COL_HEALTHVALUE, 0);
+		valuesHelmet1.put(HelmetContract.COL_ATTACKVALUE, 0);
+		valuesHelmet1.put(HelmetContract.COL_ARMORVALUE, 0);
+		valuesHelmet1.put(HelmetContract.COL_PRICE, 0);
 	}
 }

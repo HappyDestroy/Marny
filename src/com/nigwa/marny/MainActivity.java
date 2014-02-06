@@ -58,6 +58,9 @@ public class MainActivity extends SherlockActivity {
 		
 		db.execSQL("DELETE FROM " + HeroContract.TABLE);
 		db.execSQL("DELETE FROM " + MonsterContract.TABLE);
+		db.execSQL("DELETE FROM " + HelmetContract.TABLE);
+		db.execSQL("DELETE FROM " + ShieldContract.TABLE);
+		db.execSQL("DELETE FROM " + WeaponContract.TABLE);
 		this.fillBDD();
 		
 		//Si la database n'existe pas dans les préférences ont en fait la créer

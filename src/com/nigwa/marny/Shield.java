@@ -10,15 +10,11 @@ public class Shield {
 	
 	
 	public Shield(int id, int healthValue, int attackValue, int armorValue, int price) {
-		this.setId(id);
+		this.id = id;
 		this.healthValue = healthValue;
 		this.attackValue = attackValue;
 		this.armorValue = armorValue;
-<<<<<<< HEAD
-		this.setPrice(price);
-=======
 		this.price = price;
->>>>>>> db5f188325212ca9b08ccf013eb586cb012f477b
 	}
 	
 	public int getHealthValue() {
@@ -52,15 +48,6 @@ public class Shield {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
 	
 	public int getPrice() {
 		return price;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
@@ -16,6 +17,9 @@ public class MonsterActivity extends SherlockActivity {
 		setContentView(R.layout.activity_monster);
 		
 		Button btn_next = (Button) findViewById(R.id.monster_btn_next);
+		Button btn_attack = (Button) findViewById(R.id.monster_btn_attack);
+		
+		final ProgressBar monster_health = (ProgressBar) findViewById(R.id.progressBar1);
 		
 		btn_next.setOnClickListener(new OnClickListener() {
 			
@@ -31,6 +35,15 @@ public class MonsterActivity extends SherlockActivity {
 				} else {
 					startActivity(new Intent(MonsterActivity.this, RestRoomActivity.class));
 				}
+			}
+		});
+		
+		
+		btn_attack.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				monster_health.setProgress(monster_health.getProgress()-10);
 			}
 		});
 	}

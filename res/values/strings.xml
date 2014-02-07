@@ -30,10 +30,13 @@
     
     <string name="empty">vide</string>
     
-    <string name="monster">UN MONSTRE !!!</string>
+    <string name="monster">AAAHH !!! Un monstre vient d\'apparaitre !</string>
+    <string name="img_monster">Image du monstre</string>
     <string name="goldroom">GOLD ROOM !!!</string>
     <string name="restroom">REST ROOM !!!</string>
     <string name="shoproom">SHOP ROOM !!!</string>
     <string name="next">Aller à la sale suivante</string>
+    
+    <string name="attack_btn">Attaquer !</string>
 
 </resources>

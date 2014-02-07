@@ -1,24 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+   	android:background="@drawable/bg_monster_room" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/monster_label_monster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="27dp"
+        android:alpha="0.60"
+        android:background="#000000"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/monster"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF" />
+
+    <ImageView
+        android:id="@+id/monster_imgview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/monster"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_alignRight="@+id/monster_btn_next"
+        android:layout_below="@+id/monster_label_monster"
+        android:layout_marginRight="44dp"
+        android:layout_marginTop="38dp"
+        android:contentDescription="@string/img_monster"
+        android:src="@drawable/sprite_larbin" />
 
     <Button
         android:id="@+id/monster_btn_next"
         android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="86dp"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="21dp"
+        android:gravity="center"
         android:text="@string/next" />
+
+    <Button
+        android:id="@+id/monster_btn_attack"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@+id/monster_btn_next"
+        android:layout_marginRight="24dp"
+        android:layout_toLeftOf="@+id/monster_imgview"
+        android:text="@string/attack_btn" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="150dp"
+        android:layout_height="5dp"
+        android:layout_alignRight="@+id/monster_btn_next"
+        android:layout_below="@+id/monster_label_monster"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="13dp"
+        android:max="100"
+        android:progress="100"
+        android:progressDrawable="@drawable/shape_healthbar" />
 
 </RelativeLayout>

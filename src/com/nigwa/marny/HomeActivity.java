@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
@@ -26,6 +27,7 @@ public class HomeActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 
+		Button btn_shop = (Button) findViewById(R.id.home_btn_shop);
 		Button btn_info_hero = (Button) findViewById(R.id.home_btn_info_hero);
 		Button btn_go = (Button) findViewById(R.id.home_btn_go);
 		
@@ -63,14 +65,14 @@ public class HomeActivity extends SherlockActivity {
 			int valuePotion = c.getInt(
 					c.getColumnIndex(HeroContract.COL_POTION)) ;
 
-			if(valueHelmet == 0) {
-				myHelmet = new Helmet(0, 0, 0, 0, 0);
+			if(valueHelmet == 999) {
+				myHelmet = new Helmet(999, 0, 0, 0, 0);
 			}
-			if(valueShield == 0) {
-				myShield = new Shield(0, 0, 0, 0, 0);
+			if(valueShield == 999) {
+				myShield = new Shield(999, 0, 0, 0, 0);
 			}
-			if(valueWeapon == 0) {
-				myWeapon = new Weapon(0, 0, 0, 0, 0);
+			if(valueWeapon == 999) {
+				myWeapon = new Weapon(999, 0, 0, 0, 0);
 			}
 			
 			myHero = new Hero(valueHealth, valueAttack, valueArmor, valueGold, 
@@ -105,8 +107,8 @@ public class HomeActivity extends SherlockActivity {
 			    .setPositiveButton(android.R.string.ok, 
 			    		new DialogInterface.OnClickListener() {
 					        public void onClick(
-					        		DialogInterface dialog, int which) { 
-					            // continue with delete
+					        		DialogInterface dialog, int which) {
+					        		//La fenetre se ferme
 					        }
 			     })
 			    .setIcon(R.drawable.ic_info_small)
@@ -121,7 +123,14 @@ public class HomeActivity extends SherlockActivity {
 			public void onClick(View v) {
 				int myRandom = Tools.random(20);
 				if(myRandom >= 0 && myRandom <= 12) {
-					startActivity(new Intent(HomeActivity.this, MonsterActivity.class));
+					Intent intentMonsterRoom = new Intent(HomeActivity.this,
+							MonsterActivity.class);
+					
+					intentMonsterRoom.putExtra("hero", myHero);
+					
+					
+					startActivity(intentMonsterRoom);
+					
 				} else if(myRandom >= 13 && myRandom <= 16 ) {
 					startActivity(new Intent(HomeActivity.this, GoldRoomActivity.class));
 				} else if(myRandom >= 17 && myRandom <= 18 ) {
@@ -129,6 +138,7 @@ public class HomeActivity extends SherlockActivity {
 				} else {
 					startActivity(new Intent(HomeActivity.this, RestRoomActivity.class));
 				}
+				//Toast.makeText(HomeActivity.this, myHero.toString(), Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

@@ -1,7 +1,9 @@
 package com.nigwa.marny;
 
+import java.io.Serializable;
 
-public class Hero extends Object {
+
+public class Hero extends Object implements Serializable {
 
 	private int health;
 	private int attack;
@@ -16,14 +18,14 @@ public class Hero extends Object {
 	public Hero(int health, int attack, int armor, int gold, Helmet helmet, Shield shield, Weapon weapon, int potion) {
 		this.health = health;
 		this.attack = attack;
-		this.setArmor(armor);
+		this.armor = armor;
 		this.gold = gold;
 		this.helmet = helmet;
 		this.shield = shield;
 		this.weapon = weapon;
 		this.potion = potion;
 	}
-	
+
 	public int getHealth() {
 		return health;
 	}

@@ -1,6 +1,8 @@
 package com.nigwa.marny;
 
-public class Shield {
+import java.io.Serializable;
+
+public class Shield implements Serializable {
 
 	private int id;
 	private int healthValue;

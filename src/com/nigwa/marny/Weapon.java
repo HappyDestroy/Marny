@@ -1,6 +1,8 @@
 package com.nigwa.marny;
 
-public class Weapon {
+import java.io.Serializable;
+
+public class Weapon implements Serializable {
 
 	private int id;
 	private int healthValue;

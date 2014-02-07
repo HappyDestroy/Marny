@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +25,7 @@ public class ShopRoomActivity extends SherlockActivity {
 		setContentView(R.layout.activity_shoproom);
 		
 		//Creation ListView
-		listViewShopRoom = (ListView)findViewById(R.id.listViewShopRoom);
+		//listViewShopRoom = (ListView)findViewById(R.id.listViewShopRoom);
 
 		String[] listeStrings = {"Armes","Boucliers","Casques", "Potions'"};
 
@@ -87,16 +85,4 @@ public class ShopRoomActivity extends SherlockActivity {
 			}
 		});
 	}
-	private void RemplirMonShop() {
-
-		/*myShop.clear();
-
-		myShop.add(new Weapon("", "William-C Dietz"));
-
-		myShop.add(new Weapon("L'art du développement Android", "Mark Murphy"));
-
-		myShop.add(new Weapon("Le seuil des ténèbres", "Karen Chance"));*/
-
-	}
-
 }

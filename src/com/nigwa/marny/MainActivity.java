@@ -118,9 +118,9 @@ public class MainActivity extends SherlockActivity {
 		valuesHero.put(HeroContract.COL_ATTACK, 15);
 		valuesHero.put(HeroContract.COL_ARMOR, 0);
 		valuesHero.put(HeroContract.COL_GOLD, 0);
-		valuesHero.put(HeroContract.COL_HELMET, 0);
-		valuesHero.put(HeroContract.COL_SHIELD, 0);
-		valuesHero.put(HeroContract.COL_WEAPON, 0);
+		valuesHero.put(HeroContract.COL_HELMET, 999);
+		valuesHero.put(HeroContract.COL_SHIELD, 999);
+		valuesHero.put(HeroContract.COL_WEAPON, 999);
 		valuesHero.put(HeroContract.COL_POTION, 0);
 		
 		db.insert(HeroContract.TABLE, null, valuesHero);

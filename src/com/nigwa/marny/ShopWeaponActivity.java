@@ -1,39 +1,20 @@
 package com.nigwa.marny;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import com.actionbarsherlock.app.SherlockActivity;
 import com.nigwa.marny.Weapon;
+<<<<<<< HEAD
 import com.nigwa.marny.R;
 
+=======
+>>>>>>> f427c2dd0380224308932d2f82d1cb37d00f02fa
 
-import android.content.ContentValues;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.app.Activity;
-import android.widget.SimpleAdapter;
-import android.widget.ArrayAdapter;
 
-public class ShopWeaponActivity extends Activity {
+public class ShopWeaponActivity extends SherlockActivity {
 	private Hero myHero;
 	private SQLiteDatabase db;
 	private SQLiteOpenHelperClass dbHelper;
@@ -70,10 +51,22 @@ public class ShopWeaponActivity extends Activity {
 					c.getColumnIndex(WeaponContract.COL_ARMORVALUE)) ;
 			int valuePrice = c.getInt(
 					c.getColumnIndex(WeaponContract.COL_PRICE)) ;
+<<<<<<< HEAD
+=======
+
+			//myAdapter myAdapter = new myAdapter(this, R.layout.activity_shopweapon, valueHealth,valueAttack,valueArmor,valuePrice);
+			
+			//ListView myList = (ListView) findViewById(R.id.listViewWeapon);
+			
+			//myList.setAdapter(myAdapter);
+>>>>>>> f427c2dd0380224308932d2f82d1cb37d00f02fa
 			/*myHero = new Hero(valueHealth, valueAttack, valueArmor, valueGold, 
 					myHelmet, myShield, myWeapon, valuePotion);*/
 			
 		} while ( c.moveToNext() );
+<<<<<<< HEAD
 	
+=======
+>>>>>>> f427c2dd0380224308932d2f82d1cb37d00f02fa
 	}
 }

@@ -3,11 +3,9 @@ package com.nigwa.marny;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.nigwa.marny.Weapon;
-<<<<<<< HEAD
 import com.nigwa.marny.R;
 
-=======
->>>>>>> f427c2dd0380224308932d2f82d1cb37d00f02fa
+
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -51,22 +49,16 @@ public class ShopWeaponActivity extends SherlockActivity {
 					c.getColumnIndex(WeaponContract.COL_ARMORVALUE)) ;
 			int valuePrice = c.getInt(
 					c.getColumnIndex(WeaponContract.COL_PRICE)) ;
-<<<<<<< HEAD
-=======
-
 			//myAdapter myAdapter = new myAdapter(this, R.layout.activity_shopweapon, valueHealth,valueAttack,valueArmor,valuePrice);
 			
 			//ListView myList = (ListView) findViewById(R.id.listViewWeapon);
 			
 			//myList.setAdapter(myAdapter);
->>>>>>> f427c2dd0380224308932d2f82d1cb37d00f02fa
+
 			/*myHero = new Hero(valueHealth, valueAttack, valueArmor, valueGold, 
 					myHelmet, myShield, myWeapon, valuePotion);*/
 			
 		} while ( c.moveToNext() );
-<<<<<<< HEAD
-	
-=======
->>>>>>> f427c2dd0380224308932d2f82d1cb37d00f02fa
+
 	}
 }

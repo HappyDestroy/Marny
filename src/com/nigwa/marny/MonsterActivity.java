@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +25,8 @@ public class MonsterActivity extends SherlockActivity {
 	private SQLiteDatabase db;
 	private SQLiteOpenHelperClass dbHelper;
 	private int hero_health_left;
+	private MediaPlayer soudHurt = null;
+	private MediaPlayer soudDeath = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -131,12 +134,23 @@ public class MonsterActivity extends SherlockActivity {
 					//On réduit la progressBar de vie du héro
 					hero_health.setProgress(hero_health.getProgress() - 
 							myMonster.getAttack());
-
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
 					//On change la valeur des points de vie qu'il nous reste
 					hero_health_left = hero_health.getProgress();
 					 if(hero_health_left <= 0) { 
+						 soudDeath = MediaPlayer.create(MonsterActivity.this,
+								 R.raw.death);
+						 soudDeath.start();
 						 heroKO();
 					 }
+					soudHurt = MediaPlayer.create(MonsterActivity.this,
+								 R.raw.coup_ventre);
+							soudHurt.start();
 					//Le monstre nous enlève de la vie
 					label_monster.postDelayed(new Runnable() {
 						@Override
@@ -147,6 +161,7 @@ public class MonsterActivity extends SherlockActivity {
 						}
 					}, 1000);
 				} else { //Sinon le monstre est K.O.
+					
 					label_monster.postDelayed(new Runnable() {
 						@Override
 						public void run() {

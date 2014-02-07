@@ -26,7 +26,7 @@ public class HomeActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-
+		
 		Button btn_shop = (Button) findViewById(R.id.home_btn_shop);
 		Button btn_info_hero = (Button) findViewById(R.id.home_btn_info_hero);
 		Button btn_go = (Button) findViewById(R.id.home_btn_go);
@@ -80,7 +80,17 @@ public class HomeActivity extends SherlockActivity {
 			
 		} while ( c.moveToNext() );
 		
-		//Toast.makeText(this, myHero.toString(),Toast.LENGTH_LONG).show();
+		//Button Shop
+		btn_shop.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(HomeActivity.this, ShopRoomActivity.class));
+				
+			}
+		});
+		
+		//Button Hero
 		btn_info_hero.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -116,29 +126,27 @@ public class HomeActivity extends SherlockActivity {
 			}
 		});
 		
-		
+		//Button GO
 		btn_go.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				int myRandom = Tools.random(20);
-				if(myRandom >= 0 && myRandom <= 12) {
+				if(myRandom >= 0 && myRandom <= 11) {
+
 					Intent intentMonsterRoom = new Intent(HomeActivity.this,
 							MonsterActivity.class);
 					
 					intentMonsterRoom.putExtra("hero", myHero);
 					
-					
 					startActivity(intentMonsterRoom);
-					
-				} else if(myRandom >= 13 && myRandom <= 16 ) {
+				} else if(myRandom >= 12 && myRandom <= 14 ) {
 					startActivity(new Intent(HomeActivity.this, GoldRoomActivity.class));
-				} else if(myRandom >= 17 && myRandom <= 18 ) {
+				} else if(myRandom >= 15 && myRandom <= 18 ) {
 					startActivity(new Intent(HomeActivity.this, ShopRoomActivity.class));
 				} else {
 					startActivity(new Intent(HomeActivity.this, RestRoomActivity.class));
 				}
-				//Toast.makeText(HomeActivity.this, myHero.toString(), Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

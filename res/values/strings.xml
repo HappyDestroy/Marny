@@ -44,5 +44,7 @@
     
     <string name="attack_btn">Attaquer !</string>
     <string name="monster_ko">Le monstre à été vaincu</string>
+    
+    <string name="buy">Acheter</string>
 
 </resources>

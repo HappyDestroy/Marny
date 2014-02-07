@@ -14,35 +14,33 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class ShopRoomActivity extends SherlockActivity {
 
-	ListView listViewShopRoom;
-	List<Weapon> myShop = new ArrayList<Weapon>();
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shoproom);
 		
-		//Creation ListView
-		//listViewShopRoom = (ListView)findViewById(R.id.listViewShopRoom);
-
-		String[] listeStrings = {"Armes","Boucliers","Casques", "Potions'"};
-
-		listViewShopRoom.setAdapter(new ArrayAdapter<String>
-		(this, android.R.layout.simple_list_item_1,listeStrings));
+		
+		
 		
 		Button btn_next = (Button) findViewById(R.id.shoproom_btn_next);
 		
+		ListView listViewShopRoom = (ListView) findViewById(
+				R.id.listViewShopRoom);
+		
+		String[] listeStrings = {"Armes","Boucliers","Casques", "Potions'"};
+		
+		listViewShopRoom.setAdapter(new ArrayAdapter<String>
+				(this, android.R.layout.simple_list_item_1, listeStrings));
 		
 		listViewShopRoom.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Toast.makeText(ShopRoomActivity.this, "ListView Selected : "+ 
-					arg1.toString()+ " arg2:"+arg2+" arg3:",
-						Toast.LENGTH_LONG).show();
+				
 				if(arg2 == 0) {
 					//Affichage Armes
 					startActivity(new Intent(ShopRoomActivity.this, 
@@ -64,8 +62,13 @@ public class ShopRoomActivity extends SherlockActivity {
 			}
 		});
 		
+		
+		
+		
+		
+		
+		
 		btn_next.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				int myRandom = Tools.random(20);

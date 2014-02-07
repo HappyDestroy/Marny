@@ -6,6 +6,9 @@ import java.util.List;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.nigwa.marny.Weapon;
+import com.nigwa.marny.R;
+
+
 
 import android.content.Context;
 import android.database.Cursor;

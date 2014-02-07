@@ -22,7 +22,8 @@ public class MainActivity extends SherlockActivity {
 
 	private SQLiteDatabase db;
 	private SQLiteOpenHelperClass dbHelper;
-	private MediaPlayer mPlayer = null;
+	private MediaPlayer mp = null;
+	
 	
 	/**
 	 * Création de l'activity
@@ -31,7 +32,8 @@ public class MainActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+		mp = MediaPlayer.create(MainActivity.this, R.raw.sound_game);
+		mp.start();
 		SharedPreferences settings = getSharedPreferences("database",
 				Context.MODE_PRIVATE);
 		

@@ -63,4 +63,16 @@
         android:progress="100"
         android:progressDrawable="@drawable/shape_healthbar" />
 
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="150dp"
+        android:layout_height="5dp"
+        android:layout_above="@+id/monster_btn_attack"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="11dp"
+        android:max="100"
+        android:progress="100"
+        android:progressDrawable="@drawable/shape_healthbar" />
+
 </RelativeLayout>

@@ -8,7 +8,7 @@ import java.util.List;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.nigwa.marny.Weapon;
 import com.nigwa.marny.R;
-import com.nigwa.marny.ShopWeaponActivity.myAdapter;
+
 
 import android.content.ContentValues;
 import android.app.AlertDialog;
@@ -70,51 +70,10 @@ public class ShopWeaponActivity extends Activity {
 					c.getColumnIndex(WeaponContract.COL_ARMORVALUE)) ;
 			int valuePrice = c.getInt(
 					c.getColumnIndex(WeaponContract.COL_PRICE)) ;
-
-			myAdapter myAdapter = new myAdapter(this, R.layout.activity_shopweapon, valueHealth,valueAttack,valueArmor,valuePrice);
-			
-			ListView myList = (ListView) findViewById(R.id.listViewWeapon);
-			
-			myList.setAdapter(myAdapter);
 			/*myHero = new Hero(valueHealth, valueAttack, valueArmor, valueGold, 
 					myHelmet, myShield, myWeapon, valuePotion);*/
 			
 		} while ( c.moveToNext() );
-	
-		private static class myAdapter extends ArrayAdapter<Weapon>
-		{
-			
-			private Context myContext;
-			private int myRessource;
-			private LayoutInflater myInflater;
-			
-			public myAdapter(Context context, int resource, List<Weapon> objects) {
-				super(context, resource, objects);
-				this.myContext = context;
-				this.myRessource = resource;
-				
-				this.myInflater = LayoutInflater.from(this.myContext);
-			}
-
-			
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				View myView = myInflater.inflate(this.myRessource, null);
-
-				TextView TxtViewHealth = (TextView) myView.findViewById(R.id.lbl_health);
-				TextView TxtViewAttack = (TextView) myView.findViewById(R.id.lbl_attack);
-				TextView TxtViewAmor = (TextView) myView.findViewById(R.id.lbl_armor);
-				
-				Weapon myWeapon = this.getItem(position);
-				
-				TxtViewHealth.setText(myWeapon.getHealthValue().toString());
-				TxtViewAttack.setText(myWeapon.getAttackValue().toString());
-				TxtViewAmor.setText(myWeapon.getArmorValue().toString());
-				
-				return myView;
-			}
-			
-		}
 	
 	}
 }

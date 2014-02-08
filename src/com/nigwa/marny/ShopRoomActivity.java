@@ -32,27 +32,43 @@ public class ShopRoomActivity extends SherlockActivity {
 				(this, android.R.layout.simple_list_item_1, listeStrings));
 		
 		listViewShopRoom.setOnItemClickListener(new OnItemClickListener() {
-
+			
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				
 				if(arg2 == 0) {
 					//Affichage Armes
-					startActivity(new Intent(ShopRoomActivity.this, 
-							ShopWeaponActivity.class));
+					Intent myIntentWeapon = new Intent(ShopRoomActivity.this, 
+							ShopWeaponActivity.class);
+					
+					myIntentWeapon.putExtra("hero", myHero);
+					
+					startActivity(myIntentWeapon);
 				} else if(arg2 == 1) {
 					//Affichage Boucliers
-					startActivity(new Intent(ShopRoomActivity.this, 
-							ShopShieldActivity.class));
+					Intent myIntentShield = new Intent(ShopRoomActivity.this, 
+							ShopShieldActivity.class);
+					
+					myIntentShield.putExtra("hero", myHero);
+					
+					startActivity(myIntentShield);
 				} else if(arg2 == 2) {
 					//Affichage Casques
-					startActivity(new Intent(ShopRoomActivity.this, 
-							ShopHelmetActivity.class));
+					Intent myIntentHelmet = new Intent(ShopRoomActivity.this, 
+							ShopHelmetActivity.class);
+					
+					myIntentHelmet.putExtra("hero", myHero);
+					
+					startActivity(myIntentHelmet);
 				} else {
 					//Affichage Potions
-					startActivity(new Intent(ShopRoomActivity.this, 
-							ShopWeaponActivity.class));
+					Intent myIntentPotion = new Intent(ShopRoomActivity.this, 
+							ShopWeaponActivity.class);
+					
+					myIntentPotion.putExtra("hero", myHero);
+					
+					startActivity(myIntentPotion);
 				}
 			}
 		});

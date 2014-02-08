@@ -53,5 +53,9 @@
     <string name="monster_ko">Le monstre à été vaincu</string>
     
     <string name="buy">Acheter</string>
+    <string name="confirm">Es-t sûr ?</string>
+    <string name="msg_buy_begin">Acheter cet item pour </string>
+    <string name="msg_buy_end"> golds ?</string>
+    <string name="msg_error">Malheuresement,  tu n\'as pas assez de golds</string>
 
 </resources>

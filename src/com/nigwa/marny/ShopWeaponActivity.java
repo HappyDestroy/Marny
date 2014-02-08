@@ -6,27 +6,37 @@ import java.util.List;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.nigwa.marny.Weapon;
+
+import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ShopWeaponActivity extends SherlockActivity {
 	
-	private SQLiteDatabase db;
-	private SQLiteOpenHelperClass dbHelper;
+	private static SQLiteDatabase db;
+	private static SQLiteOpenHelperClass dbHelper;
 	private ArrayList<Weapon> myWeapons;
+	private static Hero myHero;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shopweapon);
+		
+		myHero = (Hero) getIntent().getSerializableExtra("hero");
 		
 		myWeapons = new ArrayList<Weapon>();
 		
@@ -68,7 +78,12 @@ public class ShopWeaponActivity extends SherlockActivity {
 				R.id.listViewWeapon);
 		
 		myListViewWeapon.setAdapter(myAdapter);
+		
+		
 	}
+	
+	
+	
 	
 	private static class Adapter extends ArrayAdapter<Weapon>
 	{
@@ -83,7 +98,7 @@ public class ShopWeaponActivity extends SherlockActivity {
 			
 			this.myInflater = LayoutInflater.from(this.myContext);
 		}
-
+		
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -97,8 +112,9 @@ public class ShopWeaponActivity extends SherlockActivity {
 					(R.id.attack);
 			TextView valueArmor = (TextView) myView.findViewById
 					(R.id.armor);
+			Button btn_buy = (Button) myView.findViewById(R.id.btn_buy);
 			
-			Weapon myWeapon = this.getItem(position);
+			final Weapon myWeapon = this.getItem(position);
 			
 			switch(myWeapon.getId()) {
 			case 1 :
@@ -115,9 +131,65 @@ public class ShopWeaponActivity extends SherlockActivity {
 				break;
 			}
 
-			valueHealth.setText(" "+String.valueOf(myWeapon.getHealthValue())+" HP");
-			valueAttack.setText(" "+String.valueOf(myWeapon.getAttackValue())+" Attaque");
-			valueArmor.setText(" "+String.valueOf(myWeapon.getArmorValue())+" Armure");
+			valueHealth.setText(" "+String.valueOf(
+					myWeapon.getHealthValue())+" HP");
+			valueAttack.setText(" "+String.valueOf(
+					myWeapon.getAttackValue())+" Attaque");
+			valueArmor.setText(" "+String.valueOf(
+					myWeapon.getArmorValue())+" Armure");
+			
+			btn_buy.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(final View v) {
+					new AlertDialog.Builder(v.getContext())
+				    .setTitle(R.string.confirm)
+				    .setMessage(v.getContext().getString(R.string.msg_buy_begin)
+				    		+ myWeapon.getPrice() 
+				    		+ v.getContext().getString(R.string.msg_buy_end))
+				    .setPositiveButton(android.R.string.yes, 
+				    		new DialogInterface.OnClickListener() {
+				        public void onClick(DialogInterface dialog, int which) { 
+				        	//Si le héro n'est pas assez de gold on affiche 
+				        	//un message
+				            if(myHero.getGold() < myWeapon.getPrice()) {
+				            	Toast.makeText(v.getContext(), 
+				            			R.string.msg_error, 
+				            			Toast.LENGTH_LONG).show();
+				            } else {
+				            	//Sauvegarde en BDD
+				            	String[] VALUES = {"1"};
+				            	
+				            	db = dbHelper.getWritableDatabase();
+				        		
+				        		
+				        		Cursor c = db.query(HeroContract.TABLE ,
+				        				HeroContract.COLS, "id LIKE ?", 
+				        				VALUES, null, null, null) ;
+				        		
+				    			ContentValues itemHero = new ContentValues();
+				    			itemHero.put("gold", myHero.getGold() - 
+				    					myWeapon.getPrice());
+				    			
+				    			itemHero.put("weapon", myWeapon.getId());
+
+				    			String whereClause = "id =? ";
+				    			String[] whereArgs = { "1" };
+				    			db.update(HeroContract.TABLE, itemHero, 
+				    					whereClause, whereArgs);
+				            }
+				        }
+				     })
+				    .setNegativeButton(android.R.string.no, 
+				    		new DialogInterface.OnClickListener() {
+				        public void onClick(DialogInterface dialog, int which) { 
+				            //Ferme la fenetre
+				        }
+				     })
+				    .setIcon(R.drawable.ic_info_small)
+				     .show();
+				}
+			});
 			
 			return myView;
 		}

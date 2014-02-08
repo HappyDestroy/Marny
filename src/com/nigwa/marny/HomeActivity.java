@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
@@ -50,8 +51,7 @@ public class HomeActivity extends SherlockActivity {
 		
 		
 		Cursor c = db.query(HeroContract.TABLE , HeroContract.COLS, "id LIKE ?" 
-				,VALUES, null,
-				null, null) ;
+				,VALUES, null, null, null) ;
 		c.moveToFirst();
 		
 		
@@ -96,16 +96,88 @@ public class HomeActivity extends SherlockActivity {
 				//999 est l'id des equipements sans caractéritiques
 				if(valueHelmet == 999) {
 					myHelmet = new Helmet(999, 0, 0, 0, 0);
+				} else if(valueHelmet == 1) {
+					String[] VALUESHELMET = {"1"};
+					Cursor cHelmet = db.query(
+							HelmetContract.TABLE , 
+							HelmetContract.COLS, "id LIKE ?" 
+							, VALUESHELMET, null,
+							null, null) ;
+					cHelmet.moveToFirst();
+					do {
+						int valueIDHelemt_1 = cHelmet.getInt(
+								cHelmet.getColumnIndex(
+										HelmetContract.COL_ID));
+						
+						int valueHealthHelmet_1 = cHelmet.getInt(
+								cHelmet.getColumnIndex(
+										HelmetContract.COL_HEALTHVALUE));
+						
+						int valueArmorHelmet_1 = cHelmet.getInt(
+								cHelmet.getColumnIndex(
+										HelmetContract.COL_ARMORVALUE));
+						
+						int valueAttackHelmet_1 = cHelmet.getInt(
+								cHelmet.getColumnIndex(
+										HelmetContract.COL_ATTACKVALUE));
+						
+						int valuePriceHelmet_1 = cHelmet.getInt(
+								cHelmet.getColumnIndex(
+										HelmetContract.COL_PRICE));
+						
+						
+						myHelmet = new Helmet(valueIDHelemt_1, 
+								valueHealthHelmet_1, valueAttackHelmet_1, 
+								valueArmorHelmet_1, valuePriceHelmet_1);
+						
+					} while ( cHelmet.moveToNext() );
 				}
+				
+				
 				if(valueShield == 999) {
 					myShield = new Shield(999, 0, 0, 0, 0);
 				}
+				
 				if(valueWeapon == 999) {
 					myWeapon = new Weapon(999, 0, 0, 0, 0);
+				} else if (valueWeapon == 1) {
+					String[] VALUESWEAPON = {"1"};
+					Cursor cWeapon = db.query(
+							WeaponContract.TABLE , 
+							WeaponContract.COLS, "id LIKE ?" 
+							, VALUESWEAPON, null,
+							null, null) ;
+					cWeapon.moveToFirst();
+					do {
+						int valueIDWeapon_1 = c.getInt(
+								cWeapon.getColumnIndex(
+										WeaponContract.COL_ID));
+						
+						int valueHealthWeapon_1 = cWeapon.getInt(
+								cWeapon.getColumnIndex(
+										WeaponContract.COL_HEALTHVALUE));
+						
+						int valueArmorWeapont_1 = cWeapon.getInt(
+								cWeapon.getColumnIndex(
+										WeaponContract.COL_ARMORVALUE));
+						
+						int valueAttackWeapon_1 = cWeapon.getInt(
+								cWeapon.getColumnIndex(
+										WeaponContract.COL_ATTACKVALUE));
+						
+						int valuePriceWeapon_1 = cWeapon.getInt(
+								cWeapon.getColumnIndex(
+										WeaponContract.COL_PRICE));
+						
+						
+						myWeapon = new Weapon(valueIDWeapon_1, 
+								valueHealthWeapon_1, valueArmorWeapont_1, 
+								valueAttackWeapon_1, valuePriceWeapon_1);
+					} while ( cWeapon.moveToNext() );
 				}
 				
-				myHero = new Hero(valueHealth, valueAttack, valueArmor, valueGold, 
-						myHelmet, myShield, myWeapon, valuePotion);
+				myHero = new Hero(valueHealth, valueAttack, valueArmor, 
+						valueGold, myHelmet, myShield, myWeapon, valuePotion);
 				
 			} while ( c.moveToNext() );
 			
@@ -125,7 +197,7 @@ public class HomeActivity extends SherlockActivity {
 				Intent myIntentShopRoom = new Intent(
 						HomeActivity.this, ShopRoomActivity.class);
 				
-				myIntentShopRoom.putExtra("myHero", myHero);
+				myIntentShopRoom.putExtra("hero", myHero);
 				
 				startActivity(myIntentShopRoom);
 			}

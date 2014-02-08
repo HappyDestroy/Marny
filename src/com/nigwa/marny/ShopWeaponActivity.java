@@ -6,15 +6,9 @@ import java.util.List;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.nigwa.marny.Weapon;
-import com.nigwa.marny.R;
-
-
-
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,7 +66,7 @@ public class ShopWeaponActivity extends SherlockActivity {
 		
 		ListView myListViewWeapon = (ListView) findViewById(
 				R.id.listViewWeapon);
-		myListViewWeapon.setBackgroundColor(Color.WHITE);
+		
 		myListViewWeapon.setAdapter(myAdapter);
 	}
 	
@@ -96,13 +90,13 @@ public class ShopWeaponActivity extends SherlockActivity {
 			View myView = myInflater.inflate(this.myRessource, null);
 
 			ImageView imgViewWeapon = (ImageView) myView.findViewById(
-					R.id.img_weapon);
+					R.id.img);
 			TextView valueHealth = (TextView) myView.findViewById
-					(R.id.health_weapon);
+					(R.id.health);
 			TextView valueAttack = (TextView) myView.findViewById
-					(R.id.attack_weapon);
+					(R.id.attack);
 			TextView valueArmor = (TextView) myView.findViewById
-					(R.id.armor_weapon);
+					(R.id.armor);
 			
 			Weapon myWeapon = this.getItem(position);
 			

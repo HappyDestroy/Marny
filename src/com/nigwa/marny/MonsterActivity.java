@@ -269,7 +269,15 @@ public class MonsterActivity extends SherlockActivity {
 			        public void onClick(
 			        		DialogInterface dialog, int which) {
 			        		//On arrête l'activity pour quitter
-			        		MonsterActivity.this.finish();
+			        		//MonsterActivity.this.finish();
+			        		
+			        		Intent myIntentDeath = new Intent(
+			        				MonsterActivity.this, HomeActivity.class);
+			        		
+			        		myIntentDeath.putExtra("death", true);
+			        		myIntentDeath.putExtra("myHero", myHero);
+			        		
+			        		startActivity(myIntentDeath);
 			        }
 	     })
 	    .setIcon(R.drawable.ic_info_small)

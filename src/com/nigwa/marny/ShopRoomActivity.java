@@ -12,6 +12,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class ShopRoomActivity extends SherlockActivity {
 
@@ -115,5 +116,14 @@ public class ShopRoomActivity extends SherlockActivity {
 				}
 			}
 		});
+	}
+	
+
+	//Empêcher l'utilisation du bouton retour
+	@Override
+	public void onBackPressed() {
+		Toast.makeText(this, getApplication().getString(R.string.btn_back), 
+				Toast.LENGTH_LONG).show();
+		return;
 	}
 }

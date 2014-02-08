@@ -1,6 +1,7 @@
 package com.nigwa.marny;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -53,40 +54,62 @@ public class HomeActivity extends SherlockActivity {
 				null, null) ;
 		c.moveToFirst();
 		
-		do {
-			int valueHealth = c.getInt(
-					c.getColumnIndex(HeroContract.COL_HEALTH)) ;
-			int valueAttack = c.getInt(
-					c.getColumnIndex(HeroContract.COL_ATTACK)) ;
-			int valueArmor = c.getInt(
-					c.getColumnIndex(HeroContract.COL_ARMOR)) ;
-			int valueGold = c.getInt(
-					c.getColumnIndex(HeroContract.COL_GOLD)) ;
-			int valueHelmet = c.getInt(
-					c.getColumnIndex(HeroContract.COL_HELMET)) ;
-			int valueShield = c.getInt(
-					c.getColumnIndex(HeroContract.COL_SHIELD)) ;
-			int valueWeapon = c.getInt(
-					c.getColumnIndex(HeroContract.COL_WEAPON)) ;
-			int valuePotion = c.getInt(
-					c.getColumnIndex(HeroContract.COL_POTION)) ;
-
-			//999 est l'id des equipements sans caractéritiques
-			if(valueHelmet == 999) {
-				myHelmet = new Helmet(999, 0, 0, 0, 0);
-			}
-			if(valueShield == 999) {
-				myShield = new Shield(999, 0, 0, 0, 0);
-			}
-			if(valueWeapon == 999) {
-				myWeapon = new Weapon(999, 0, 0, 0, 0);
-			}
-			
-			myHero = new Hero(valueHealth, valueAttack, valueArmor, valueGold, 
-					myHelmet, myShield, myWeapon, valuePotion);
-			
-		} while ( c.moveToNext() );
 		
+		if(getIntent().getBooleanExtra("death", false)) {
+			myHero = (Hero) getIntent().getSerializableExtra("myHero");
+			
+			//Sauvegarde en BDD
+			ContentValues itemHero = new ContentValues();
+			itemHero.put("health", myHero.getHealth());
+			itemHero.put("attack", myHero.getAttack());
+			itemHero.put("armor", myHero.getArmor());
+			itemHero.put("gold", myHero.getGold());
+			itemHero.put("helmet", myHero.getHelmet().getId());
+			itemHero.put("shield", myHero.getShield().getId());
+			itemHero.put("weapon", myHero.getWeapon().getId());
+			itemHero.put("potion", myHero.getPotion());
+
+			String whereClause = "id =? ";
+			String[] whereArgs = { "1" };
+			db.update(HeroContract.TABLE, itemHero, whereClause, whereArgs);
+			
+		} else {
+			//On récupère le Hero depuis la BDD
+			do {
+				int valueHealth = c.getInt(
+						c.getColumnIndex(HeroContract.COL_HEALTH)) ;
+				int valueAttack = c.getInt(
+						c.getColumnIndex(HeroContract.COL_ATTACK)) ;
+				int valueArmor = c.getInt(
+						c.getColumnIndex(HeroContract.COL_ARMOR)) ;
+				int valueGold = c.getInt(
+						c.getColumnIndex(HeroContract.COL_GOLD)) ;
+				int valueHelmet = c.getInt(
+						c.getColumnIndex(HeroContract.COL_HELMET)) ;
+				int valueShield = c.getInt(
+						c.getColumnIndex(HeroContract.COL_SHIELD)) ;
+				int valueWeapon = c.getInt(
+						c.getColumnIndex(HeroContract.COL_WEAPON)) ;
+				int valuePotion = c.getInt(
+						c.getColumnIndex(HeroContract.COL_POTION)) ;
+	
+				//999 est l'id des equipements sans caractéritiques
+				if(valueHelmet == 999) {
+					myHelmet = new Helmet(999, 0, 0, 0, 0);
+				}
+				if(valueShield == 999) {
+					myShield = new Shield(999, 0, 0, 0, 0);
+				}
+				if(valueWeapon == 999) {
+					myWeapon = new Weapon(999, 0, 0, 0, 0);
+				}
+				
+				myHero = new Hero(valueHealth, valueAttack, valueArmor, valueGold, 
+						myHelmet, myShield, myWeapon, valuePotion);
+				
+			} while ( c.moveToNext() );
+			
+		}
 		//On met la vie restante de héro au maximum
 		health_left = myHero.getHealth();
 		

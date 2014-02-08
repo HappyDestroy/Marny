@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class Shield implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private int healthValue;
 	private int attackValue;

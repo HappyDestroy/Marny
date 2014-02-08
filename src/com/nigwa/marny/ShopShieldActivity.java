@@ -9,7 +9,6 @@ import com.nigwa.marny.R;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,11 +62,11 @@ public class ShopShieldActivity extends SherlockActivity {
 		} while ( c.moveToNext() );
 		
 		
-		Adapter myAdapter = new Adapter(this, R.layout.row_list_shield, myShield);
+		Adapter myAdapter = new Adapter(this, R.layout.row_list, myShield);
 		
 		ListView myListViewShield = (ListView) findViewById(
 				R.id.listViewShield);
-		myListViewShield.setBackgroundColor(Color.WHITE);
+		
 		myListViewShield.setAdapter(myAdapter);
 	}
 	
@@ -91,13 +90,13 @@ public class ShopShieldActivity extends SherlockActivity {
 			View myView = myInflater.inflate(this.myRessource, null);
 
 			ImageView imgViewShield = (ImageView) myView.findViewById(
-					R.id.img_shield);
+					R.id.img);
 			TextView valueHealth = (TextView) myView.findViewById
-					(R.id.health_shield);
+					(R.id.health);
 			TextView valueAttack = (TextView) myView.findViewById
-					(R.id.attack_shield);
+					(R.id.attack);
 			TextView valueArmor = (TextView) myView.findViewById
-					(R.id.armor_shield);
+					(R.id.armor);
 			
 			Shield myShield = this.getItem(position);
 			

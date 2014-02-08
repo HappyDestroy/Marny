@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/img_weapon"
+        android:id="@+id/img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -13,34 +13,49 @@
         android:src="@drawable/sprite_blade_1" />
 
     <TextView
-        android:id="@+id/health_weapon"
-        android:layout_width="wrap_content"
+        android:id="@+id/health"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/img_weapon"
-        android:text="@string/empty" />
+        android:layout_toRightOf="@+id/img"
+        android:text="@string/empty"
+        android:layout_marginLeft="10dp"
+        android:textColor="#FFFFFF"
+        android:background="#000000"
+        android:alpha="0.60"
+        android:padding="5dp" />
 
     <TextView
-        android:id="@+id/attack_weapon"
-        android:layout_width="wrap_content"
+        android:id="@+id/attack"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/health_weapon"
-        android:layout_below="@+id/health_weapon"
-        android:text="@string/empty" />
+        android:layout_alignLeft="@+id/health"
+        android:layout_below="@+id/health"
+        android:text="@string/empty"
+        android:textColor="#FFFFFF"
+        android:background="#000000"
+        android:alpha="0.60"
+        android:padding="5dp" />
 
     <TextView
-        android:id="@+id/armor_weapon"
-        android:layout_width="wrap_content"
+        android:id="@+id/armor"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/attack_weapon"
-        android:layout_toRightOf="@+id/img_weapon"
-        android:text="@string/empty" />
+        android:layout_below="@+id/attack"
+        android:layout_toRightOf="@+id/img"
+        android:text="@string/empty"
+        android:layout_marginLeft="10dp"
+        android:textColor="#FFFFFF"
+        android:background="#000000"
+        android:alpha="0.60"
+        android:padding="5dp" />
 
     <Button
         android:id="@+id/btn_acheter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/armor_weapon"
+        android:layout_alignBaseline="@+id/attack"
+        android:layout_alignBottom="@+id/attack"
         android:layout_alignParentRight="true"
         android:text="@string/buy" />
     

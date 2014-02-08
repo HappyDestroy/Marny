@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
@@ -77,5 +78,14 @@ public class RestRoomActivity extends SherlockActivity {
 				}
 			}
 		});
+	}
+	
+
+	//Empêcher l'utilisation du bouton retour
+	@Override
+	public void onBackPressed() {
+		Toast.makeText(this, getApplication().getString(R.string.btn_back), 
+				Toast.LENGTH_LONG).show();
+		return;
 	}
 }

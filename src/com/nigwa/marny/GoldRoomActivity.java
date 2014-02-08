@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
@@ -21,9 +22,11 @@ public class GoldRoomActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_goldroom);
+		
 		//Ajout Son
 		sound_coins = MediaPlayer.create(GoldRoomActivity.this, R.raw.coins);
 		sound_coins.start();
+		
 		//TextViex infos recompense
 		final TextView label_gold = (TextView) findViewById(
 			R.id.gold_label_gold);
@@ -32,6 +35,9 @@ public class GoldRoomActivity extends SherlockActivity {
 		int myRandom = Tools.random(10,500);
 		label_gold.setText("Vous venez de trouver " + myRandom + 
 				" Golds !");
+		
+		
+		myHero = (Hero) getIntent().getSerializableExtra("hero");
 		
 		//Ajout des golds aux héros
 		myHero.setGold(myHero.getGold() + myRandom);
@@ -43,7 +49,6 @@ public class GoldRoomActivity extends SherlockActivity {
 		
 		health_left = getIntent().getIntExtra("health_left", 1); 
 		
-		myHero = (Hero) getIntent().getSerializableExtra("hero");
 		
 		btn_next.setOnClickListener(new OnClickListener() {
 			
@@ -92,4 +97,11 @@ public class GoldRoomActivity extends SherlockActivity {
 	}
 
 
+	//Empêcher l'utilisation du bouton retour
+	@Override
+	public void onBackPressed() {
+		Toast.makeText(this, getApplication().getString(R.string.btn_back), 
+				Toast.LENGTH_LONG).show();
+		return;
+	}
 }

@@ -16,13 +16,13 @@
             android:layout_width="50dip"
             android:layout_height="50dip"
             android:padding="3dip"
-            android:src="@drawable/sprite_blade_1"
+            android:src="@drawable/sprite_shield_1"
         	android:layout_marginRight="5dip"/>
  
     </LinearLayout>
     
     <ListView
-        android:id="@+id/listViewWeapon"
+        android:id="@+id/listViewShield"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" >

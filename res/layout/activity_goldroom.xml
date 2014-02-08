@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_gold_room" >
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
@@ -28,5 +27,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="54dp"
         android:text="@string/next" />
+
+    <TextView
+        android:id="@+id/gold_label_gold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:alpha="0.60"
+        android:background="#000000"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/empty"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>

@@ -3,14 +3,9 @@ package com.nigwa.marny;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.actionbarsherlock.app.SherlockActivity;
-import com.nigwa.marny.Weapon;
+import com.nigwa.marny.Shield;
 import com.nigwa.marny.R;
-
-
-
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,17 +19,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ShopWeaponActivity extends SherlockActivity {
+public class ShopShieldActivity extends SherlockActivity {
 	
 	private SQLiteDatabase db;
 	private SQLiteOpenHelperClass dbHelper;
-	private ArrayList<Weapon> myWeapons;
+	private ArrayList<Shield> myShield;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_shopweapon);
+		setContentView(R.layout.activity_shopshield);
 		
-		myWeapons = new ArrayList<Weapon>();
+		myShield = new ArrayList<Shield>();
 		
 		dbHelper = new SQLiteOpenHelperClass(
 				this, 
@@ -45,44 +40,44 @@ public class ShopWeaponActivity extends SherlockActivity {
 		db = dbHelper.getWritableDatabase();
 		
 		
-		Cursor c = db.query(WeaponContract.TABLE , WeaponContract.COLS, null 
+		Cursor c = db.query(ShieldContract.TABLE , ShieldContract.COLS, null 
 				,null, null, null, null);
 		
 		
 		c.moveToFirst();
 		do {
 			int valueID = c.getInt(
-					c.getColumnIndex(WeaponContract.COL_ID));
+					c.getColumnIndex(ShieldContract.COL_ID));
 			int valueHealth = c.getInt(
-					c.getColumnIndex(WeaponContract.COL_HEALTHVALUE));
+					c.getColumnIndex(ShieldContract.COL_HEALTHVALUE));
 			int valueAttack = c.getInt(
-					c.getColumnIndex(WeaponContract.COL_ATTACKVALUE));
+					c.getColumnIndex(ShieldContract.COL_ATTACKVALUE));
 			int valueArmor = c.getInt(
-					c.getColumnIndex(WeaponContract.COL_ARMORVALUE));
+					c.getColumnIndex(ShieldContract.COL_ARMORVALUE));
 			int valuePrice = c.getInt(
-					c.getColumnIndex(WeaponContract.COL_PRICE));
+					c.getColumnIndex(ShieldContract.COL_PRICE));
 
-			myWeapons.add(new Weapon(valueID, valueHealth, valueAttack, 
+			myShield.add(new Shield(valueID, valueHealth, valueAttack, 
 					valueArmor, valuePrice));
 			
 		} while ( c.moveToNext() );
 		
 		
-		Adapter myAdapter = new Adapter(this, R.layout.row_list, myWeapons);
+		Adapter myAdapter = new Adapter(this, R.layout.row_list_shield, myShield);
 		
-		ListView myListViewWeapon = (ListView) findViewById(
-				R.id.listViewWeapon);
-		myListViewWeapon.setBackgroundColor(Color.WHITE);
-		myListViewWeapon.setAdapter(myAdapter);
+		ListView myListViewShield = (ListView) findViewById(
+				R.id.listViewShield);
+		myListViewShield.setBackgroundColor(Color.WHITE);
+		myListViewShield.setAdapter(myAdapter);
 	}
 	
-	private static class Adapter extends ArrayAdapter<Weapon>
+	private static class Adapter extends ArrayAdapter<Shield>
 	{
 		private Context myContext;
 		private int myRessource;
 		private LayoutInflater myInflater;
 		
-		public Adapter(Context context, int resource, List<Weapon> objects) {
+		public Adapter(Context context, int resource, List<Shield> objects) {
 			super(context, resource, objects);
 			this.myContext = context;
 			this.myRessource = resource;
@@ -95,35 +90,35 @@ public class ShopWeaponActivity extends SherlockActivity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View myView = myInflater.inflate(this.myRessource, null);
 
-			ImageView imgViewWeapon = (ImageView) myView.findViewById(
-					R.id.img_weapon);
+			ImageView imgViewShield = (ImageView) myView.findViewById(
+					R.id.img_shield);
 			TextView valueHealth = (TextView) myView.findViewById
-					(R.id.health_weapon);
+					(R.id.health_shield);
 			TextView valueAttack = (TextView) myView.findViewById
-					(R.id.attack_weapon);
+					(R.id.attack_shield);
 			TextView valueArmor = (TextView) myView.findViewById
-					(R.id.armor_weapon);
+					(R.id.armor_shield);
 			
-			Weapon myWeapon = this.getItem(position);
+			Shield myShield = this.getItem(position);
 			
-			switch(myWeapon.getId()) {
+			switch(myShield.getId()) {
 			case 1 :
-				imgViewWeapon.setImageResource(R.drawable.sprite_blade_1);
+				imgViewShield.setImageResource(R.drawable.sprite_shield_1);
 				break;
 			case 2 :
-				imgViewWeapon.setImageResource(R.drawable.sprite_blade_2);
+				imgViewShield.setImageResource(R.drawable.sprite_shield_2);
 				break;
 			case 3 :
-				imgViewWeapon.setImageResource(R.drawable.sprite_blade_3);
+				imgViewShield.setImageResource(R.drawable.sprite_shield_3);
 				break;
 			case 4 :
-				imgViewWeapon.setImageResource(R.drawable.sprite_blade_4);
+				imgViewShield.setImageResource(R.drawable.sprite_shield_4);
 				break;
 			}
 
-			valueHealth.setText(" "+String.valueOf(myWeapon.getHealthValue())+" HP");
-			valueAttack.setText(" "+String.valueOf(myWeapon.getAttackValue())+" Attaque");
-			valueArmor.setText(" "+String.valueOf(myWeapon.getArmorValue())+" Armure");
+			valueHealth.setText(" "+String.valueOf(myShield.getHealthValue())+" HP");
+			valueAttack.setText(" "+String.valueOf(myShield.getAttackValue())+" Attaque");
+			valueArmor.setText(" "+String.valueOf(myShield.getArmorValue())+" Armure");
 			
 			return myView;
 		}

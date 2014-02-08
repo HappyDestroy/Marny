@@ -219,9 +219,9 @@ public class MainActivity extends SherlockActivity {
 		/*********** BOUCLIER ***************/
 		ContentValues valuesShield1 = new ContentValues();
 		// Ajout shields lvl 1
-		valuesShield1.put(ShieldContract.COL_HEALTHVALUE, 10);
+		valuesShield1.put(ShieldContract.COL_HEALTHVALUE, 0);
 		valuesShield1.put(ShieldContract.COL_ATTACKVALUE, 0);
-		valuesShield1.put(ShieldContract.COL_ARMORVALUE, 0);
+		valuesShield1.put(ShieldContract.COL_ARMORVALUE, 10);
 		valuesShield1.put(ShieldContract.COL_PRICE, 50);
 		
 		db.insert(ShieldContract.TABLE, null, valuesShield1);
@@ -229,9 +229,9 @@ public class MainActivity extends SherlockActivity {
 		
 		ContentValues valuesShield2 = new ContentValues();
 		// Ajout shields lvl 2
-		valuesShield2.put(ShieldContract.COL_HEALTHVALUE, 15);
-		valuesShield2.put(ShieldContract.COL_ATTACKVALUE, 0);
-		valuesShield2.put(ShieldContract.COL_ARMORVALUE, 5);
+		valuesShield2.put(ShieldContract.COL_HEALTHVALUE, 0);
+		valuesShield2.put(ShieldContract.COL_ATTACKVALUE, 5);
+		valuesShield2.put(ShieldContract.COL_ARMORVALUE, 15);
 		valuesShield2.put(ShieldContract.COL_PRICE, 120);
 		
 		db.insert(ShieldContract.TABLE, null, valuesShield2);
@@ -239,9 +239,9 @@ public class MainActivity extends SherlockActivity {
 		
 		ContentValues valuesShield3 = new ContentValues();
 		// Ajout shields lvl 3
-		valuesShield3.put(ShieldContract.COL_HEALTHVALUE, 30);
-		valuesShield3.put(ShieldContract.COL_ATTACKVALUE, 0);
-		valuesShield3.put(ShieldContract.COL_ARMORVALUE, 15);
+		valuesShield3.put(ShieldContract.COL_HEALTHVALUE, 0);
+		valuesShield3.put(ShieldContract.COL_ATTACKVALUE, 15);
+		valuesShield3.put(ShieldContract.COL_ARMORVALUE, 30);
 		valuesShield3.put(ShieldContract.COL_PRICE, 220);
 		
 		db.insert(ShieldContract.TABLE, null, valuesShield3);
@@ -249,9 +249,9 @@ public class MainActivity extends SherlockActivity {
 		
 		ContentValues valuesShield4 = new ContentValues();
 		// Ajout shields lvl 4
-		valuesShield4.put(ShieldContract.COL_HEALTHVALUE, 45);
-		valuesShield4.put(ShieldContract.COL_ATTACKVALUE, 0);
-		valuesShield4.put(ShieldContract.COL_ARMORVALUE, 20);
+		valuesShield4.put(ShieldContract.COL_HEALTHVALUE, 0);
+		valuesShield4.put(ShieldContract.COL_ATTACKVALUE, 20);
+		valuesShield4.put(ShieldContract.COL_ARMORVALUE, 45);
 		valuesShield4.put(ShieldContract.COL_PRICE, 450);
 		
 		db.insert(ShieldContract.TABLE, null, valuesShield4);

@@ -56,15 +56,15 @@ public class ShopRoomActivity extends SherlockActivity {
 				} else if(arg2 == 1) {
 					//Affichage Boucliers
 					startActivity(new Intent(ShopRoomActivity.this, 
-							MonsterActivity.class));
+							ShopShieldActivity.class));
 				} else if(arg2 == 2) {
 					//Affichage Casques
 					startActivity(new Intent(ShopRoomActivity.this, 
-							MonsterActivity.class));
+							ShopHelmetActivity.class));
 				} else {
 					//Affichage Potions
 					startActivity(new Intent(ShopRoomActivity.this, 
-							MonsterActivity.class));
+							ShopWeaponActivity.class));
 				}
 			}
 		});

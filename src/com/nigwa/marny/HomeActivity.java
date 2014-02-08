@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +23,7 @@ public class HomeActivity extends SherlockActivity {
 	private Weapon myWeapon;
 	private int nb_room;
 	private int health_left;
+	private MediaPlayer sound_grincement = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +95,9 @@ public class HomeActivity extends SherlockActivity {
 			
 			@Override
 			public void onClick(View v) {
+				sound_grincement = MediaPlayer.create(HomeActivity.this, R.raw.grincement);
+				sound_grincement.start();
 				startActivity(new Intent(HomeActivity.this, ShopRoomActivity.class));
-				
 			}
 		});
 		
@@ -136,10 +139,12 @@ public class HomeActivity extends SherlockActivity {
 		
 		//Button GO
 		btn_go.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				//Tirage a usort de la prochaine salle à visiter
+				sound_grincement = MediaPlayer.create(HomeActivity.this, R.raw.grincement);
+				sound_grincement.start();
 				int myRandom = Tools.random(20);
 				if(myRandom >= 0 && myRandom <= 11) {
 					Intent intentMonsterRoom = new Intent(HomeActivity.this,

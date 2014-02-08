@@ -55,7 +55,7 @@ public class GoldRoomActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				int myRandom = Tools.random(20);
-				if(myRandom >= 0 && myRandom <= 11) {
+				if(myRandom >= 0 && myRandom <= 14) {
 					Intent intentMonsterRoom = new Intent(GoldRoomActivity.this,
 							MonsterActivity.class);
 					
@@ -64,7 +64,7 @@ public class GoldRoomActivity extends SherlockActivity {
 					intentMonsterRoom.putExtra("health_left", health_left);
 					
 					startActivity(intentMonsterRoom);
-				} else if(myRandom >= 12 && myRandom <= 14 ) {
+				} else if(myRandom >= 15 && myRandom <= 18 ) {
 					Intent intentGoldRoom = new Intent(GoldRoomActivity.this,
 							GoldRoomActivity.class);
 					
@@ -73,15 +73,6 @@ public class GoldRoomActivity extends SherlockActivity {
 					intentGoldRoom.putExtra("health_left", health_left);
 					
 					startActivity(intentGoldRoom);
-				} else if(myRandom >= 15 && myRandom <= 18 ) {
-					Intent intentShopRoom = new Intent(GoldRoomActivity.this,
-							ShopRoomActivity.class);
-					
-					intentShopRoom.putExtra("hero", myHero);
-					intentShopRoom.putExtra("nb_room", nb_room);
-					intentShopRoom.putExtra("health_left", health_left);
-					
-					startActivity(intentShopRoom);
 				} else {
 					Intent intentRestRoom = new Intent(GoldRoomActivity.this,
 							RestRoomActivity.class);

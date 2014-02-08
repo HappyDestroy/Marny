@@ -68,7 +68,6 @@ public class Shield implements Serializable {
 		return "C'est un bouclier qui apporte " 
 				+ this.armorValue + " point(s) d'armure, "
 				+ this.healthValue + " point(s) de vie, "
-				+ this.attackValue + " point(s) d'attaque, "
-				+ this.price + " golds";
+				+ this.attackValue + " point(s) d'attaque.";
 	}
 }

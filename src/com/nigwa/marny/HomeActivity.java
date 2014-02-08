@@ -118,9 +118,16 @@ public class HomeActivity extends SherlockActivity {
 			
 			@Override
 			public void onClick(View v) {
-				sound_grincement = MediaPlayer.create(HomeActivity.this, R.raw.grincement);
+				sound_grincement = MediaPlayer.create(
+						HomeActivity.this, R.raw.grincement);
 				sound_grincement.start();
-				startActivity(new Intent(HomeActivity.this, ShopRoomActivity.class));
+				
+				Intent myIntentShopRoom = new Intent(
+						HomeActivity.this, ShopRoomActivity.class);
+				
+				myIntentShopRoom.putExtra("myHero", myHero);
+				
+				startActivity(myIntentShopRoom);
 			}
 		});
 		
@@ -169,7 +176,7 @@ public class HomeActivity extends SherlockActivity {
 				sound_grincement = MediaPlayer.create(HomeActivity.this, R.raw.grincement);
 				sound_grincement.start();
 				int myRandom = Tools.random(20);
-				if(myRandom >= 0 && myRandom <= 11) {
+				if(myRandom >= 0 && myRandom <= 14) {
 					Intent intentMonsterRoom = new Intent(HomeActivity.this,
 							MonsterActivity.class);
 					
@@ -178,7 +185,7 @@ public class HomeActivity extends SherlockActivity {
 					intentMonsterRoom.putExtra("health_left", health_left);
 					
 					startActivity(intentMonsterRoom);
-				} else if(myRandom >= 12 && myRandom <= 14 ) {
+				} else if(myRandom >= 15 && myRandom <= 18 ) {
 					Intent intentGoldRoom = new Intent(HomeActivity.this,
 							GoldRoomActivity.class);
 					
@@ -187,15 +194,6 @@ public class HomeActivity extends SherlockActivity {
 					intentGoldRoom.putExtra("health_left", health_left);
 					
 					startActivity(intentGoldRoom);
-				} else if(myRandom >= 15 && myRandom <= 18 ) {
-					Intent intentShopRoom = new Intent(HomeActivity.this,
-							ShopRoomActivity.class);
-					
-					intentShopRoom.putExtra("hero", myHero);
-					intentShopRoom.putExtra("nb_room", nb_room);
-					intentShopRoom.putExtra("health_left", health_left);
-					
-					startActivity(intentShopRoom);
 				} else {
 					Intent intentRestRoom = new Intent(HomeActivity.this,
 							RestRoomActivity.class);

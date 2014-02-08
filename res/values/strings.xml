@@ -18,15 +18,15 @@
     <string name="home_go">Partir à l\'assaut du chateau</string>
     <string name="home_info_hero">Informations sur votre héro</string>
     
-    <string name="health">Points de vie : </string>
-    <string name="attack">Points d\'attaque : </string>
-    <string name="armor">Points d\'armure : </string>
-    <string name="health">Points de vie : </string>
-    <string name="gold">Golds : </string>
-    <string name="helmet">Casque : </string>
-    <string name="shield">Bouclier : </string>
-    <string name="weapon">Arme : </string>
-    <string name="potion">Potions : </string>
+    <string name="health">Points de vie : </string>
+    <string name="attack">Points d\'attaque : </string>
+    <string name="armor">Points d\'armure : </string>
+    <string name="health">Points de vie : </string>
+    <string name="gold">Golds : </string>
+    <string name="helmet">Casque : </string>
+    <string name="shield">Bouclier : </string>
+    <string name="weapon">Arme : </string>
+    <string name="potion">Potions : </string>
     
     <string name="empty">vide</string>
     <string name="bg">background</string>

@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:contentDescription="@string/bg"
         android:src="@drawable/sprite_blade_1" />
 
     <TextView
@@ -17,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/img_weapon"
-        android:text="TextView" />
+        android:text="@string/empty" />
 
     <TextView
         android:id="@+id/attack_weapon"
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/health_weapon"
         android:layout_below="@+id/health_weapon"
-        android:text="TextView" />
+        android:text="@string/empty" />
 
     <TextView
         android:id="@+id/armor_weapon"
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/attack_weapon"
         android:layout_toRightOf="@+id/img_weapon"
-        android:text="TextView" />
+        android:text="@string/empty" />
 
     <Button
         android:id="@+id/btn_acheter"

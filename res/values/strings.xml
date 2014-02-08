@@ -29,6 +29,9 @@
     <string name="potion">Potions : </string>
     
     <string name="empty">vide</string>
+    <string name="bg">background</string>
+    <string name="sprite">sprite</string>
+    
     <string name="btn_back">Hop ! Hop ! Hop mon petit ! On ne revient jamais 
         sur ses pas quand on est courageux !</string>
 	<string name="heroKO_title">Pas de chance &#8230;</string>
@@ -37,9 +40,13 @@
     
     <string name="monster">AAAHH !!! Un monstre vient d\'apparaitre !</string>
     <string name="img_monster">Image du monstre</string>
-    <string name="goldroom">GOLD ROOM !!!</string>
-    <string name="restroom">REST ROOM !!!</string>
-    <string name="shoproom">SHOP ROOM !!!</string>
+    <string name="goldroom">Une salle au trésor ! Prends le maximum !</string>
+    
+    <string name="restroom">Quelle chance ! Une salle de repos. Ta vie a été 
+        remise a son maximum !</string>
+    
+    <string name="shoproom">Bienvenue chez le marchand, fais ton choix.</string>
+    
     <string name="next">Aller à la sale suivante</string>
     
     <string name="attack_btn">Attaquer !</string>

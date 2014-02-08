@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
@@ -21,6 +20,8 @@ public class HomeActivity extends SherlockActivity {
 	private Helmet myHelmet;
 	private Shield myShield;
 	private Weapon myWeapon;
+	private int nb_room;
+	private int health_left;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,9 @@ public class HomeActivity extends SherlockActivity {
 		Button btn_shop = (Button) findViewById(R.id.home_btn_shop);
 		Button btn_info_hero = (Button) findViewById(R.id.home_btn_info_hero);
 		Button btn_go = (Button) findViewById(R.id.home_btn_go);
+		
+		//On remet le nombre de pièce visité a 0 
+		nb_room = 0;
 		
 		String[] VALUES = { "1" };
 		
@@ -65,6 +69,7 @@ public class HomeActivity extends SherlockActivity {
 			int valuePotion = c.getInt(
 					c.getColumnIndex(HeroContract.COL_POTION)) ;
 
+			//999 est l'id des equipements sans caractéritiques
 			if(valueHelmet == 999) {
 				myHelmet = new Helmet(999, 0, 0, 0, 0);
 			}
@@ -79,6 +84,9 @@ public class HomeActivity extends SherlockActivity {
 					myHelmet, myShield, myWeapon, valuePotion);
 			
 		} while ( c.moveToNext() );
+		
+		//On met la vie restante de héro au maximum
+		health_left = myHero.getHealth();
 		
 		//Button Shop
 		btn_shop.setOnClickListener(new OnClickListener() {
@@ -95,7 +103,7 @@ public class HomeActivity extends SherlockActivity {
 			
 			@Override
 			public void onClick(View v) {
-				
+				//AlertDialog avec les informations sur le héro
 				new AlertDialog.Builder(HomeActivity.this)
 			    .setTitle("Informations du héro")
 			    .setMessage(getApplicationContext().getString(R.string.health) 
@@ -131,21 +139,44 @@ public class HomeActivity extends SherlockActivity {
 			
 			@Override
 			public void onClick(View v) {
+				//Tirage a usort de la prochaine salle à visiter
 				int myRandom = Tools.random(20);
 				if(myRandom >= 0 && myRandom <= 11) {
-
 					Intent intentMonsterRoom = new Intent(HomeActivity.this,
 							MonsterActivity.class);
 					
 					intentMonsterRoom.putExtra("hero", myHero);
+					intentMonsterRoom.putExtra("nb_room", nb_room);
+					intentMonsterRoom.putExtra("health_left", health_left);
 					
 					startActivity(intentMonsterRoom);
 				} else if(myRandom >= 12 && myRandom <= 14 ) {
-					startActivity(new Intent(HomeActivity.this, GoldRoomActivity.class));
+					Intent intentGoldRoom = new Intent(HomeActivity.this,
+							GoldRoomActivity.class);
+					
+					intentGoldRoom.putExtra("hero", myHero);
+					intentGoldRoom.putExtra("nb_room", nb_room);
+					intentGoldRoom.putExtra("health_left", health_left);
+					
+					startActivity(intentGoldRoom);
 				} else if(myRandom >= 15 && myRandom <= 18 ) {
-					startActivity(new Intent(HomeActivity.this, ShopRoomActivity.class));
+					Intent intentShopRoom = new Intent(HomeActivity.this,
+							ShopRoomActivity.class);
+					
+					intentShopRoom.putExtra("hero", myHero);
+					intentShopRoom.putExtra("nb_room", nb_room);
+					intentShopRoom.putExtra("health_left", health_left);
+					
+					startActivity(intentShopRoom);
 				} else {
-					startActivity(new Intent(HomeActivity.this, RestRoomActivity.class));
+					Intent intentRestRoom = new Intent(HomeActivity.this,
+							RestRoomActivity.class);
+					
+					intentRestRoom.putExtra("hero", myHero);
+					intentRestRoom.putExtra("nb_room", nb_room);
+					intentRestRoom.putExtra("health_left", health_left);
+					
+					startActivity(intentRestRoom);
 				}
 			}
 		});

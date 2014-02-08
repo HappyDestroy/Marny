@@ -24,7 +24,8 @@ public class MonsterActivity extends SherlockActivity {
 	private Monster myMonster;
 	private SQLiteDatabase db;
 	private SQLiteOpenHelperClass dbHelper;
-	private int hero_health_left;
+	private int health_left;
+	private int nb_room;
 	private MediaPlayer soudHurt = null;
 	private MediaPlayer soudDeath = null;
 	
@@ -60,8 +61,14 @@ public class MonsterActivity extends SherlockActivity {
 		//On récupère le héro passé depuis le bundle
 		myHero = (Hero) getIntent().getSerializableExtra("hero");
 
+		health_left = getIntent().getIntExtra("health_left", 1); 
+		
+		nb_room = getIntent().getIntExtra("nb_room", 1);
+		nb_room++;
+		
 		//On met le max pour la progressBar de vie du héro
 		hero_health.setMax(myHero.getHealth());
+		hero_health.setProgress(health_left);
 
 		this.createMonster();
 		//On affiche l'image qui correspond au rang du monstre
@@ -82,6 +89,7 @@ public class MonsterActivity extends SherlockActivity {
 		
 		//On met le max pour la progressBar de vie du monstre
 		monster_health.setMax(myMonster.getHealth());
+		monster_health.setProgress(myMonster.getHealth());
 
 		
 		//Si le monstre est vivant à la création (Et il l'est !) on desactive 
@@ -97,14 +105,42 @@ public class MonsterActivity extends SherlockActivity {
 			public void onClick(View v) {
 				//Choix aléatoire du type de la prochaine pièce
 				int myRandom = Tools.random(20);
-				if(myRandom >= 0 && myRandom <= 12) {
-					startActivity(new Intent(MonsterActivity.this, MonsterActivity.class));
-				} else if(myRandom >= 13 && myRandom <= 16 ) {
-					startActivity(new Intent(MonsterActivity.this, GoldRoomActivity.class));
-				} else if(myRandom >= 17 && myRandom <= 18 ) {
-					startActivity(new Intent(MonsterActivity.this, ShopRoomActivity.class));
+				if(myRandom >= 0 && myRandom <= 11) {
+					Intent intentMonsterRoom = new Intent(MonsterActivity.this,
+							MonsterActivity.class);
+					
+					intentMonsterRoom.putExtra("hero", myHero);
+					intentMonsterRoom.putExtra("nb_room", nb_room);
+					intentMonsterRoom.putExtra("health_left", health_left);
+					
+					startActivity(intentMonsterRoom);
+				} else if(myRandom >= 12 && myRandom <= 14 ) {
+					Intent intentGoldRoom = new Intent(MonsterActivity.this,
+							GoldRoomActivity.class);
+					
+					intentGoldRoom.putExtra("hero", myHero);
+					intentGoldRoom.putExtra("nb_room", nb_room);
+					intentGoldRoom.putExtra("health_left", health_left);
+					
+					startActivity(intentGoldRoom);
+				} else if(myRandom >= 15 && myRandom <= 18 ) {
+					Intent intentShopRoom = new Intent(MonsterActivity.this,
+							ShopRoomActivity.class);
+					
+					intentShopRoom.putExtra("hero", myHero);
+					intentShopRoom.putExtra("nb_room", nb_room);
+					intentShopRoom.putExtra("health_left", health_left);
+					
+					startActivity(intentShopRoom);
 				} else {
-					startActivity(new Intent(MonsterActivity.this, RestRoomActivity.class));
+					Intent intentRestRoom = new Intent(MonsterActivity.this,
+							RestRoomActivity.class);
+					
+					intentRestRoom.putExtra("hero", myHero);
+					intentRestRoom.putExtra("nb_room", nb_room);
+					intentRestRoom.putExtra("health_left", health_left);
+					
+					startActivity(intentRestRoom);
 				}
 			}
 		});
@@ -137,8 +173,8 @@ public class MonsterActivity extends SherlockActivity {
 					
 					
 					//On change la valeur des points de vie qu'il nous reste
-					hero_health_left = hero_health.getProgress();
-					 if(hero_health_left <= 0) { 
+					health_left = hero_health.getProgress();
+					 if(health_left <= 0) { 
 						 soudDeath = MediaPlayer.create(MonsterActivity.this,
 								 R.raw.death);
 						 soudDeath.start();
@@ -176,8 +212,18 @@ public class MonsterActivity extends SherlockActivity {
 	
 
 	private void createMonster() {
-		//On tire un nombre entre 1 et 4 pour choisir le rang du monstre
-		int random = Tools.random(1, 4);
+		//On tire un nombre entre 1 et 4 pour choisir le rang du monstre.
+		int random = 1;
+		if(nb_room < 10) {
+			random = 1;
+		} else if (nb_room >= 10 && nb_room < 17)  {
+			random = Tools.random(1, 2);
+		} else if (nb_room >= 17 && nb_room < 23) {
+			random = Tools.random(1, 3);
+		} else if (nb_room >= 23) {
+			random = Tools.random(2, 4);
+		}
+		
 		String[] VALUES = { String.valueOf(random) };
 		
 		dbHelper = new SQLiteOpenHelperClass(

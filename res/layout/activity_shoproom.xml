@@ -16,12 +16,16 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/shoproom_btn_next"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="27dp"
         android:text="@string/shoproom"
+        android:alpha="0.60"
+        android:background="#000000"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ListView
@@ -29,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true" >
     </ListView>
 

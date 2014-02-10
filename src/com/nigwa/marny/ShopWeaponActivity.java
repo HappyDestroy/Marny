@@ -158,14 +158,8 @@ public class ShopWeaponActivity extends SherlockActivity {
 				            			Toast.LENGTH_LONG).show();
 				            } else {
 				            	//Sauvegarde en BDD
-				            	String[] VALUES = {"1"};
 				            	
 				            	db = dbHelper.getWritableDatabase();
-				        		
-				        		
-				        		Cursor c = db.query(HeroContract.TABLE ,
-				        				HeroContract.COLS, "id LIKE ?", 
-				        				VALUES, null, null, null) ;
 				        		
 				    			ContentValues itemHero = new ContentValues();
 				    			itemHero.put("gold", myHero.getGold() - 

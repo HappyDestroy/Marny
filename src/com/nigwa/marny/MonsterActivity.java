@@ -2,6 +2,7 @@ package com.nigwa.marny;
 
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -252,6 +253,9 @@ public class MonsterActivity extends SherlockActivity {
 	}
 	
 	private void heroKO() {
+		
+		
+		
 		new AlertDialog.Builder(MonsterActivity.this)
 	    .setTitle(getApplication().getString(R.string.heroKO_title))
 	    .setMessage(getApplication().getString(R.string.heroKO_msg))
@@ -260,19 +264,23 @@ public class MonsterActivity extends SherlockActivity {
 			        public void onClick(
 			        		DialogInterface dialog, int which) {
 			        		//On arrête l'activity pour quitter
-			        		//MonsterActivity.this.finish();
 			        		
-			        		Intent myIntentDeath = new Intent(
-			        				MonsterActivity.this, HomeActivity.class);
-			        		
-			        		myIntentDeath.putExtra("death", true);
-			        		myIntentDeath.putExtra("myHero", myHero);
-			        		
-			        		startActivity(myIntentDeath);
+				        	//Sauvegarde en BDD
+							ContentValues itemHero = new ContentValues();
+							itemHero.put("gold", myHero.getGold());
+							itemHero.put("potion", myHero.getPotion());
+	
+							String whereClause = "id =? ";
+							String[] whereArgs = { "1" };
+							db.update(HeroContract.TABLE, itemHero, 
+									whereClause, whereArgs);
+			        	
+			        		MonsterActivity.this.finish();
 			        }
 	     })
 	    .setIcon(R.drawable.ic_info_small)
-	     .show();
+	    .setCancelable(false)
+	    .show();
 		
 	}
 	

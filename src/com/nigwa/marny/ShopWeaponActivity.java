@@ -82,9 +82,6 @@ public class ShopWeaponActivity extends SherlockActivity {
 		
 	}
 	
-	
-	
-	
 	private static class Adapter extends ArrayAdapter<Weapon>
 	{
 		private Context myContext;

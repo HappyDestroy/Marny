@@ -4,30 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" 
     android:background="@drawable/bg_shoproom_potion">
-
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/button1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="63dp"
-            android:ems="10"
-            android:inputType="number" >
-
-            <requestFocus />
-        </EditText>
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="150dp"
-            android:layout_marginRight="25dp"
-            android:text="@string/buy" />
-
         <TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
@@ -42,14 +18,16 @@
             android:text="@string/buy_potion"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF" />
-
-        <ImageView
-            android:id="@+id/imageCoin"
+        
+        
+        <Button
+            android:id="@+id/potion_btn_buy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/editText1"
-            android:layout_marginBottom="18dp"
-            android:layout_marginRight="39dp"
-            android:layout_toLeftOf="@+id/button1" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="150dp"
+            android:layout_marginRight="25dp"
+            android:text="@string/buy" />
         
         </RelativeLayout>

@@ -63,19 +63,18 @@ public class MonsterActivity extends SherlockActivity {
 
 		//On récupère le héro passé depuis le bundle
 		myHero = (Hero) getIntent().getSerializableExtra("hero");
-
+		
 		health_left = getIntent().getIntExtra("health_left", 1); 
 		
 		nb_room = getIntent().getIntExtra("nb_room", 1);
 		nb_room++;
 		
-		//On met le max pour la progressBar de vie du héro
 		hero_health.setMax(myHero.getHealth() 
-				+ myHero.getHelmet().getHealthValue() 
-				+ myHero.getShield().getHealthValue());
-		
+				+ myHero.getHelmet().getHealthValue()
+				+ myHero.getShield().getHealthValue()
+				+ myHero.getWeapon().getHealthValue());
 		hero_health.setProgress(health_left);
-		
+
 		this.createMonster();
 		//On affiche l'image qui correspond au rang du monstre
 		switch(myMonster.getRank()) {
@@ -235,6 +234,12 @@ public class MonsterActivity extends SherlockActivity {
 				}
 			}
 		});
+		if(health_left <= 0) { 
+			 soudDeath = MediaPlayer.create(MonsterActivity.this,
+					 R.raw.death);
+			 soudDeath.start();
+			 heroKO();
+		 }
 	}
 	
 	

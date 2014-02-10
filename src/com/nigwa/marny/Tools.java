@@ -154,8 +154,8 @@ public class Tools {
 					HelmetContract.COL_PRICE));
 			
 			
-			myHelmet = new Helmet(valueID, valueHealth, valueArmor, 
-					valueAttack, valuePrice);
+			myHelmet = new Helmet(valueID, valueHealth, valueAttack, 
+					valueArmor, valuePrice);
 		} while ( c.moveToNext() );
 		
 		return myHelmet;
@@ -197,8 +197,8 @@ public class Tools {
 					ShieldContract.COL_PRICE));
 			
 			
-			myShield = new Shield(valueID, valueHealth, valueArmor, 
-					valueAttack, valuePrice);
+			myShield = new Shield(valueID, valueHealth, valueAttack, 
+					valueArmor, valuePrice);
 		} while ( c.moveToNext() );
 		
 		
@@ -242,8 +242,8 @@ public class Tools {
 					WeaponContract.COL_PRICE));
 			
 			
-			myWeapon = new Weapon(valueID, valueHealth, valueArmor, 
-					valueAttack, valuePrice);
+			myWeapon = new Weapon(valueID, valueHealth, valueAttack, 
+					valueArmor, valuePrice);
 		} while ( c.moveToNext() );
 		
 		return myWeapon;

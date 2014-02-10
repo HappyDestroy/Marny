@@ -26,13 +26,12 @@ public class GoldRoomActivity extends SherlockActivity {
 		//Ajout Son
 		sound_coins = MediaPlayer.create(GoldRoomActivity.this, R.raw.coins);
 		sound_coins.start();
-		sound_coins.release();
 		//TextViex infos recompense
 		final TextView label_gold = (TextView) findViewById(
 			R.id.gold_label_gold);
 		
 		//Génération des golds trouvés
-		int myRandom = Tools.random(10,500);
+		int myRandom = Tools.random(1,150);
 		label_gold.setText("Vous venez de trouver " + myRandom + 
 				" Golds !");
 		

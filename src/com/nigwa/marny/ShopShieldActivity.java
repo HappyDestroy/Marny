@@ -166,15 +166,11 @@ public class ShopShieldActivity extends SherlockActivity {
 				            	Toast.makeText(v.getContext(), 
 				            			R.string.msg_congrat, 
 				            			Toast.LENGTH_LONG).show();
-				            	//Sauvegarde en BDD
-				            	String[] VALUES = {"1"};
 				            	
+				            	
+				            	//Sauvegarde en BDD
 				            	db = dbHelper.getWritableDatabase();
 				        		
-				        		
-				        		Cursor c = db.query(HeroContract.TABLE ,
-				        				HeroContract.COLS, "id LIKE ?", 
-				        				VALUES, null, null, null) ;
 				        		//On debite le héros
 				    			ContentValues itemHero = new ContentValues();
 				    			itemHero.put("gold", myHero.getGold() - 

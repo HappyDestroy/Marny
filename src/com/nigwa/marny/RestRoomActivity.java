@@ -24,7 +24,8 @@ public class RestRoomActivity extends SherlockActivity {
 		//Ajout Son
 		sound_power_up = MediaPlayer.create(RestRoomActivity.this, R.raw.powerup);
 		sound_power_up.start();
-		sound_power_up.release();
+		
+		
 		//On récupère les extras depuis l'intent
 		nb_room = getIntent().getIntExtra("nb_room", 1);
 		nb_room++;
@@ -36,7 +37,10 @@ public class RestRoomActivity extends SherlockActivity {
 		Button btn_next = (Button) findViewById(R.id.restroom_btn_next);
 		
 		//Comme c'est une chambre de repos, on remet toute la vie du héro
-		health_left = myHero.getHealth();
+		health_left = myHero.getHealth() 
+				+ myHero.getHelmet().getHealthValue()
+				+ myHero.getShield().getHealthValue()
+				+ myHero.getWeapon().getHealthValue();
 		
 		btn_next.setOnClickListener(new OnClickListener() {
 			

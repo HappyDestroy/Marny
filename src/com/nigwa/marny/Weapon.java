@@ -62,9 +62,8 @@ public class Weapon implements Serializable {
 
 	@Override
 	public String toString() {
-		return "C'est une arme qui apporte " 
-				+ this.armorValue + " point(s) d'armure, "
-				+ this.healthValue + " point(s) de vie, "
-				+ this.attackValue + " point(s) d'attaque.";
+		return "+ " + this.healthValue + " point(s) de vie \n "
+				+ "+ " + this.attackValue + " point(s) d'attaque \n"
+				+ "+ " + this.armorValue + " point(s) d'armure.\n";
 	}
 }

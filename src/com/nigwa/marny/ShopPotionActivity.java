@@ -1,6 +1,7 @@
 package com.nigwa.marny;
 
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +18,7 @@ public class ShopPotionActivity extends SherlockActivity {
 	private static SQLiteDatabase db;
 	private static SQLiteOpenHelperClass dbHelper;
 	private Hero myHero;
-
+	private MediaPlayer soudKaching = null;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,7 +45,9 @@ public class ShopPotionActivity extends SherlockActivity {
 						Toast.makeText(ShopPotionActivity.this, 
 		            			R.string.succes_potion, 
 		            			Toast.LENGTH_LONG).show();
-						
+						soudKaching = MediaPlayer.create(ShopPotionActivity.this,
+								 R.raw.ka_chingsound);
+						soudKaching.start();
 						//On debite le Hero
 		    			ContentValues itemHero = new ContentValues();
 		    			itemHero.put("gold", myHero.getGold() - 

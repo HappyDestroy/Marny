@@ -24,7 +24,6 @@ public class RestRoomActivity extends SherlockActivity {
 		//Ajout Son
 		sound_power_up = MediaPlayer.create(RestRoomActivity.this, R.raw.powerup);
 		sound_power_up.start();
-		sound_power_up.release();
 		//On récupère les extras depuis l'intent
 		nb_room = getIntent().getIntExtra("nb_room", 1);
 		nb_room++;

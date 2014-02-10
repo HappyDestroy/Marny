@@ -213,6 +213,12 @@ public class MonsterActivity extends SherlockActivity {
 				}
 			}
 		});
+		if(health_left <= 0) { 
+			 soudDeath = MediaPlayer.create(MonsterActivity.this,
+					 R.raw.death);
+			 soudDeath.start();
+			 heroKO();
+		 }
 	}
 	
 

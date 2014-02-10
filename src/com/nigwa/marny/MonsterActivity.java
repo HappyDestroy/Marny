@@ -1,8 +1,6 @@
 package com.nigwa.marny;
 
 
-import java.io.IOException;
-
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -72,7 +70,10 @@ public class MonsterActivity extends SherlockActivity {
 		nb_room++;
 		
 		//On met le max pour la progressBar de vie du héro
-		hero_health.setMax(myHero.getHealth());
+		hero_health.setMax(myHero.getHealth() 
+				+ myHero.getHelmet().getHealthValue() 
+				+ myHero.getShield().getHealthValue());
+		
 		hero_health.setProgress(health_left);
 		
 		this.createMonster();
@@ -145,11 +146,13 @@ public class MonsterActivity extends SherlockActivity {
 		btn_attack.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				
+				
 				//On calcul les dégats que peux faire le héro face au bouclier 
 				//du monstre
-				int valueAttack = (myHero.getAttack() + 
-						myHero.getWeapon().getAttackValue())
+				int valueAttack = (myHero.getAttack() 
+						+ myHero.getWeapon().getAttackValue() 
+						+ myHero.getShield().getAttackValue())
 						- myMonster.getShield();
 				
 				if(valueAttack < 0) {
@@ -167,36 +170,53 @@ public class MonsterActivity extends SherlockActivity {
 				//On vérifie qu'il reste de la vie au monstre, et il attaque
 				if(monster_health.getProgress() > 0) {
 					
-					int valueDefendHero = (myHero.getArmor() 
+					final int valueDefendHero = (myHero.getArmor() 
 							+ myHero.getHelmet().getArmorValue() 
 							+ myHero.getShield().getArmorValue() 
 							+ myHero.getWeapon().getArmorValue());
+					 
+					final int health_lose;
+					
+					if(myMonster.getAttack() - valueDefendHero <= 0) {
+						health_lose = 0;
+					} else {
+						health_lose = myMonster.getAttack() - valueDefendHero;
+					}
 					
 					//On réduit la progressBar de vie du héro
-					hero_health.setProgress(hero_health.getProgress() - 
-							(valueDefendHero - myMonster.getAttack()));
+					hero_health.setProgress(hero_health.getProgress() 
+							- health_lose);
 					
 					
 					//On change la valeur des points de vie qu'il nous reste
 					health_left = hero_health.getProgress();
-					 if(health_left <= 0) { 
-						 soudDeath = MediaPlayer.create(MonsterActivity.this,
-								 R.raw.death);
-						 soudDeath.start();
-						 heroKO();
-					 }
+					
+					
 					soudHurt = MediaPlayer.create(MonsterActivity.this,
 								 R.raw.coup);
-							soudHurt.start();
+					soudHurt.start();
+					
+					
 					//Le monstre nous enlève de la vie
 					label_monster.postDelayed(new Runnable() {
 						@Override
 						public void run() {
-							label_monster.setText("Il fait " + 
-									myMonster.getAttack()
+							label_monster.setText("Il fait " + health_lose 
 									+ " point de dégâts.");
 						}
 					}, 1000);
+					
+					//Si le héro n'a plus de vie
+					 if(health_left <= 0) { 
+						 
+						 soudDeath = MediaPlayer.create(MonsterActivity.this,
+								 R.raw.death);
+						 soudDeath.start();
+						 
+						 
+						 heroKO();
+					 }
+					 
 				} else { //Sinon le monstre est K.O.
 					
 					label_monster.postDelayed(new Runnable() {
@@ -206,6 +226,8 @@ public class MonsterActivity extends SherlockActivity {
 									.getString(R.string.monster_ko));
 							}
 					}, 600);
+					
+					
 					//On active les boutons et on cache le sprite du monstre
 					btn_next.setEnabled(true);
 					btn_attack.setEnabled(false);
@@ -215,7 +237,7 @@ public class MonsterActivity extends SherlockActivity {
 		});
 	}
 	
-
+	
 	private void createMonster() {
 		//On tire un nombre entre 1 et 4 pour choisir le rang du monstre.
 		int random = 1;

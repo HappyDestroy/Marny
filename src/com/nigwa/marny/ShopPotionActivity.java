@@ -1,25 +1,21 @@
 package com.nigwa.marny;
 
-import android.app.Activity;
+import com.actionbarsherlock.app.SherlockActivity;
+
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.actionbarsherlock.app.SherlockActivity;
-
-public class ShopPotionActivity extends Activity {
-private Hero myHero;
-	//int i = 1;
-	/*protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_shoppotion);
-		
-		
-		myHero = (Hero) getIntent().getSerializableExtra("hero");
-		
-	}*/
+public class ShopPotionActivity extends SherlockActivity {
+	
 	ImageView imageView;
 
-	 Integer[] image = { R.drawable.coin_1, R.drawable.coin_2,R.drawable.coin_3,R.drawable.coin_3,R.drawable.coin_3,R.drawable.coin_3,R.drawable.coin_3,R.drawable.coin_3 };
+	 Integer[] image = { R.drawable.coin_1, R.drawable.coin_2, 
+			 R.drawable.coin_3, 
+			 R.drawable.coin_4, 
+			 R.drawable.coin_5, 
+			 R.drawable.coin_6, 
+			 R.drawable.coin_7, 
+			 R.drawable.coin_8 };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -28,10 +24,8 @@ private Hero myHero;
 
 	   ImageView img_coin= (ImageView) findViewById(R.id.imageCoin);
 
-	   for(int i = 1;i<8;i++){
+	   for(int i = 1;i<8;i++) {
 		   img_coin.setImageResource(image[i]);
-	        }
-	     }
-	   
-	}
-
+        }
+	}	   
+}

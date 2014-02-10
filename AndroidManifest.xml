@@ -81,6 +81,12 @@
             android:noHistory="true"
 			android:screenOrientation="portrait" >
         </activity>
+                <activity
+            android:name="com.nigwa.marny.ShopPotionActivity"
+            android:label="@string/app_name"
+            android:noHistory="true"
+			android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

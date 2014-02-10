@@ -26,7 +26,7 @@
     <string name="helmet">Casque : </string>
     <string name="shield">Bouclier : </string>
     <string name="weapon">Arme : </string>
-    <string name="potion">Potions : </string>
+    <string name="buy_potion">La potion regénére 10HP pour 25 Golds. Combien en voulez-vous ?</string>
     
     <string name="empty">vide</string>
     <string name="bg">background</string>
@@ -57,5 +57,7 @@
     <string name="msg_buy_begin">Acheter cet item pour </string>
     <string name="msg_buy_end"> golds ?</string>
     <string name="msg_error">Malheuresement,  tu n\'as pas assez de golds</string>
+    <string name="msg_congrat">Félicitation jeune aventurier ! Tu viens d\'acquérir un nouvel item !</string>
+    <string name="potion">Potions :</string>
 
 </resources>

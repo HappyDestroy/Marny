@@ -26,7 +26,7 @@ public class GoldRoomActivity extends SherlockActivity {
 		//Ajout Son
 		sound_coins = MediaPlayer.create(GoldRoomActivity.this, R.raw.coins);
 		sound_coins.start();
-		
+		sound_coins.release();
 		//TextViex infos recompense
 		final TextView label_gold = (TextView) findViewById(
 			R.id.gold_label_gold);

@@ -97,6 +97,7 @@ public class HomeActivity extends SherlockActivity {
 				//Tirage a usort de la prochaine salle à visiter
 				sound_grincement = MediaPlayer.create(HomeActivity.this, R.raw.grincement);
 				sound_grincement.start();
+				sound_grincement.release();
 				int myRandom = Tools.random(20);
 				if(myRandom >= 0 && myRandom <= 14) {
 					Intent intentMonsterRoom = new Intent(HomeActivity.this,

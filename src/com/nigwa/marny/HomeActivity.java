@@ -25,7 +25,7 @@ public class HomeActivity extends SherlockActivity {
 	private Weapon myWeapon;
 	private int nb_room;
 	private int health_left;
-	private MediaPlayer sound_grincement = null;
+	private MediaPlayer sound_grincement;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +64,6 @@ public class HomeActivity extends SherlockActivity {
 			itemHero.put("attack", myHero.getAttack());
 			itemHero.put("armor", myHero.getArmor());
 			itemHero.put("gold", myHero.getGold());
-			itemHero.put("helmet", myHero.getHelmet().getId());
-			itemHero.put("shield", myHero.getShield().getId());
-			itemHero.put("weapon", myHero.getWeapon().getId());
 			itemHero.put("potion", myHero.getPotion());
 
 			String whereClause = "id =? ";
@@ -247,6 +244,7 @@ public class HomeActivity extends SherlockActivity {
 				//Tirage a usort de la prochaine salle à visiter
 				sound_grincement = MediaPlayer.create(HomeActivity.this, R.raw.grincement);
 				sound_grincement.start();
+				sound_grincement.release();
 				int myRandom = Tools.random(20);
 				if(myRandom >= 0 && myRandom <= 14) {
 					Intent intentMonsterRoom = new Intent(HomeActivity.this,

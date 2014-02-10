@@ -32,8 +32,9 @@ public class MainActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		mp = MediaPlayer.create(MainActivity.this, R.raw.sound_game);
+		mp = MediaPlayer.create(MainActivity.this, R.raw.sound_game4);
 		mp.start();
+		mp.setLooping(true);
 		SharedPreferences settings = getSharedPreferences("database",
 				Context.MODE_PRIVATE);
 		

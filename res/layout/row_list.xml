@@ -50,6 +50,28 @@
         android:alpha="0.60"
         android:padding="5dp" />
 
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/health"
+        android:layout_toLeftOf="@+id/sprite_coin"
+        android:alpha="0.60"
+        android:background="#000000"
+        android:padding="5dp"
+        android:text="@string/empty"
+        android:textColor="#FFFFFF" />
+
+    <ImageView
+        android:id="@+id/sprite_coin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btn_buy"
+        android:layout_marginRight="30dp"
+        android:layout_toLeftOf="@+id/btn_buy"
+        android:src="@drawable/sprite_coin" />
+
+
     <Button
         android:id="@+id/btn_buy"
         android:layout_width="wrap_content"
@@ -58,5 +80,7 @@
         android:layout_alignBottom="@+id/attack"
         android:layout_alignParentRight="true"
         android:text="@string/buy" />
+
+
     
 </RelativeLayout>

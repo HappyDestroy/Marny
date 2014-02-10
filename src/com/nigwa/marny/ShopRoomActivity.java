@@ -26,7 +26,7 @@ public class ShopRoomActivity extends SherlockActivity {
 		ListView listViewShopRoom = (ListView) findViewById(
 				R.id.listViewShopRoom);
 		
-		String[] listeStrings = {"Armes","Boucliers","Casques", "Potions'"};
+		String[] listeStrings = {"Armes","Boucliers","Casques", "Potions"};
 		
 		listViewShopRoom.setAdapter(new ArrayAdapter<String>
 				(this, android.R.layout.simple_list_item_1, listeStrings));
@@ -64,7 +64,7 @@ public class ShopRoomActivity extends SherlockActivity {
 				} else {
 					//Affichage Potions
 					Intent myIntentPotion = new Intent(ShopRoomActivity.this, 
-							ShopWeaponActivity.class);
+							ShopPotionActivity.class);
 					
 					myIntentPotion.putExtra("hero", myHero);
 					

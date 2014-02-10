@@ -97,6 +97,8 @@ public class ShopHelmetActivity extends SherlockActivity {
 					(R.id.attack);
 			TextView valueArmor = (TextView) myView.findViewById
 					(R.id.armor);
+			TextView valuePrice = (TextView) myView.findViewById
+					(R.id.price);
 			
 			Helmet myHelmet = this.getItem(position);
 			
@@ -115,9 +117,14 @@ public class ShopHelmetActivity extends SherlockActivity {
 				break;
 			}
 
-			valueHealth.setText(" "+String.valueOf(myHelmet.getHealthValue())+" HP");
-			valueAttack.setText(" "+String.valueOf(myHelmet.getAttackValue())+" Attaque");
-			valueArmor.setText(" "+String.valueOf(myHelmet.getArmorValue())+" Armure");
+			valueHealth.setText(" + "+String.valueOf(
+					myHelmet.getHealthValue())+" HP");
+			valueAttack.setText(" + "+String.valueOf(
+					myHelmet.getAttackValue())+" Attaque");
+			valueArmor.setText(" + "+String.valueOf(
+					myHelmet.getArmorValue())+" Armure");
+			valuePrice.setText(" "+String.valueOf(
+					myHelmet.getPrice()));
 			
 			return myView;
 		}

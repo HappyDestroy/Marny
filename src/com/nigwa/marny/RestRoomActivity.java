@@ -1,6 +1,7 @@
 package com.nigwa.marny;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,13 +15,16 @@ public class RestRoomActivity extends SherlockActivity {
 	private Hero myHero;
 	private int nb_room;
 	private int health_left;
-	
+	private MediaPlayer sound_power_up = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_restroom);
 		
-		
+		//Ajout Son
+		sound_power_up = MediaPlayer.create(RestRoomActivity.this, R.raw.powerup);
+		sound_power_up.start();
+		sound_power_up.release();
 		//On récupère les extras depuis l'intent
 		nb_room = getIntent().getIntExtra("nb_room", 1);
 		nb_room++;

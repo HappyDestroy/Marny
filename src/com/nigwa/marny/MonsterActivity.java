@@ -1,6 +1,8 @@
 package com.nigwa.marny;
 
 
+import java.io.IOException;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,6 +30,8 @@ public class MonsterActivity extends SherlockActivity {
 	private int nb_room;
 	private MediaPlayer soudHurt = null;
 	private MediaPlayer soudDeath = null;
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +176,7 @@ public class MonsterActivity extends SherlockActivity {
 						 heroKO();
 					 }
 					soudHurt = MediaPlayer.create(MonsterActivity.this,
-								 R.raw.coup_ventre);
+								 R.raw.coup);
 							soudHurt.start();
 					//Le monstre nous enlève de la vie
 					label_monster.postDelayed(new Runnable() {

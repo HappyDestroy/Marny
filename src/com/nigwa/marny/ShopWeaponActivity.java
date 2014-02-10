@@ -112,6 +112,8 @@ public class ShopWeaponActivity extends SherlockActivity {
 					(R.id.attack);
 			TextView valueArmor = (TextView) myView.findViewById
 					(R.id.armor);
+			TextView valuePrice = (TextView) myView.findViewById
+					(R.id.price);			
 			Button btn_buy = (Button) myView.findViewById(R.id.btn_buy);
 			
 			final Weapon myWeapon = this.getItem(position);
@@ -131,12 +133,14 @@ public class ShopWeaponActivity extends SherlockActivity {
 				break;
 			}
 
-			valueHealth.setText(" "+String.valueOf(
+			valueHealth.setText(" + "+String.valueOf(
 					myWeapon.getHealthValue())+" HP");
-			valueAttack.setText(" "+String.valueOf(
+			valueAttack.setText(" + "+String.valueOf(
 					myWeapon.getAttackValue())+" Attaque");
-			valueArmor.setText(" "+String.valueOf(
+			valueArmor.setText(" + "+String.valueOf(
 					myWeapon.getArmorValue())+" Armure");
+			valuePrice.setText(" "+String.valueOf(
+					myWeapon.getPrice()));
 			
 			btn_buy.setOnClickListener(new OnClickListener() {
 				
@@ -157,6 +161,10 @@ public class ShopWeaponActivity extends SherlockActivity {
 				            			R.string.msg_error, 
 				            			Toast.LENGTH_LONG).show();
 				            } else {
+				            	//Si le héros a assez de gold on le félicite
+				            	Toast.makeText(v.getContext(), 
+				            			R.string.msg_congrat, 
+				            			Toast.LENGTH_LONG).show();
 				            	//Sauvegarde en BDD
 				            	String[] VALUES = {"1"};
 				            	
@@ -166,14 +174,14 @@ public class ShopWeaponActivity extends SherlockActivity {
 				        		Cursor c = db.query(HeroContract.TABLE ,
 				        				HeroContract.COLS, "id LIKE ?", 
 				        				VALUES, null, null, null) ;
-				        		
+				        		//On debite le héros
 				    			ContentValues itemHero = new ContentValues();
 				    			itemHero.put("gold", myHero.getGold() - 
 				    					myWeapon.getPrice());
 				    			
 				    			itemHero.put("weapon", myWeapon.getId());
 
-				    			String whereClause = "id =? ";
+				    			String whereClause = "id = ? ";
 				    			String[] whereArgs = { "1" };
 				    			db.update(HeroContract.TABLE, itemHero, 
 				    					whereClause, whereArgs);

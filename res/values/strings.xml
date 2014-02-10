@@ -59,5 +59,6 @@
     <string name="msg_error">Malheuresement,  tu n\'as pas assez de golds</string>
     <string name="msg_congrat">Félicitation jeune aventurier ! Tu viens d\'acquérir un nouvel item !</string>
     <string name="potion">Potions :</string>
+    <string name="succes_potion">Félicitation vous venez d\'acheter une potion</string>
 
 </resources>

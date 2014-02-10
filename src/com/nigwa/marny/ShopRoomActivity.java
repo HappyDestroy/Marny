@@ -1,7 +1,9 @@
 package com.nigwa.marny;
 
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,12 +16,13 @@ import android.widget.ListView;
 public class ShopRoomActivity extends SherlockActivity {
 
 	private Hero myHero;
-	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shoproom);
 		
-		
+        // affiche la petite flèche back
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 		myHero = (Hero) getIntent().getSerializableExtra("hero");
 		
 		
@@ -72,5 +75,18 @@ public class ShopRoomActivity extends SherlockActivity {
 				}
 			}
 		});
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case android.R.id.home:
+	            // app icon in action bar clicked; go home
+	            Intent intent = new Intent(ShopRoomActivity.this, HomeActivity.class);
+	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	            startActivity(intent);
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 }

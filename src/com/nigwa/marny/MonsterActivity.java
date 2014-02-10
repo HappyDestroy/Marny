@@ -160,21 +160,21 @@ public class MonsterActivity extends SherlockActivity {
 				
 				int randomHurt = Tools.random(10);
 				//FAIL, SUCCES, CRITIC
-				if (randomHurt <= 1) {
+				if (randomHurt <= 1) {//FAIL
 					valueAttack = 0;
 					label_monster.setText("Le monstre a esquivé "
 							+ "\n À son tour ...");
 					soudFail = MediaPlayer.create(MonsterActivity.this,
 							 R.raw.missed);
 					soudFail.start();
-				} else if (randomHurt >= 9){
+				} else if (randomHurt >= 9){//CRITIC
 					valueAttack = valueAttack * 2;
 					label_monster.setText("Coûp critique de " + valueAttack + 
 							" points de dégats \n Au tour du monstre ...");
 					soudCritic = MediaPlayer.create(MonsterActivity.this,
 							 R.raw.critic);
 					soudCritic.start();
-				}else {
+				}else {//NORMAL
 					label_monster.setText("Votre attaque à fait " + valueAttack + 
 							" points de dégats \n Au tour du monstre ...");
 					

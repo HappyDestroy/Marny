@@ -66,9 +66,11 @@ public class ShopHelmetActivity extends SherlockActivity {
 					c.getColumnIndex(HelmetContract.COL_ARMORVALUE));
 			int valuePrice = c.getInt(
 					c.getColumnIndex(HelmetContract.COL_PRICE));
+			int isBuy = c.getInt(
+					c.getColumnIndex(HelmetContract.COL_ISBUY));
 
 			myHelmets.add(new Helmet(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice));
+					valueArmor, valuePrice,isBuy));
 			
 		} while ( c.moveToNext() );
 		

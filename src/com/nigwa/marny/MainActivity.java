@@ -147,7 +147,7 @@ public class MainActivity extends SherlockActivity {
 		//Ajout du monstre lvl 2 - Soldat
 		valuesMonster2.put(MonsterContract.COL_RANK, 2);
 		valuesMonster2.put(MonsterContract.COL_HEALTH, 45);
-		valuesMonster2.put(MonsterContract.COL_ATTACK, 10);
+		valuesMonster2.put(MonsterContract.COL_ATTACK, 15);
 		valuesMonster2.put(MonsterContract.COL_ARMOR, 10);
 		//Insertion BDD
 		db.insert(MonsterContract.TABLE, null, valuesMonster2);
@@ -182,6 +182,7 @@ public class MainActivity extends SherlockActivity {
 		valuesHelmet1.put(HelmetContract.COL_ATTACKVALUE, 0);
 		valuesHelmet1.put(HelmetContract.COL_ARMORVALUE, 0);
 		valuesHelmet1.put(HelmetContract.COL_PRICE, 50);
+		valuesHelmet1.put(HelmetContract.COL_ISBUY, 0);
 		
 		db.insert(HelmetContract.TABLE, null, valuesHelmet1);
 		
@@ -192,6 +193,7 @@ public class MainActivity extends SherlockActivity {
 		valuesHelmet2.put(HelmetContract.COL_ATTACKVALUE, 0);
 		valuesHelmet2.put(HelmetContract.COL_ARMORVALUE, 5);
 		valuesHelmet2.put(HelmetContract.COL_PRICE, 120);
+		valuesHelmet2.put(HelmetContract.COL_ISBUY, 0);
 		
 		db.insert(HelmetContract.TABLE, null, valuesHelmet2);
 		
@@ -202,6 +204,7 @@ public class MainActivity extends SherlockActivity {
 		valuesHelmet3.put(HelmetContract.COL_ATTACKVALUE, 0);
 		valuesHelmet3.put(HelmetContract.COL_ARMORVALUE, 15);
 		valuesHelmet3.put(HelmetContract.COL_PRICE, 220);
+		valuesHelmet3.put(HelmetContract.COL_ISBUY, 0);
 		
 		db.insert(HelmetContract.TABLE, null, valuesHelmet3);
 		
@@ -212,6 +215,8 @@ public class MainActivity extends SherlockActivity {
 		valuesHelmet4.put(HelmetContract.COL_ATTACKVALUE, 0);
 		valuesHelmet4.put(HelmetContract.COL_ARMORVALUE, 20);
 		valuesHelmet4.put(HelmetContract.COL_PRICE, 450);
+		valuesHelmet4.put(HelmetContract.COL_ISBUY, 0);
+		
 		db.insert(HelmetContract.TABLE, null, valuesHelmet4);
 
 		
@@ -224,6 +229,7 @@ public class MainActivity extends SherlockActivity {
 		valuesShield1.put(ShieldContract.COL_ATTACKVALUE, 0);
 		valuesShield1.put(ShieldContract.COL_ARMORVALUE, 10);
 		valuesShield1.put(ShieldContract.COL_PRICE, 50);
+		valuesShield1.put(ShieldContract.COL_ISBUY, 0);
 		
 		db.insert(ShieldContract.TABLE, null, valuesShield1);
 		
@@ -234,6 +240,7 @@ public class MainActivity extends SherlockActivity {
 		valuesShield2.put(ShieldContract.COL_ATTACKVALUE, 5);
 		valuesShield2.put(ShieldContract.COL_ARMORVALUE, 15);
 		valuesShield2.put(ShieldContract.COL_PRICE, 120);
+		valuesShield2.put(ShieldContract.COL_ISBUY, 0);
 		
 		db.insert(ShieldContract.TABLE, null, valuesShield2);
 		
@@ -244,6 +251,7 @@ public class MainActivity extends SherlockActivity {
 		valuesShield3.put(ShieldContract.COL_ATTACKVALUE, 15);
 		valuesShield3.put(ShieldContract.COL_ARMORVALUE, 30);
 		valuesShield3.put(ShieldContract.COL_PRICE, 220);
+		valuesShield3.put(ShieldContract.COL_ISBUY, 0);
 		
 		db.insert(ShieldContract.TABLE, null, valuesShield3);
 		
@@ -254,6 +262,7 @@ public class MainActivity extends SherlockActivity {
 		valuesShield4.put(ShieldContract.COL_ATTACKVALUE, 20);
 		valuesShield4.put(ShieldContract.COL_ARMORVALUE, 45);
 		valuesShield4.put(ShieldContract.COL_PRICE, 450);
+		valuesShield4.put(ShieldContract.COL_ISBUY, 0);
 		
 		db.insert(ShieldContract.TABLE, null, valuesShield4);
 		
@@ -266,6 +275,7 @@ public class MainActivity extends SherlockActivity {
 		valuesWeapon1.put(WeaponContract.COL_ATTACKVALUE, 10);
 		valuesWeapon1.put(WeaponContract.COL_ARMORVALUE, 0);
 		valuesWeapon1.put(WeaponContract.COL_PRICE, 50);
+		valuesWeapon1.put(WeaponContract.COL_ISBUY, 0);
 		
 		db.insert(WeaponContract.TABLE, null, valuesWeapon1);
 		
@@ -276,6 +286,7 @@ public class MainActivity extends SherlockActivity {
 		valuesWeapon2.put(WeaponContract.COL_ATTACKVALUE, 30);
 		valuesWeapon2.put(WeaponContract.COL_ARMORVALUE, 0);
 		valuesWeapon2.put(WeaponContract.COL_PRICE, 120);
+		valuesWeapon2.put(WeaponContract.COL_ISBUY, 0);
 		
 		db.insert(WeaponContract.TABLE, null, valuesWeapon2);
 		
@@ -286,6 +297,7 @@ public class MainActivity extends SherlockActivity {
 		valuesWeapon3.put(WeaponContract.COL_ATTACKVALUE, 45);
 		valuesWeapon3.put(WeaponContract.COL_ARMORVALUE, 0);
 		valuesWeapon3.put(WeaponContract.COL_PRICE, 220);
+		valuesWeapon3.put(WeaponContract.COL_ISBUY, 0);
 		
 		db.insert(WeaponContract.TABLE, null, valuesWeapon3);
 		
@@ -296,6 +308,7 @@ public class MainActivity extends SherlockActivity {
 		valuesWeapon4.put(WeaponContract.COL_ATTACKVALUE, 60);
 		valuesWeapon4.put(WeaponContract.COL_ARMORVALUE, 0);
 		valuesWeapon4.put(WeaponContract.COL_PRICE, 450);
+		valuesWeapon4.put(WeaponContract.COL_ISBUY, 0);
 		
 		db.insert(WeaponContract.TABLE, null, valuesWeapon4);
 	}

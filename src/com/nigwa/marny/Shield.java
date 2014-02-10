@@ -13,14 +13,16 @@ public class Shield implements Serializable {
 	private int attackValue;
 	private int armorValue;
 	private int price;
+	private int isBuy;
 	
 	
-	public Shield(int id, int healthValue, int attackValue, int armorValue, int price) {
+	public Shield(int id, int healthValue, int attackValue, int armorValue, int price, int isBuy) {
 		this.id = id;
 		this.healthValue = healthValue;
 		this.attackValue = attackValue;
 		this.armorValue = armorValue;
 		this.price = price;
+		this.isBuy = isBuy;
 	}
 	
 	public int getHealthValue() {
@@ -61,6 +63,14 @@ public class Shield implements Serializable {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public int getIsBuy() {
+		return isBuy;
+	}
+
+	public void setIsBuy(int isBuy) {
+		this.isBuy = isBuy;
 	}
 
 	@Override

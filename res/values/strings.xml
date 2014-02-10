@@ -27,6 +27,7 @@
     <string name="shield">Bouclier : </string>
     <string name="weapon">Arme : </string>
     <string name="potion">Potions : </string>
+    <strin name="coin">coin</strin>
     
     <string name="empty">vide</string>
     <string name="bg">background</string>

@@ -73,6 +73,7 @@ public class MonsterActivity extends SherlockActivity {
 				+ myHero.getHelmet().getHealthValue()
 				+ myHero.getShield().getHealthValue()
 				+ myHero.getWeapon().getHealthValue());
+		
 		hero_health.setProgress(health_left);
 
 		this.createMonster();

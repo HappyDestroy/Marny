@@ -140,6 +140,12 @@ public class HomeActivity extends SherlockActivity {
 		
 		myHero = Tools.getHeroFromBDD(this);
 		
+		//On met la vie restante de héro au maximum
+		health_left = myHero.getHealth() 
+				+ myHero.getHelmet().getHealthValue()
+				+ myHero.getShield().getHealthValue()
+				+ myHero.getWeapon().getHealthValue();
+		
 		super.onResume();
 	}
 

@@ -43,23 +43,26 @@ public class ShopPotionActivity extends SherlockActivity {
 				if(myHero.getGold() >= 25 ){
 					myHero.setPotion(myHero.getPotion() + 1);
 					myHero.setGold(myHero.getGold() - 25);
+					
 					Toast.makeText(ShopPotionActivity.this, 
 	            			R.string.succes_potion, 
 	            			Toast.LENGTH_LONG).show();
+					
 					soudKaching = MediaPlayer.create(ShopPotionActivity.this,
 							 R.raw.ka_chingsound);
 					soudKaching.start();
+					
 					//On debite le Hero
 	    			ContentValues itemHero = new ContentValues();
-	    			itemHero.put("gold", myHero.getGold() - 
-	    					25);
-	    			//On incremente le nbr de potions
-	    			itemHero.put("potion", myHero.getPotion() + 
-	    					1);
+	    			
+	    			itemHero.put("gold", myHero.getGold());
+	    			itemHero.put("potion", myHero.getPotion());
+	    			
 	    			String whereClause = "id = ? ";
 	    			String[] whereArgs = { "1" };
-	    			db.update(HeroContract.TABLE, itemHero, 
-	    					whereClause, whereArgs);
+	    			
+	    			db.update(HeroContract.TABLE, itemHero, whereClause, 
+	    					whereArgs);
 				}
 				else {
 					Toast.makeText(ShopPotionActivity.this, 

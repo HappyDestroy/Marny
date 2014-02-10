@@ -66,9 +66,11 @@ public class ShopShieldActivity extends SherlockActivity {
 					c.getColumnIndex(ShieldContract.COL_ARMORVALUE));
 			int valuePrice = c.getInt(
 					c.getColumnIndex(ShieldContract.COL_PRICE));
+			int isBuy = c.getInt(
+					c.getColumnIndex(ShieldContract.COL_ISBUY));
 
 			myShields.add(new Shield(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice));
+					valueArmor, valuePrice, isBuy));
 			
 		} while ( c.moveToNext() );
 		

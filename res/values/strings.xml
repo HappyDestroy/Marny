@@ -64,5 +64,6 @@
          d\'acheter une potion</string>
     <string name="buy_potion">La potion regénére 10HP pour 25 Golds. 
         Combien en voulez-vous ?</string>
+    <string name="already_buy">Déjà acheté</string>
 
 </resources>

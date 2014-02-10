@@ -65,9 +65,11 @@ public class ShopWeaponActivity extends SherlockActivity {
 					c.getColumnIndex(WeaponContract.COL_ARMORVALUE));
 			int valuePrice = c.getInt(
 					c.getColumnIndex(WeaponContract.COL_PRICE));
+			int isBuy = c.getInt(
+					c.getColumnIndex(WeaponContract.COL_ISBUY));
 
 			myWeapons.add(new Weapon(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice));
+					valueArmor, valuePrice, isBuy));
 			
 		} while ( c.moveToNext() );
 		
@@ -115,6 +117,7 @@ public class ShopWeaponActivity extends SherlockActivity {
 			
 			final Weapon myWeapon = this.getItem(position);
 			
+			
 			switch(myWeapon.getId()) {
 			case 1 :
 				imgViewWeapon.setImageResource(R.drawable.sprite_blade_1);
@@ -143,6 +146,7 @@ public class ShopWeaponActivity extends SherlockActivity {
 				
 				@Override
 				public void onClick(final View v) {
+					
 					new AlertDialog.Builder(v.getContext())
 				    .setTitle(R.string.confirm)
 				    .setMessage(v.getContext().getString(R.string.msg_buy_begin)

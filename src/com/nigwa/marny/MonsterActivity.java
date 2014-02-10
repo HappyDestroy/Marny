@@ -29,8 +29,8 @@ public class MonsterActivity extends SherlockActivity {
 	private int nb_room;
 	private MediaPlayer soudHurt = null;
 	private MediaPlayer soudDeath = null;
-	
-	
+	private MediaPlayer soudFail = null;
+	private MediaPlayer soudCritic = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -154,18 +154,37 @@ public class MonsterActivity extends SherlockActivity {
 						+ myHero.getWeapon().getAttackValue() 
 						+ myHero.getShield().getAttackValue())
 						- myMonster.getShield();
-				
 				if(valueAttack < 0) {
 					valueAttack = 0;
 				}
 				
+				int randomHurt = Tools.random(10);
+				//FAIL, SUCCES, CRITIC
+				if (randomHurt <= 1) {
+					valueAttack = 0;
+					label_monster.setText("Le monstre a esquivé "
+							+ "\n À son tour ...");
+					soudFail = MediaPlayer.create(MonsterActivity.this,
+							 R.raw.missed);
+					soudFail.start();
+				} else if (randomHurt >= 9){
+					valueAttack = valueAttack * 2;
+					label_monster.setText("Coûp critique de " + valueAttack + 
+							" points de dégats \n Au tour du monstre ...");
+					soudCritic = MediaPlayer.create(MonsterActivity.this,
+							 R.raw.critic);
+					soudCritic.start();
+				}else {
+					label_monster.setText("Votre attaque à fait " + valueAttack + 
+							" points de dégats \n Au tour du monstre ...");
+					
+				}
 				//On enlève de la vie au monstre (On attaque toujours en 1er)
 				//(Mais c'est parce qu'on est trop fort!)
 				monster_health.setProgress(
 						monster_health.getProgress() - valueAttack);
 				
-				label_monster.setText("Votre attaque à fait " + valueAttack + 
-						" points de dégats \n Au tour du monstre ...");
+
 				
 				//On vérifie qu'il reste de la vie au monstre, et il attaque
 				if(monster_health.getProgress() > 0) {

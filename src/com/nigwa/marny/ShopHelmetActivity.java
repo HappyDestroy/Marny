@@ -295,7 +295,8 @@ public class ShopHelmetActivity extends SherlockActivity {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.gold_info, menu);
 		MenuItem myMenu = menu.findItem(R.id.gold_info);
-		myMenu.setTitle(String.valueOf(myHero.getGold()) + getApplication().getString(R.string.gold_text_info));
+		myMenu.setTitle(String.valueOf(myHero.getGold()) + getApplication().
+				getString(R.string.gold_text_info));
 		return true;
 	}
 	
@@ -305,10 +306,7 @@ public class ShopHelmetActivity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	        case android.R.id.home:
-	            // app icon in action bar clicked; go home
-	            Intent intent = new Intent(ShopHelmetActivity.this, ShopRoomActivity.class);
-	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	            startActivity(intent);
+	        	this.finish();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);

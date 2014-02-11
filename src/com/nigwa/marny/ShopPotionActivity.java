@@ -95,10 +95,7 @@ public class ShopPotionActivity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	        case android.R.id.home:
-	            // app icon in action bar clicked; go home
-	            Intent intent = new Intent(ShopPotionActivity.this, ShopRoomActivity.class);
-	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	            startActivity(intent);
+	        	this.finish();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);

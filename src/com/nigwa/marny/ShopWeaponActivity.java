@@ -295,13 +295,11 @@ public class ShopWeaponActivity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	        case android.R.id.home:
-	            // app icon in action bar clicked; go home
-	            Intent intent = new Intent(ShopWeaponActivity.this, ShopRoomActivity.class);
-	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	            startActivity(intent);
+	        	this.finish();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
 }
+

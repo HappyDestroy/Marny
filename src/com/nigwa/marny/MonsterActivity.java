@@ -31,7 +31,7 @@ public class MonsterActivity extends SherlockActivity {
 	private MediaPlayer soudDeath = null;
 	private MediaPlayer soudFail = null;
 	private MediaPlayer soudCritic = null;
-	
+	private int valeurProgress;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -107,7 +107,7 @@ public class MonsterActivity extends SherlockActivity {
 			btn_next.setEnabled(false);
 		}
 		
-		
+		hero_health.getProgress();
 		//Listener du click sur l'image de la potion
 		img_potion.setOnClickListener(new OnClickListener() {
 			
@@ -121,16 +121,27 @@ public class MonsterActivity extends SherlockActivity {
 					} else {
 						
 						//Il prend une potion
-						 if ((hero_health.getMax() - hero_health.getProgress())
+						 if ((hero_health.getMax() - health_left)
 								 < 25) {
-							 health_left = hero_health.getMax() 
-									- hero_health.getProgress();
-							 
-							 hero_health.setProgress(hero_health.getProgress() 
-									+ hero_health.getMax() 
-									- hero_health.getProgress());
+								health_left = myHero.getHealth() 
+										+ myHero.getHelmet().getHealthValue()
+										+ myHero.getShield().getHealthValue()
+										+ myHero.getWeapon().getHealthValue();
+								
+								hero_health.setProgress(hero_health.getMax());
+								
+							 valeurProgress = hero_health.getMax() - health_left;
+							 hero_health.setProgress(hero_health.getMax());
+							 /*Toast.makeText(MonsterActivity.this, 
+									 health_left+"--"+String.valueOf(hero_health.getProgress())
+									 +"--"+String.valueOf(hero_health.getMax()+"--"+valeurProgress), 
+										Toast.LENGTH_SHORT).show();*/
 						 } else {
+
 							health_left += 25;
+							 /*Toast.makeText(MonsterActivity.this, 
+									 "vie restante : "+health_left, 
+										Toast.LENGTH_SHORT).show();*/
 							hero_health.setProgress(
 									hero_health.getProgress() + 25);
 						 }
@@ -253,7 +264,7 @@ public class MonsterActivity extends SherlockActivity {
 				
 				int randomHurt = Tools.random(10);
 				//FAIL, SUCCES, CRITIC
-				if (randomHurt <= 1) {//FAIL
+				if (randomHurt == 0) {//FAIL
 					valueAttack = 0;
 					label_monster.setText("Le monstre a esquivé "
 							+ "\n À son tour ...");

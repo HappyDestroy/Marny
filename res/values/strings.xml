@@ -4,7 +4,7 @@
     <string name="app_name">Marny</string>
     <string name="menu_info">Informations</string>
     
-    <string name="info">Cette application à été créé par Nicolas SABOUREAU et
+    <string name="info">Cette application a été créé par Nicolas SABOUREAU et
          Martin CESBRON dans le cadre d\'un projet Android à l\'IIA.</string>
          
     
@@ -36,7 +36,7 @@
     <string name="btn_back">Hop ! Hop ! Hop mon petit ! On ne revient jamais 
         sur ses pas quand on est courageux !</string>
 	<string name="heroKO_title">Pas de chance &#8230;</string>
-	<string name="heroKO_msg">ARGGHH !! Vous avez été vaincu !</string>
+	<string name="heroKO_msg">ARGGHH !! Tu as été vaincu !</string>
 	<string name="heroKO_valid">Retourner devant le chateau</string>
     
     <string name="monster">AAAHH !!! Un monstre vient d\'apparaitre !</string>
@@ -44,27 +44,27 @@
     <string name="goldroom">Une salle au trésor ! Prends le maximum !</string>
     
     <string name="restroom">Quelle chance ! Une salle de repos. Ta vie a été 
-        remise a son maximum !</string>
+        remise à son maximum !</string>
     
     <string name="shoproom">Bienvenue chez le marchand, fais ton choix.</string>
     
     <string name="next">Aller à la sale suivante</string>
     
     <string name="attack_btn">Attaquer !</string>
-    <string name="monster_ko">Le monstre à été vaincu</string>
+    <string name="monster_ko">Le monstre a été vaincu</string>
     
     <string name="buy">Acheter</string>
-    <string name="confirm">Es-t sûr ?</string>
+    <string name="confirm">Es-tu sûr ?</string>
     <string name="msg_buy_begin">Acheter cet item pour </string>
     <string name="msg_buy_end"> golds ?</string>
     <string name="msg_error">Malheuresement,  
         tu n\'as pas assez de golds</string>
     <string name="msg_congrat">Félicitation jeune aventurier !
          Tu viens d\'acquérir un nouvel item !</string>
-    <string name="succes_potion">Félicitation vous venez
+    <string name="succes_potion">Tu viens
          d\'acheter une potion</string>
-    <string name="buy_potion">La potion regénére 10HP pour 25 Golds. 
-        Combien en voulez-vous ?</string>
+    <string name="buy_potion">La potion regénére 25HP pour 25 Golds. 
+        Combien en veux-tu ?</string>
     <string name="already_buy">Déjà acheté</string>
     <string name="equip">Équipé</string>
 

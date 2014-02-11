@@ -68,6 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/btn_buy"
         android:layout_marginRight="30dp"
+        android:contentDescription="@string/coin"
         android:layout_toLeftOf="@+id/btn_buy"
         android:src="@drawable/sprite_coin" />
 

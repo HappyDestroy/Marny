@@ -60,6 +60,9 @@ public class MonsterActivity extends SherlockActivity {
 		//ImageView du monstre
 		final ImageView img_monster = (ImageView) findViewById(
 				R.id.monster_imgview);
+		
+		final ImageView img_potion = (ImageView) findViewById(
+				R.id.img_potion);
 
 		//On récupère le héro passé depuis le bundle
 		myHero = (Hero) getIntent().getSerializableExtra("hero");
@@ -103,6 +106,96 @@ public class MonsterActivity extends SherlockActivity {
 		if(monster_health.getProgress() > 0) {
 			btn_next.setEnabled(false);
 		}
+		
+		
+		//Listener du click sur l'image de la potion
+		img_potion.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(myHero.getPotion() > 0) {
+					if(hero_health.getProgress() == hero_health.getMax()) {
+						Toast.makeText(MonsterActivity.this, 
+								"Ta vie est déjà au maximum", 
+								Toast.LENGTH_SHORT).show();
+					} else {
+						
+						//Il prend une potion
+						 if ((hero_health.getMax() - hero_health.getProgress())
+								 < 25) {
+							 health_left = hero_health.getMax() 
+									- hero_health.getProgress();
+							 
+							 hero_health.setProgress(hero_health.getProgress() 
+									+ hero_health.getMax() 
+									- hero_health.getProgress());
+						 } else {
+							health_left += 25;
+							hero_health.setProgress(
+									hero_health.getProgress() + 25);
+						 }
+
+						myHero.setPotion(myHero.getPotion() - 1);
+						label_monster.setText("Tu as pris une potion (+25 HP)");
+						 
+						//Le monstre attaque
+						final int valueDefendHero = (myHero.getArmor() 
+								+ myHero.getHelmet().getArmorValue() 
+								+ myHero.getShield().getArmorValue() 
+								+ myHero.getWeapon().getArmorValue());
+						 
+						final int health_lose;
+						
+						if(myMonster.getAttack() - valueDefendHero <= 0) {
+							health_lose = 0;
+						} else {
+							health_lose = myMonster.getAttack() 
+									- valueDefendHero;
+						}
+						
+						//On réduit la progressBar de vie du héro
+						hero_health.setProgress(hero_health.getProgress() 
+								- health_lose);
+						
+						
+						//On change la valeur des points de vie qu'il nous reste
+						health_left = hero_health.getProgress();
+						
+						
+						soudHurt = MediaPlayer.create(MonsterActivity.this,
+									 R.raw.coup);
+						soudHurt.start();
+						
+						
+						//Le monstre nous enlève de la vie
+						label_monster.postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								label_monster.setText("Il fait " + health_lose 
+										+ " point de dégâts.");
+							}
+						}, 1000);
+						
+						//Si le héro n'a plus de vie
+						 if(health_left <= 0) { 
+							 
+							 soudDeath = MediaPlayer.create(
+									 MonsterActivity.this, R.raw.death);
+							 soudDeath.start();
+							 
+							 
+							 heroKO();
+						 }
+					}
+				} else {
+					Toast.makeText(MonsterActivity.this, 
+							"Malheuresement,  tu n'as pas de potions", 
+							Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+		
+		
 		
 		//Listener sur le click du bouton pour changer de salle
 		btn_next.setOnClickListener(new OnClickListener() {

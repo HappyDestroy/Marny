@@ -74,7 +74,7 @@ public class Tools {
 	
 			//999 est l'id des equipements sans caractéritiques
 			if(valueHelmet == 999) {
-				myHelmet = new Helmet(999, 0, 0, 0, 0,0);
+				myHelmet = new Helmet(999, 0, 0, 0, 0, 0, 1);
 			} else if(valueHelmet == 1) {
 				myHelmet = getHelmetFromBDD(myContext, "1");
 			} else if (valueHelmet == 2) {
@@ -87,7 +87,7 @@ public class Tools {
 			
 			
 			if(valueShield == 999) {
-				myShield = new Shield(999, 0, 0, 0, 0,0);
+				myShield = new Shield(999, 0, 0, 0, 0, 0, 1);
 			} else if(valueShield == 1) {
 				myShield = getShieldFromBDD(myContext, "1");
 			} else if (valueShield == 2) {
@@ -99,7 +99,7 @@ public class Tools {
 			}
 			
 			if(valueWeapon == 999) {
-				myWeapon = new Weapon(999, 0, 0, 0, 0,0);
+				myWeapon = new Weapon(999, 0, 0, 0, 0, 0, 1);
 			} else if(valueWeapon == 1) {
 				myWeapon = getWeaponFromBDD(myContext, "1");
 			} else if (valueWeapon == 2) {
@@ -152,12 +152,16 @@ public class Tools {
 			
 			int valuePrice = c.getInt(c.getColumnIndex(
 					HelmetContract.COL_PRICE));
+			
 			int isBuy = c.getInt(c.getColumnIndex(
 					HelmetContract.COL_ISBUY));
 			
+			int isEquip = c.getInt(c.getColumnIndex(
+					HelmetContract.COL_ISEQUIP));
+			
 			
 			myHelmet = new Helmet(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice,isBuy);
+					valueArmor, valuePrice,isBuy, isEquip);
 		} while ( c.moveToNext() );
 		
 		return myHelmet;
@@ -197,12 +201,15 @@ public class Tools {
 			
 			int valuePrice = c.getInt(c.getColumnIndex(
 					ShieldContract.COL_PRICE));
+			
 			int isBuy = c.getInt(c.getColumnIndex(
 					ShieldContract.COL_ISBUY));
 			
+			int isEquip = c.getInt(c.getColumnIndex(
+					ShieldContract.COL_ISEQUIP));
 			
 			myShield = new Shield(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice,isBuy);
+					valueArmor, valuePrice,isBuy, isEquip);
 		} while ( c.moveToNext() );
 		
 		
@@ -244,12 +251,16 @@ public class Tools {
 			
 			int valuePrice = c.getInt(c.getColumnIndex(
 					WeaponContract.COL_PRICE));
+			
 			int isBuy = c.getInt(c.getColumnIndex(
 					ShieldContract.COL_ISBUY));
 			
+			int isEquip = c.getInt(c.getColumnIndex(
+					ShieldContract.COL_ISEQUIP));
+			
 			
 			myWeapon = new Weapon(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice, isBuy);
+					valueArmor, valuePrice, isBuy, isEquip);
 		} while ( c.moveToNext() );
 		
 		return myWeapon;

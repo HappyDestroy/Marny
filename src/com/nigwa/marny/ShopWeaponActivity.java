@@ -72,9 +72,11 @@ public class ShopWeaponActivity extends SherlockActivity {
 					c.getColumnIndex(WeaponContract.COL_PRICE));
 			int isBuy = c.getInt(
 					c.getColumnIndex(WeaponContract.COL_ISBUY));
+			int isEquip =  c.getInt(
+					c.getColumnIndex(WeaponContract.COL_ISEQUIP));
 
 			myWeapons.add(new Weapon(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice, isBuy));
+					valueArmor, valuePrice, isBuy, isEquip));
 			
 		} while ( c.moveToNext() );
 		
@@ -85,8 +87,6 @@ public class ShopWeaponActivity extends SherlockActivity {
 				R.id.listViewWeapon);
 		
 		myListViewWeapon.setAdapter(myAdapter);
-		
-		
 	}
 	
 	private static class Adapter extends ArrayAdapter<Weapon>
@@ -137,6 +137,14 @@ public class ShopWeaponActivity extends SherlockActivity {
 				imgViewWeapon.setImageResource(R.drawable.sprite_blade_4);
 				break;
 			}
+			
+			if (myWeapon.getIsEquip() == 1) {
+				btn_buy.setText(getContext().getString(R.string.equip));
+				btn_buy.setEnabled(false);
+			} else if (myWeapon.getIsBuy() == 1) {
+				btn_buy.setText(getContext().getString(R.string.already_buy));
+				btn_buy.setEnabled(true);
+			}
 
 			valueHealth.setText(" + "+String.valueOf(
 					myWeapon.getHealthValue())+" HP");
@@ -151,51 +159,119 @@ public class ShopWeaponActivity extends SherlockActivity {
 				
 				@Override
 				public void onClick(final View v) {
-					
-					new AlertDialog.Builder(v.getContext())
-				    .setTitle(R.string.confirm)
-				    .setMessage(v.getContext().getString(R.string.msg_buy_begin)
-				    		+ myWeapon.getPrice() 
-				    		+ v.getContext().getString(R.string.msg_buy_end))
-				    .setPositiveButton(android.R.string.yes, 
-				    		new DialogInterface.OnClickListener() {
-				        public void onClick(DialogInterface dialog, int which) { 
-				        	//Si le héro n'est pas assez de gold on affiche 
-				        	//un message
-				            if(myHero.getGold() < myWeapon.getPrice()) {
-				            	Toast.makeText(v.getContext(), 
-				            			R.string.msg_error, 
-				            			Toast.LENGTH_LONG).show();
-				            } else {
-				            	//Si le héros a assez de gold on le félicite
-				            	Toast.makeText(v.getContext(), 
-				            			R.string.msg_congrat, 
-				            			Toast.LENGTH_LONG).show();
-				            	//Sauvegarde en BDD
-				            	
-				            	db = dbHelper.getWritableDatabase();
-				            	
-				    			ContentValues itemHero = new ContentValues();
-				    			itemHero.put("gold", myHero.getGold() - 
-				    					myWeapon.getPrice());
-				    			
-				    			itemHero.put("weapon", myWeapon.getId());
+					String whereClause = "id = ? ";
+					final String whereClauseWeaponUnequip = "isEQuip = ?";
+	    			final String[] whereArgsWeaponUnequip = { "1" };
+					//Si l'item est déjà acheté...
+					if(myWeapon.getIsBuy() == 1) {
+		        		//On dit que l'ancien item n'est plus dans 
+		    			//l'état équipé
+		    			ContentValues itemWeaponUnequip = 
+		    					new ContentValues();
+		    			
+		    			itemWeaponUnequip.put("isEquip", 0);
+		    			
+		    			db.update(WeaponContract.TABLE, 
+		    					itemWeaponUnequip, 
+		    					whereClauseWeaponUnequip, 
+		    					whereArgsWeaponUnequip);
+		            	
+		        		//On ajoute l'item au héro
+		    			ContentValues itemHero = new ContentValues();
+		    			
+		    			itemHero.put("weapon", myWeapon.getId());
 
-				    			String whereClause = "id = ? ";
-				    			String[] whereArgs = { "1" };
-				    			db.update(HeroContract.TABLE, itemHero, 
-				    					whereClause, whereArgs);
-				            }
-				        }
-				     })
-				    .setNegativeButton(android.R.string.no, 
-				    		new DialogInterface.OnClickListener() {
-				        public void onClick(DialogInterface dialog, int which) { 
-				            //Ferme la fenetre
-				        }
-				     })
-				    .setIcon(R.drawable.ic_info_small)
-				     .show();
+		    			String[] whereArgsHero = { "1" };
+		    			db.update(HeroContract.TABLE, itemHero, 
+		    					whereClause, whereArgsHero);
+		    			
+		    			//On indique a l'item qu'il est dans l'état équipé
+		    			ContentValues itemWeaponEquip = 
+		    					new ContentValues();
+		    			
+		    			itemWeaponEquip.put("isEquip", 1);
+		    			
+		    			String[] whereArgsWeaponEquip = { 
+		    					String.valueOf(myWeapon.getId()) };
+		    			
+		    			db.update(WeaponContract.TABLE, itemWeaponEquip, 
+		    					whereClause, 
+		    					whereArgsWeaponEquip);
+		    			
+		        	} else {
+						new AlertDialog.Builder(v.getContext())
+					    .setTitle(R.string.confirm)
+					    .setMessage(v.getContext().getString(
+					    		R.string.msg_buy_begin)
+					    		+ myWeapon.getPrice() 
+					    		+ v.getContext().getString(
+					    				R.string.msg_buy_end))
+					    .setPositiveButton(android.R.string.yes, 
+					    		new DialogInterface.OnClickListener() {
+					        public void onClick(
+					        		DialogInterface dialog, int which) { 
+					        	//Si le héro n'est pas assez de gold on affiche 
+					        	//un message
+					            if(myHero.getGold() < myWeapon.getPrice()) {
+					            	Toast.makeText(v.getContext(), 
+					            			R.string.msg_error, 
+					            			Toast.LENGTH_LONG).show();
+					            } else {
+					            	//Si le héros a assez de gold on le félicite
+					            	Toast.makeText(v.getContext(), 
+					            			R.string.msg_congrat, 
+					            			Toast.LENGTH_LONG).show();
+					            	
+					            	//On dit que l'ancien item n'est plus dans 
+					    			//l'état équipé
+					    			ContentValues itemWeaponUnequip = 
+					    					new ContentValues();
+					    			
+					    			itemWeaponUnequip.put("isEquip", 0);
+					    			
+					    			db.update(WeaponContract.TABLE, 
+					    					itemWeaponUnequip, 
+					    					whereClauseWeaponUnequip, 
+					    					whereArgsWeaponUnequip);
+					            	
+					    			
+					    			//On débite le héro
+					    			ContentValues itemHero =new ContentValues();
+					    			itemHero.put("gold", myHero.getGold() - 
+					    					myWeapon.getPrice());
+					    			
+					    			itemHero.put("weapon", myWeapon.getId());
+	
+					    			String whereClause = "id = ? ";
+					    			String[] whereArgs = { "1" };
+					    			db.update(HeroContract.TABLE, itemHero, 
+					    					whereClause, whereArgs);
+					    			
+					    			//Sauvegarde de l'état "acheté" dans la BDD
+					    			ContentValues itemWeapon = 
+					    					new ContentValues();
+					    			
+					    			itemWeapon.put("isBuy", 1);
+					    			itemWeapon.put("isEquip", 1);
+					    			
+					    			String[] whereArgsWeapon = { 
+					    					String.valueOf(myWeapon.getId()) };
+					    			
+					    			db.update(WeaponContract.TABLE, itemWeapon, 
+					    					whereClause, whereArgsWeapon);
+					            }
+					        }
+					     })
+					    .setNegativeButton(android.R.string.no, 
+					    		new DialogInterface.OnClickListener() {
+					        public void onClick(
+					        		DialogInterface dialog, int which) { 
+					            //Ferme la fenetre
+					        }
+					     })
+					    .setIcon(R.drawable.ic_info_small)
+					     .show();
+					}
 				}
 			});
 			

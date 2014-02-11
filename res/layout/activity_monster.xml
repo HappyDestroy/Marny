@@ -75,4 +75,14 @@
         android:progress="100"
         android:progressDrawable="@drawable/shape_healthbar" />
 
+    <ImageView
+        android:id="@+id/img_potion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/progressBar_herohealth"
+        android:layout_alignLeft="@+id/progressBar_herohealth"
+        android:layout_marginBottom="21dp"
+        android:contentDescription="@string/potion"
+        android:src="@drawable/sprite_health_potion" />
+
 </RelativeLayout>

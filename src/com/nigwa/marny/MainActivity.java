@@ -83,7 +83,6 @@ public class MainActivity extends SherlockActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.main, menu);
-		
 		return true;
 	}
 
@@ -92,7 +91,6 @@ public class MainActivity extends SherlockActivity {
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
 		new AlertDialog.Builder(this)
 	    .setTitle(R.string.menu_info)
 	    .setMessage(R.string.info)

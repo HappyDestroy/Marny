@@ -22,7 +22,7 @@ public class GoldRoomActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_goldroom);
-		
+
 		//Ajout Son
 		sound_coins = MediaPlayer.create(GoldRoomActivity.this, R.raw.coins);
 		sound_coins.start();

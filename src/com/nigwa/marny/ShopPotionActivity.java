@@ -1,6 +1,8 @@
 package com.nigwa.marny;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
+
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -9,8 +11,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 import android.database.sqlite.SQLiteDatabase;
-
 import android.content.ContentValues;
+import android.content.Intent;
 
 
 public class ShopPotionActivity extends SherlockActivity {
@@ -23,6 +25,8 @@ public class ShopPotionActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shoppotion);
 		
+        // affiche la petite flèche back
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		myHero = (Hero) getIntent().getSerializableExtra("hero");
 		dbHelper = new SQLiteOpenHelperClass(
@@ -72,5 +76,18 @@ public class ShopPotionActivity extends SherlockActivity {
 			}
 			
 		});
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case android.R.id.home:
+	            // app icon in action bar clicked; go home
+	            Intent intent = new Intent(ShopPotionActivity.this, ShopRoomActivity.class);
+	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	            startActivity(intent);
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 }

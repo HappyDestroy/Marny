@@ -119,16 +119,11 @@ public class MonsterActivity extends SherlockActivity {
 								"Ta vie est déjà au maximum", 
 								Toast.LENGTH_SHORT).show();
 					} else {
-						
-						//Il prend une potion
+						//Si il lui manque moins de 25 HP
 						 if ((hero_health.getMax() - hero_health.getProgress())
 								 < 25) {
-							 health_left = hero_health.getMax() 
-									- hero_health.getProgress();
-							 
-							 hero_health.setProgress(hero_health.getProgress() 
-									+ hero_health.getMax() 
-									- hero_health.getProgress());
+							 health_left = hero_health.getMax();
+							 hero_health.setProgress(hero_health.getMax());							 
 						 } else {
 							health_left += 25;
 							hero_health.setProgress(
@@ -136,7 +131,8 @@ public class MonsterActivity extends SherlockActivity {
 						 }
 
 						myHero.setPotion(myHero.getPotion() - 1);
-						label_monster.setText("Tu as pris une potion (+25 HP)");
+						label_monster.setText("Tu as pris une potion (+25 HP) "
+								+ "\n Au tour du monstre ...");
 						 
 						//Le monstre attaque
 						final int valueDefendHero = (myHero.getArmor() 
@@ -160,7 +156,6 @@ public class MonsterActivity extends SherlockActivity {
 						
 						//On change la valeur des points de vie qu'il nous reste
 						health_left = hero_health.getProgress();
-						
 						
 						soudHurt = MediaPlayer.create(MonsterActivity.this,
 									 R.raw.coup);

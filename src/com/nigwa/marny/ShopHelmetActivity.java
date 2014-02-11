@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.nigwa.marny.Helmet;
 import com.nigwa.marny.R;
@@ -286,6 +288,19 @@ public class ShopHelmetActivity extends SherlockActivity {
 			return myView;
 		}
 	}
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.gold_info, menu);
+		MenuItem myMenu = menu.findItem(R.id.gold_info);
+		myMenu.setTitle(String.valueOf(myHero.getGold()) + getApplication().getString(R.string.gold_text_info));
+		return true;
+	}
+	
+	
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {

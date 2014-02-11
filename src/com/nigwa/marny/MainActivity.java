@@ -41,6 +41,7 @@ public class MainActivity extends SherlockActivity {
 		
 		
 		Button btnStart = (Button) findViewById(R.id.btn_start);
+		Button btn_rss = (Button) findViewById(R.id.btn_rss);
 		
 		/**
 		 * Listenner de click sur le bouton pour commencer
@@ -73,6 +74,17 @@ public class MainActivity extends SherlockActivity {
 			editor.putBoolean("database", true);
 			editor.commit();
 		}
+		
+		
+		btn_rss.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainActivity.this, 
+						RSSReaderActivity.class));
+				
+			}
+		});
 		
 	}
 

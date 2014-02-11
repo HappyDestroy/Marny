@@ -21,4 +21,16 @@
         android:text="@string/start"
         android:textColor="#FFFFFF" />
 
+    <Button
+        android:id="@+id/btn_rss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_start"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="93dp"
+        android:background="#9b9b9b"
+        android:padding="10dp"
+        android:text="@string/rss"
+        android:textColor="#FFFFFF" />
+
 </RelativeLayout>

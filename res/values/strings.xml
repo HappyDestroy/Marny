@@ -9,6 +9,7 @@
          
     
     <string name="start">Commencer</string>
+    <string name="rss">Flux RSS</string>
     
     
     <string name="home_welcome">Bienvenue, aventurier. Choisis ce que tu veux 
@@ -67,5 +68,7 @@
         Combien en voulez-vous ?</string>
     <string name="already_buy">Déjà acheté</string>
     <string name="equip">Équipé</string>
+    
+    <string name="gold_text_info"> Golds</string>
 
 </resources>

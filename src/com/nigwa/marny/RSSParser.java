@@ -9,7 +9,8 @@ import org.xml.sax.helpers.DefaultHandler;
 public class RSSParser extends DefaultHandler {
 	
 	private final static String TAG_ITEM = "item";
-	private final static String[] xmltags = { "title", "link", "pubDate", "description" };
+	private final static String[] xmltags = { "title", "link", "pubDate", 
+		"description" };
          
 	private RSSItem currentitem = null;
 	private ArrayList<RSSItem> itemarray = null;
@@ -22,7 +23,7 @@ public class RSSParser extends DefaultHandler {
 		
 		this.itemarray = itemarray;
 	}
- 
+	
 	@Override
 	public void characters(char[] ch, int start, int length) 
 			throws SAXException {
@@ -33,7 +34,7 @@ public class RSSParser extends DefaultHandler {
 			builder.append(ch,start,length);
 		}
 	}
-                 
+	
 	@Override
 	public void startElement(String uri, String localName, String qName, 
 			Attributes attributes) throws SAXException {

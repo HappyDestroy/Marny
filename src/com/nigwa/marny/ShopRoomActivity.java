@@ -23,7 +23,7 @@ public class ShopRoomActivity extends SherlockActivity {
 		
         // affiche la petite flèche back
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+		
 		myHero = (Hero) getIntent().getSerializableExtra("hero");
 		
 		

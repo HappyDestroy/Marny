@@ -27,7 +27,7 @@
     <string name="shield">Bouclier : </string>
     <string name="weapon">Arme : </string>
     <string name="potion">Potions : </string>
-    <strin name="coin">coin</strin>
+    <string name="coin">coin</string>
     
     <string name="empty">vide</string>
     <string name="bg">background</string>
@@ -66,5 +66,6 @@
     <string name="buy_potion">La potion regénére 10HP pour 25 Golds. 
         Combien en voulez-vous ?</string>
     <string name="already_buy">Déjà acheté</string>
+    <string name="equip">Équipé</string>
 
 </resources>

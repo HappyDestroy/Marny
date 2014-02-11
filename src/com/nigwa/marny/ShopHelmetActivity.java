@@ -68,20 +68,24 @@ public class ShopHelmetActivity extends SherlockActivity {
 					c.getColumnIndex(HelmetContract.COL_PRICE));
 			int isBuy = c.getInt(
 					c.getColumnIndex(HelmetContract.COL_ISBUY));
+			int isEquip = c.getInt(
+					c.getColumnIndex(HelmetContract.COL_ISEQUIP));
 
 			myHelmets.add(new Helmet(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice,isBuy));
+					valueArmor, valuePrice, isBuy, isEquip));
 			
 		} while ( c.moveToNext() );
 		
 		
-		Adapter myAdapter = new Adapter(this, R.layout.row_list, myHelmets);
+		final Adapter myAdapter = new Adapter(this, R.layout.row_list, myHelmets);
 		
 		ListView myListViewHelmet = (ListView) findViewById(
 				R.id.listViewHelmet);
 		
 		myListViewHelmet.setAdapter(myAdapter);
 	}
+	
+	
 	
 	private static class Adapter extends ArrayAdapter<Helmet>
 	{
@@ -96,7 +100,6 @@ public class ShopHelmetActivity extends SherlockActivity {
 			
 			this.myInflater = LayoutInflater.from(this.myContext);
 		}
-
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -130,6 +133,15 @@ public class ShopHelmetActivity extends SherlockActivity {
 				imgViewHelmet.setImageResource(R.drawable.helmet_dark);
 				break;
 			}
+			
+			
+			if (myHelmet.getIsEquip() == 1) {
+				btn_buy.setText(getContext().getString(R.string.equip));
+				btn_buy.setEnabled(false);
+			} else if (myHelmet.getIsBuy() == 1) {
+				btn_buy.setText(getContext().getString(R.string.already_buy));
+				btn_buy.setEnabled(true);
+			}
 
 			valueHealth.setText(" + "+String.valueOf(
 					myHelmet.getHealthValue())+" HP");
@@ -140,57 +152,132 @@ public class ShopHelmetActivity extends SherlockActivity {
 			valuePrice.setText(" "+String.valueOf(
 					myHelmet.getPrice()));
 			
+			
 			btn_buy.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(final View v) {
-					new AlertDialog.Builder(v.getContext())
-				    .setTitle(R.string.confirm)
-				    .setMessage(v.getContext().getString(R.string.msg_buy_begin)
-				    		+ myHelmet.getPrice() 
-				    		+ v.getContext().getString(R.string.msg_buy_end))
-				    .setPositiveButton(android.R.string.yes, 
-				    		new DialogInterface.OnClickListener() {
-				        public void onClick(DialogInterface dialog, int which) { 
-				        	//Si le héro n'est pas assez de gold on affiche 
-				        	//un message
-				            if(myHero.getGold() < myHelmet.getPrice()) {
-				            	Toast.makeText(v.getContext(), 
-				            			R.string.msg_error, 
-				            			Toast.LENGTH_LONG).show();
-				            } else {
-				            	//Si le héros a assez de gold on le félicite
-				            	Toast.makeText(v.getContext(), 
-				            			R.string.msg_congrat, 
-				            			Toast.LENGTH_LONG).show();
-				            	
-				            	//Sauvegarde en BDD
-				            	db = dbHelper.getWritableDatabase();
-				            	
-				    			ContentValues itemHero = new ContentValues();
-				    			itemHero.put("gold", myHero.getGold() - 
-				    					myHelmet.getPrice());
-				    			
-				    			itemHero.put("helmet", myHelmet.getId());
+					
+	    			String whereClause = "id = ? ";
+	    			final String whereClauseHelmetUnequip = "isEQuip = ?";
+	    			final String[] whereArgsHelmetUnequip = { "1" };
+	    			
+					//Si le casque est déjà acheté...
+					if(myHelmet.getIsBuy() == 1) {
+		        		//On dit que l'ancien casque n'est plus dans 
+		    			//l'état équipé
+		    			ContentValues itemHelmetUnequip = 
+		    					new ContentValues();
+		    			
+		    			itemHelmetUnequip.put("isEquip", 0);
+		    			
+		    			
+		    			db.update(HelmetContract.TABLE, 
+		    					itemHelmetUnequip, 
+		    					whereClauseHelmetUnequip, 
+		    					whereArgsHelmetUnequip);
+		            	
+		        		//On ajoute le casque au héro
+		    			ContentValues itemHero = new ContentValues();
+		    			
+		    			itemHero.put("helmet", myHelmet.getId());
 
+		    			String[] whereArgsHero = { "1" };
+		    			db.update(HeroContract.TABLE, itemHero, 
+		    					whereClause, whereArgsHero);
+		    			
+		    			//On indique au casque qu'il est dans l'état 
+		    			//équipé
+		    			ContentValues itemHelmetEquip = 
+		    					new ContentValues();
+		    			
+		    			itemHelmetEquip.put("isEquip", 1);
+		    			
+		    			String[] whereArgsHelmetEquip = { 
+		    					String.valueOf(myHelmet.getId()) };
+		    			
+		    			db.update(HelmetContract.TABLE, itemHelmetEquip, 
+		    					whereClause, 
+		    					whereArgsHelmetEquip);
+		    			
+		        	} else {
+						new AlertDialog.Builder(v.getContext())
+					    .setTitle(R.string.confirm)
+					    .setMessage(v.getContext().getString(
+					    		R.string.msg_buy_begin)
+					    		+ myHelmet.getPrice() 
+					    		+ v.getContext().getString(
+					    				R.string.msg_buy_end))
+					    .setPositiveButton(android.R.string.yes, 
+					    		new DialogInterface.OnClickListener() {
+					        public void onClick(
+					        		DialogInterface dialog, int which) { 
+					        	
 				    			String whereClause = "id = ? ";
-				    			String[] whereArgs = { "1" };
-				    			db.update(HeroContract.TABLE, itemHero, 
-				    					whereClause, whereArgs);
-				            }
-				        }
-				     })
-				    .setNegativeButton(android.R.string.no, 
-				    		new DialogInterface.OnClickListener() {
-				        public void onClick(DialogInterface dialog, int which) { 
-				            //Ferme la fenetre
-				        }
-				     })
-				    .setIcon(R.drawable.ic_info_small)
-				     .show();
+					        	//Si le héro n'est pas assez de gold on affiche 
+					        	//un message
+					            if(myHero.getGold() < myHelmet.getPrice()) {
+					            	Toast.makeText(v.getContext(), 
+					            			R.string.msg_error, 
+					            			Toast.LENGTH_LONG).show();
+					            } else {
+					            	//Si le héros a assez de gold on le félicite
+					            	Toast.makeText(v.getContext(), 
+					            			R.string.msg_congrat, 
+					            			Toast.LENGTH_LONG).show();
+					            	
+					            	//On dit que l'ancien casque n'est plus dans 
+					    			//l'état équipé
+					    			ContentValues itemHelmetUnequip = 
+					    					new ContentValues();
+					    			
+					    			itemHelmetUnequip.put("isEquip", 0);
+					    			
+					    			db.update(HelmetContract.TABLE, 
+					    					itemHelmetUnequip, 
+					    					whereClauseHelmetUnequip, 
+					    					whereArgsHelmetUnequip);
+					            	
+					            	//Sauvegarde des info du héro en BDD
+					    			ContentValues itemHero = 
+					    					new ContentValues();
+					    			
+					    			itemHero.put("gold", myHero.getGold() - 
+					    					myHelmet.getPrice());
+					    			
+					    			itemHero.put("helmet", myHelmet.getId());
+					    			
+					    			String[] whereArgsHero = { "1" };
+					    			db.update(HeroContract.TABLE, itemHero, 
+					    					whereClause, whereArgsHero);
+					    			
+					    			//Sauvegarde de l'état "acheté" en BDD
+					    			ContentValues itemHelmet = 
+					    					new ContentValues();
+					    			
+					    			itemHelmet.put("isBuy", 1);
+					    			itemHelmet.put("isEquip", 1);
+	
+					    			String[] whereArgsHelmet = { 
+					    					String.valueOf(myHelmet.getId()) };
+					    			
+					    			db.update(HelmetContract.TABLE, itemHelmet, 
+					    					whereClause, whereArgsHelmet);
+					            }
+				        	}
+					    })
+					    .setNegativeButton(android.R.string.no, 
+					    		new DialogInterface.OnClickListener() {
+					        public void onClick(
+					        		DialogInterface dialog, int which) { 
+					            //Ferme la fenetre
+					        }
+					     })
+					    .setIcon(R.drawable.ic_info_small)
+					     .show();
+		        	}
 				}
 			});
-			
 			return myView;
 		}
 	}

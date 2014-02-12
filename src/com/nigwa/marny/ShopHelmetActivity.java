@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ public class ShopHelmetActivity extends SherlockActivity {
 	private static SQLiteOpenHelperClass dbHelper;
 	private ArrayList<Helmet> myHelmets;
 	private static Hero myHero;
+	private MediaPlayer soudKaching = null;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -94,7 +96,7 @@ public class ShopHelmetActivity extends SherlockActivity {
 	
 	
 	
-	private static class Adapter extends ArrayAdapter<Helmet>
+	private class Adapter extends ArrayAdapter<Helmet>
 	{
 		private Context myContext;
 		private int myRessource;
@@ -228,11 +230,18 @@ public class ShopHelmetActivity extends SherlockActivity {
 					            			R.string.msg_error, 
 					            			Toast.LENGTH_LONG).show();
 					            } else {
-					            	//Si le héros a assez de gold on le félicite
+					            	//Si le héros a assez de gold 
+					            	//on confirme son achat
 					            	Toast.makeText(v.getContext(), 
 					            			R.string.msg_congrat, 
 					            			Toast.LENGTH_LONG).show();
 					            	
+					            	//Son achat
+					            	soudKaching = MediaPlayer.create(
+					            			v.getContext(),
+											 R.raw.ka_chingsound);
+									soudKaching.start();
+									
 					            	//On dit que l'ancien casque n'est plus dans 
 					    			//l'état équipé
 					    			ContentValues itemHelmetUnequip = 

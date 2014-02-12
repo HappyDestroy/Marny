@@ -1,3 +1,17 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ ****ShopRoomActivity****
+ * Cette activity permet d'entrer dans la pièce "ShopRoom"
+ *  Elle gére la boutique des équipements
+ *  
+ *  Permet d'accèder à la boutique :
+ *  - Arme
+ *  - Bouclier
+ *  - Casque
+ *  - Potion
+ * 
+ */
 package com.nigwa.marny;
 
 

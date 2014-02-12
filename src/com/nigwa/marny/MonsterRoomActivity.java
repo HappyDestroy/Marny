@@ -1,3 +1,20 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ ****MonsterActivity****
+ * Cette activity permet d'entrer dans la pièce "MonsterRoom"
+ *  Elle gére les combats en fonction des caractèristiques du héro
+ *  et de son équipement.
+ *  
+ *  Permet de gérer les monstres à combattre
+ *  Permet d'utiliser les potions de vie.
+ *  Permet de gérer les coups du héro (echec, réussite, critique)
+ *  
+ *  Permet de faire revenir le héro à l'entrée du chateau s'il est mort
+ *  Permet de faire mourir le héro si lui et le monstre ne font pas de dégat
+ *  Permet de passer à une autre pièce
+ * 
+ */
 package com.nigwa.marny;
 
 
@@ -22,7 +39,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-public class MonsterActivity extends SherlockActivity {
+public class MonsterRoomActivity extends SherlockActivity {
 
 	private Hero myHero;
 	private Monster myMonster;
@@ -122,7 +139,7 @@ public class MonsterActivity extends SherlockActivity {
 			public void onClick(View v) {
 				if(myHero.getPotion() > 0) {
 					if(hero_health.getProgress() == hero_health.getMax()) {
-						Toast.makeText(MonsterActivity.this, 
+						Toast.makeText(MonsterRoomActivity.this, 
 								"Ta vie est déjà au maximum", 
 								Toast.LENGTH_SHORT).show();
 					} else {
@@ -174,7 +191,7 @@ public class MonsterActivity extends SherlockActivity {
 						//On change la valeur des points de vie qu'il nous reste
 						health_left = hero_health.getProgress();
 						
-						soudHurt = MediaPlayer.create(MonsterActivity.this,
+						soudHurt = MediaPlayer.create(MonsterRoomActivity.this,
 									 R.raw.coup);
 						soudHurt.start();
 						
@@ -192,7 +209,7 @@ public class MonsterActivity extends SherlockActivity {
 						 if(health_left <= 0) { 
 							 
 							 soudDeath = MediaPlayer.create(
-									 MonsterActivity.this, R.raw.death);
+									 MonsterRoomActivity.this, R.raw.death);
 							 soudDeath.start();
 							 
 							 
@@ -200,7 +217,7 @@ public class MonsterActivity extends SherlockActivity {
 						 }
 					}
 				} else {
-					Toast.makeText(MonsterActivity.this, 
+					Toast.makeText(MonsterRoomActivity.this, 
 							"Malheuresement,  tu n'as pas de potions", 
 							Toast.LENGTH_SHORT).show();
 				}
@@ -217,8 +234,8 @@ public class MonsterActivity extends SherlockActivity {
 				//Choix aléatoire du type de la prochaine pièce
 				int myRandom = Tools.random(20);
 				if(myRandom >= 0 && myRandom <= 14) {
-					Intent intentMonsterRoom = new Intent(MonsterActivity.this,
-							MonsterActivity.class);
+					Intent intentMonsterRoom = new Intent(MonsterRoomActivity.this,
+							MonsterRoomActivity.class);
 					
 					intentMonsterRoom.putExtra("hero", myHero);
 					intentMonsterRoom.putExtra("nb_room", nb_room);
@@ -226,7 +243,7 @@ public class MonsterActivity extends SherlockActivity {
 					
 					startActivity(intentMonsterRoom);
 				} else if(myRandom >= 15 && myRandom <= 18 ) {
-					Intent intentGoldRoom = new Intent(MonsterActivity.this,
+					Intent intentGoldRoom = new Intent(MonsterRoomActivity.this,
 							GoldRoomActivity.class);
 					
 					intentGoldRoom.putExtra("hero", myHero);
@@ -235,7 +252,7 @@ public class MonsterActivity extends SherlockActivity {
 					
 					startActivity(intentGoldRoom);
 				} else {
-					Intent intentRestRoom = new Intent(MonsterActivity.this,
+					Intent intentRestRoom = new Intent(MonsterRoomActivity.this,
 							RestRoomActivity.class);
 					
 					intentRestRoom.putExtra("hero", myHero);
@@ -270,14 +287,14 @@ public class MonsterActivity extends SherlockActivity {
 					valueAttack = 0;
 					label_monster.setText("Le monstre a esquivé "
 							+ "\n À son tour ...");
-					soudFail = MediaPlayer.create(MonsterActivity.this,
+					soudFail = MediaPlayer.create(MonsterRoomActivity.this,
 							 R.raw.missed);
 					soudFail.start();
 				} else if (randomHurt >= 9){//CRITIC
 					valueAttack = valueAttack * 2;
 					label_monster.setText("Coûp critique de " + valueAttack + 
 							" points de dégats \n Au tour du monstre ...");
-					soudCritic = MediaPlayer.create(MonsterActivity.this,
+					soudCritic = MediaPlayer.create(MonsterRoomActivity.this,
 							 R.raw.critic);
 					soudCritic.start();
 				}else {//NORMAL
@@ -320,7 +337,7 @@ public class MonsterActivity extends SherlockActivity {
 					health_left = hero_health.getProgress();
 					
 					
-					soudHurt = MediaPlayer.create(MonsterActivity.this,
+					soudHurt = MediaPlayer.create(MonsterRoomActivity.this,
 								 R.raw.coup);
 					soudHurt.start();
 					
@@ -337,7 +354,7 @@ public class MonsterActivity extends SherlockActivity {
 					//Si le héro n'a plus de vie
 					 if(health_left <= 0) { 
 						 
-						 soudDeath = MediaPlayer.create(MonsterActivity.this,
+						 soudDeath = MediaPlayer.create(MonsterRoomActivity.this,
 								 R.raw.death);
 						 soudDeath.start();
 						 
@@ -364,7 +381,7 @@ public class MonsterActivity extends SherlockActivity {
 			}
 		});
 		if(health_left <= 0) { 
-			 soudDeath = MediaPlayer.create(MonsterActivity.this,
+			 soudDeath = MediaPlayer.create(MonsterRoomActivity.this,
 					 R.raw.death);
 			 soudDeath.start();
 			 heroKO();
@@ -467,7 +484,7 @@ public class MonsterActivity extends SherlockActivity {
 		
 		
 		
-		new AlertDialog.Builder(MonsterActivity.this)
+		new AlertDialog.Builder(MonsterRoomActivity.this)
 	    .setTitle(getApplication().getString(R.string.heroKO_title))
 	    .setMessage(getApplication().getString(R.string.heroKO_msg))
 	    .setPositiveButton(R.string.heroKO_valid, 
@@ -486,7 +503,7 @@ public class MonsterActivity extends SherlockActivity {
 							db.update(HeroContract.TABLE, itemHero, 
 									whereClause, whereArgs);
 			        	
-			        		MonsterActivity.this.finish();
+			        		MonsterRoomActivity.this.finish();
 			        }
 	     })
 	    .setIcon(R.drawable.ic_info_small)

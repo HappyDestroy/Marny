@@ -1,3 +1,13 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ ****GoldRoomActivity****
+ * Cette activity permet d'entrer dans la pièce "GoldRoom"
+ *  Elle génere aléatoire un nombre de gold de 1 à 150.
+ *  
+ *  Permet de passer à une autre pièce
+ * 
+ */
 package com.nigwa.marny;
 
 import android.content.Intent;
@@ -56,7 +66,7 @@ public class GoldRoomActivity extends SherlockActivity {
 				int myRandom = Tools.random(20);
 				if(myRandom >= 0 && myRandom <= 14) {
 					Intent intentMonsterRoom = new Intent(GoldRoomActivity.this,
-							MonsterActivity.class);
+							MonsterRoomActivity.class);
 					
 					intentMonsterRoom.putExtra("hero", myHero);
 					intentMonsterRoom.putExtra("nb_room", nb_room);

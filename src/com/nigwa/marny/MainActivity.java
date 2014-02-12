@@ -1,3 +1,14 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ ****MainActivity****
+ * Cette activity permet de créer la BDD si ce n'est pas déjà le cas
+ * C'est aussi la première activity du project. Elle offre 2 choix :
+ * 
+ * - Démarrer le jeu
+ * - Lancer le lecteur de flux RSS
+ * 
+ */
 package com.nigwa.marny;
 
 import com.actionbarsherlock.app.SherlockActivity;

@@ -1,3 +1,16 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ * Création de l'objets Héro
+* int health : 	Santé du Héro
+* int attack : Attaque du Héro
+* int armor :  Armur du Héro
+* int gold :   Gold du Héro
+* int potion : Nombre de potions du Héro
+* Helmet helmet : Casque du Héro
+* Shield shield : Bouclier du Héro
+* Weapon weapon : Arme du Hero
+ */
 package com.nigwa.marny;
 
 import java.io.Serializable;
@@ -13,10 +26,11 @@ public class Hero extends Object implements Serializable {
 	private int attack;
 	private int armor;
 	private int gold;
+	private int potion;
 	private Helmet helmet;
 	private Shield shield;
 	private Weapon weapon;
-	private int potion;
+	
 
 	
 	public Hero(int health, int attack, int armor, int gold, Helmet helmet, Shield shield, Weapon weapon, int potion) {

@@ -1,3 +1,10 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ *			***HeroContract***
+ * Permet de schématiser la table du hero dans la BDD
+ * 
+ */
 package com.nigwa.marny;
 
 public class HeroContract {

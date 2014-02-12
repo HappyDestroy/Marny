@@ -90,16 +90,20 @@ public class Tools {
 				myHelmet = new Helmet(999, 0, 0, 0, 0, 0, 1);
 			} else if(valueHelmet == 1) {
 				String[] whereArgs = { "1" };
-				myHelmet = getHelmetFromBDD(myContext, "id = ?", whereArgs).get(0);
+				myHelmet = getHelmetFromBDD(
+						myContext, "id = ?", whereArgs).get(0);
 			} else if (valueHelmet == 2) {
 				String[] whereArgs = { "2" };
-				myHelmet = getHelmetFromBDD(myContext, "id = ?", whereArgs).get(0);
+				myHelmet = getHelmetFromBDD(
+						myContext, "id = ?", whereArgs).get(0);
 			} else if (valueHelmet == 3) {
 				String[] whereArgs = { "3" };
-				myHelmet = getHelmetFromBDD(myContext, "id = ?", whereArgs).get(0);
+				myHelmet = getHelmetFromBDD(
+						myContext, "id = ?", whereArgs).get(0);
 			} else if (valueHelmet == 4) {
 				String[] whereArgs = { "4" };
-				myHelmet = getHelmetFromBDD(myContext, "id = ?", whereArgs).get(0);
+				myHelmet = getHelmetFromBDD(
+						myContext, "id = ?", whereArgs).get(0);
 			}
 			
 			
@@ -107,32 +111,40 @@ public class Tools {
 				myShield = new Shield(999, 0, 0, 0, 0, 0, 1);
 			} else if(valueShield == 1) {
 				String[] whereArgs = { "1" };
-				myShield = getShieldFromBDD(myContext, "id = ?", whereArgs).get(0);
+				myShield = getShieldFromBDD(
+						myContext, "id = ?", whereArgs).get(0);
 			} else if (valueShield == 2) {
 				String[] whereArgs = { "2" };
-				myShield = getShieldFromBDD(myContext, "id = ?", whereArgs).get(0);
+				myShield = getShieldFromBDD(
+						myContext, "id = ?", whereArgs).get(0);
 			} else if (valueShield == 3) {
 				String[] whereArgs = { "3" };
-				myShield = getShieldFromBDD(myContext, "id = ?", whereArgs).get(0);
+				myShield = getShieldFromBDD(
+						myContext, "id = ?", whereArgs).get(0);
 			} else if (valueShield == 4) {
 				String[] whereArgs = { "4" };
-				myShield = getShieldFromBDD(myContext, "id = ?", whereArgs).get(0);
+				myShield = getShieldFromBDD(
+						myContext, "id = ?", whereArgs).get(0);
 			}
 			
 			if(valueWeapon == 999) {
 				myWeapon = new Weapon(999, 0, 0, 0, 0, 0, 1);
 			} else if(valueWeapon == 1) {
 				String[] whereArgs = { "1" };
-				myWeapon = getWeaponFromBDD(myContext, "id = ?", whereArgs).get(0);
+				myWeapon = getWeaponFromBDD(
+						myContext, "id = ?", whereArgs).get(0);
 			} else if (valueWeapon == 2) {
 				String[] whereArgs = { "2" };
-				myWeapon = getWeaponFromBDD(myContext, "id = ?", whereArgs).get(0);
+				myWeapon = getWeaponFromBDD(
+						myContext, "id = ?", whereArgs).get(0);
 			} else if (valueWeapon == 3) {
 				String[] whereArgs = { "3" };
-				myWeapon = getWeaponFromBDD(myContext, "id = ?", whereArgs).get(0);
+				myWeapon = getWeaponFromBDD(
+						myContext, "id = ?", whereArgs).get(0);
 			} else if (valueWeapon == 4) {
 				String[] whereArgs = { "4" };
-				myWeapon = getWeaponFromBDD(myContext, "id = ?", whereArgs).get(0);
+				myWeapon = getWeaponFromBDD(
+						myContext, "id = ?", whereArgs).get(0);
 			}
 				
 				myHero = new Hero(valueHealth, valueAttack, valueArmor, 
@@ -150,7 +162,8 @@ public class Tools {
 	 * @param whereArgs - Les arguments pour le WHERE
 	 * @return une collection de casque
 	 */
-	public static ArrayList<Helmet> getHelmetFromBDD(Context myContext, String whereClause, String[] whereArgs) {
+	public static ArrayList<Helmet> getHelmetFromBDD(Context myContext, 
+			String whereClause, String[] whereArgs) {
 		
 		SQLiteDatabase db;
 		SQLiteOpenHelperClass dbHelper;
@@ -202,7 +215,8 @@ public class Tools {
 	 * @param whereArgs - Les arguments pour la clause WHERE
 	 * @return une collection de bouclier
 	 */
-	public static ArrayList<Shield> getShieldFromBDD(Context myContext, String whereClause, String[] whereArgs) {
+	public static ArrayList<Shield> getShieldFromBDD(Context myContext, 
+			String whereClause, String[] whereArgs) {
 		
 		SQLiteDatabase db;
 		SQLiteOpenHelperClass dbHelper;
@@ -257,7 +271,8 @@ public class Tools {
 	 * @param whereArgs - Les arguments pour la clause WHERE
 	 * @return une collection d'armes
 	 */
-	public static ArrayList<Weapon> getWeaponFromBDD(Context myContext, String whereClause, String[] whereArgs) {
+	public static ArrayList<Weapon> getWeaponFromBDD(Context myContext, 
+			String whereClause, String[] whereArgs) {
 		
 		SQLiteDatabase db;
 		SQLiteOpenHelperClass dbHelper;
@@ -303,6 +318,47 @@ public class Tools {
 		} while ( c.moveToNext() );
 		
 		return myWeapons;
+	}
+	
+	
+	public static ArrayList<Monster> getMonsterFromBDD(Context myContext,
+			String whereClause, String[] whereArgs) {
+		
+		SQLiteDatabase db;
+		SQLiteOpenHelperClass dbHelper;
+		ArrayList<Monster> myMonsters = new ArrayList<Monster>();
+		
+		
+		dbHelper = new SQLiteOpenHelperClass(myContext, "myDB", null, 1);
+		
+		db = dbHelper.getWritableDatabase();
+		
+		
+		Cursor c = db.query(MonsterContract.TABLE , MonsterContract.COLS, 
+				whereClause ,whereArgs , null, null, null);
+		
+		c.moveToFirst();
+		
+		do {
+			int valueRank = c.getInt(
+					c.getColumnIndex(MonsterContract.COL_RANK));
+			
+			int valueHealth = c.getInt(
+					c.getColumnIndex(MonsterContract.COL_HEALTH));
+			
+			int valueAttack = c.getInt(
+					c.getColumnIndex(MonsterContract.COL_ATTACK));
+			
+			int valueShielsd = c.getInt(
+					c.getColumnIndex(MonsterContract.COL_ARMOR));
+			
+			
+			myMonsters.add(new Monster(valueRank, valueHealth, valueAttack, 
+					valueShielsd));
+			
+		} while ( c.moveToNext() );
+		
+		return myMonsters;
 	}
 	
 	/**

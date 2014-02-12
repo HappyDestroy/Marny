@@ -22,8 +22,6 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -43,10 +41,9 @@ public class MonsterRoomActivity extends SherlockActivity {
 
 	private Hero myHero;
 	private Monster myMonster;
-	private SQLiteDatabase db;
-	private SQLiteOpenHelperClass dbHelper;
 	private int health_left;
 	private int nb_room;
+	private int random_gold;
 	private MediaPlayer soudHurt = null;
 	private MediaPlayer soudDeath = null;
 	private MediaPlayer soudFail = null;
@@ -361,7 +358,9 @@ public class MonsterRoomActivity extends SherlockActivity {
 						@Override
 						public void run() {
 							label_monster.setText(getApplication()
-									.getString(R.string.monster_ko));
+									.getString(R.string.monster_ko) 
+									+ "\n Tu as gagné " + random_gold 
+									+ " golds !" );
 							}
 					}, 600);
 					
@@ -372,6 +371,7 @@ public class MonsterRoomActivity extends SherlockActivity {
 					img_potion.setEnabled(false);
 					img_potion.setVisibility(View.INVISIBLE);
 					img_monster.setVisibility(View.INVISIBLE);
+					myHero.setGold(myHero.getGold() + random_gold);
 				}
 			}
 		});
@@ -413,10 +413,13 @@ public class MonsterRoomActivity extends SherlockActivity {
 		}
 		new AlertDialog.Builder(this)
 	    .setTitle(R.string.menu_info)
-	    .setMessage("Tu affrontes un "+monsterName
-	    		+"\n"+getApplication().getString(R.string.health)+" "+myMonster.getHealth()
-	    		+"\n"+getApplication().getString(R.string.attack)+""+myMonster.getAttack()
-	    		+"\n"+getApplication().getString(R.string.armor)+""+myMonster.getShield())
+	    .setMessage("Tu affrontes un "+monsterName+"\n"
+	    		+ getApplication().getString(R.string.health)+ " "
+	    		+ myMonster.getHealth() + "\n" 
+	    		+ getApplication().getString(R.string.attack) + " " 
+	    		+ myMonster.getAttack() + "\n" 
+	    		+ getApplication().getString(R.string.armor) + " " 
+	    		+ myMonster.getShield())
 	    .setPositiveButton(android.R.string.ok,
 	    		new DialogInterface.OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) { 
@@ -435,6 +438,7 @@ public class MonsterRoomActivity extends SherlockActivity {
 	private void createMonster() {
 		//On tire un nombre entre 1 et 4 pour choisir le rang du monstre.
 		int random = 1;
+		
 		if(nb_room < 10) {
 			random = 1;
 		} else if (nb_room >= 10 && nb_room < 17)  {
@@ -445,40 +449,25 @@ public class MonsterRoomActivity extends SherlockActivity {
 			random = Tools.random(2, 4);
 		}
 		
-		String[] VALUES = { String.valueOf(random) };
+		switch(random) {
+		case 1 :
+			random_gold = Tools.random(1, 5);
+			break;
+		case 2 :
+			random_gold = Tools.random(5, 15);
+			break;
+		case 3 :
+			random_gold = Tools.random(10, 20);
+			break;
+		case 4 :
+			random_gold = 100;
+		}
 		
-		dbHelper = new SQLiteOpenHelperClass(
-				this, 
-				"myDB", 
-				null, 
-				1);
-
-		db = dbHelper.getWritableDatabase();
+		String[] whereArgs = { String.valueOf(random) };
 		
+		myMonster = Tools.getMonsterFromBDD(getApplicationContext(), 
+				"id = ?", whereArgs).get(0);
 		
-		Cursor c = db.query(MonsterContract.TABLE , MonsterContract.COLS, 
-				"id LIKE ?" ,VALUES, null, null, null);
-		
-		c.moveToFirst();
-		
-		do {
-			int valueRank = c.getInt(
-					c.getColumnIndex(MonsterContract.COL_RANK));
-			
-			int valueHealth = c.getInt(
-					c.getColumnIndex(MonsterContract.COL_HEALTH));
-			
-			int valueAttack = c.getInt(
-					c.getColumnIndex(MonsterContract.COL_ATTACK));
-			
-			int valueShielsd = c.getInt(
-					c.getColumnIndex(MonsterContract.COL_ARMOR));
-			
-			
-			myMonster = new Monster(valueRank, valueHealth, valueAttack, 
-					valueShielsd);
-			
-		} while ( c.moveToNext() );
 	}
 	
 	
@@ -502,8 +491,12 @@ public class MonsterRoomActivity extends SherlockActivity {
 	
 							String whereClause = "id =? ";
 							String[] whereArgs = { "1" };
-							db.update(HeroContract.TABLE, itemHero, 
-									whereClause, whereArgs);
+							
+							Tools.updateBDD(getApplicationContext(), 
+									HeroContract.TABLE, 
+									itemHero, 
+									whereClause, 
+									whereArgs);
 			        	
 			        		MonsterRoomActivity.this.finish();
 			        }

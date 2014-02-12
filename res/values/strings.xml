@@ -13,10 +13,10 @@
     
     
     <string name="home_welcome">Bienvenue, aventurier. Choisis ce que tu veux 
-        faire avant d\'entrer dans le chateau.</string>
+        faire avant d\'entrer dans le château.</string>
         
     <string name="home_shop">Faire un tour dans la boutique</string>
-    <string name="home_go">Partir à l\'assaut du chateau</string>
+    <string name="home_go">Partir à l\'assaut du château</string>
     <string name="home_info_hero">Informations sur votre héro</string>
     
     <string name="health">Points de vie : </string>
@@ -38,7 +38,7 @@
         sur ses pas quand on est courageux !</string>
 	<string name="heroKO_title">Pas de chance &#8230;</string>
 	<string name="heroKO_msg">ARGGHH !! Tu as été vaincu !</string>
-	<string name="heroKO_valid">Retourner devant le chateau</string>
+	<string name="heroKO_valid">Retourner devant le château</string>
     
     <string name="monster">AAAHH !!! Un monstre vient d\'apparaitre !</string>
     <string name="img_monster">Image du monstre</string>

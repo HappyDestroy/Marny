@@ -11,13 +11,21 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
+/**
+ * Activity de la salle au trésor
+ * @author HappyDestroy
+ *
+ */
 public class GoldRoomActivity extends SherlockActivity {
 	private MediaPlayer sound_coins = null;
-
+	
 	private Hero myHero;
 	private int nb_room;
 	private int health_left;
 	
+	/**
+	 * Methode à la création de l'activity
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,9 +56,8 @@ public class GoldRoomActivity extends SherlockActivity {
 		
 		health_left = getIntent().getIntExtra("health_left", 1); 
 		
-		
+		//Listener du click sur le bouto npour changer de salle
 		btn_next.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				int myRandom = Tools.random(20);

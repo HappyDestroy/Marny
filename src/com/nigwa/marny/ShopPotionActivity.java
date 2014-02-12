@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
-import android.content.Intent;
 
 
 public class ShopPotionActivity extends SherlockActivity {

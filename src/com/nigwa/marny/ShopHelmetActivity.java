@@ -15,9 +15,6 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,10 +30,9 @@ import android.widget.Toast;
 
 public class ShopHelmetActivity extends SherlockActivity {
 	
-	private static SQLiteDatabase db;
-	private static SQLiteOpenHelperClass dbHelper;
 	private ArrayList<Helmet> myHelmets;
-	private static Hero myHero;
+	private Hero myHero;
+	private Adapter myAdapter;
 	private MediaPlayer soudKaching = null;
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,43 +46,9 @@ public class ShopHelmetActivity extends SherlockActivity {
 		
 		myHelmets = new ArrayList<Helmet>();
 		
-		dbHelper = new SQLiteOpenHelperClass(
-				this, 
-				"myDB", 
-				null, 
-				1);
-
-		db = dbHelper.getWritableDatabase();
+		myHelmets = Tools.getHelmetFromBDD(getApplicationContext(), null, null);
 		
-		
-		Cursor c = db.query(HelmetContract.TABLE , HelmetContract.COLS, null 
-				,null, null, null, null);
-		
-		
-		c.moveToFirst();
-		do {
-			int valueID = c.getInt(
-					c.getColumnIndex(HelmetContract.COL_ID));
-			int valueHealth = c.getInt(
-					c.getColumnIndex(HelmetContract.COL_HEALTHVALUE));
-			int valueAttack = c.getInt(
-					c.getColumnIndex(HelmetContract.COL_ATTACKVALUE));
-			int valueArmor = c.getInt(
-					c.getColumnIndex(HelmetContract.COL_ARMORVALUE));
-			int valuePrice = c.getInt(
-					c.getColumnIndex(HelmetContract.COL_PRICE));
-			int isBuy = c.getInt(
-					c.getColumnIndex(HelmetContract.COL_ISBUY));
-			int isEquip = c.getInt(
-					c.getColumnIndex(HelmetContract.COL_ISEQUIP));
-
-			myHelmets.add(new Helmet(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice, isBuy, isEquip));
-			
-		} while ( c.moveToNext() );
-		
-		
-		final Adapter myAdapter = new Adapter(this, R.layout.row_list, myHelmets);
+		myAdapter = new Adapter(this, R.layout.row_list, myHelmets);
 		
 		ListView myListViewHelmet = (ListView) findViewById(
 				R.id.listViewHelmet);
@@ -180,8 +142,8 @@ public class ShopHelmetActivity extends SherlockActivity {
 		    			
 		    			itemHelmetUnequip.put("isEquip", 0);
 		    			
-		    			
-		    			db.update(HelmetContract.TABLE, 
+		    			Tools.updateBDD(getApplicationContext(), 
+		    					HelmetContract.TABLE, 
 		    					itemHelmetUnequip, 
 		    					whereClauseHelmetUnequip, 
 		    					whereArgsHelmetUnequip);
@@ -192,8 +154,12 @@ public class ShopHelmetActivity extends SherlockActivity {
 		    			itemHero.put("helmet", myHelmet.getId());
 
 		    			String[] whereArgsHero = { "1" };
-		    			db.update(HeroContract.TABLE, itemHero, 
-		    					whereClause, whereArgsHero);
+		    			
+		    			Tools.updateBDD(getApplicationContext(), 
+		    					HeroContract.TABLE, 
+		    					itemHero, 
+		    					whereClause,
+		    					whereArgsHero);
 		    			
 		    			//On indique au casque qu'il est dans l'état 
 		    			//équipé
@@ -205,9 +171,26 @@ public class ShopHelmetActivity extends SherlockActivity {
 		    			String[] whereArgsHelmetEquip = { 
 		    					String.valueOf(myHelmet.getId()) };
 		    			
-		    			db.update(HelmetContract.TABLE, itemHelmetEquip, 
-		    					whereClause, 
+		    			Tools.updateBDD(getApplicationContext(), 
+		    					HelmetContract.TABLE, 
+		    					itemHelmetEquip, 
+		    					whereClause,
 		    					whereArgsHelmetEquip);
+		    			
+		    			//On rafraichit la ListView avec les nouveaux items
+						/*ArrayList<Helmet> myNewHelmets = 
+								new ArrayList<Helmet>();
+						
+		    			myAdapter.clear();
+		    			
+		    			myNewHelmets = Tools.getHelmetFromBDD(
+		    					getApplicationContext(), null, null);
+		    			
+		    			myAdapter.addAll(myNewHelmets);
+		    			myAdapter.notifyDataSetChanged();*/
+		    			
+		    			Tools.refreshListViewShopHelmet(
+		    					getApplicationContext(), myAdapter);
 		    			
 		        	} else {
 						new AlertDialog.Builder(v.getContext())
@@ -249,9 +232,10 @@ public class ShopHelmetActivity extends SherlockActivity {
 					    			
 					    			itemHelmetUnequip.put("isEquip", 0);
 					    			
-					    			db.update(HelmetContract.TABLE, 
+					    			Tools.updateBDD(getApplicationContext(),
+					    					HelmetContract.TABLE, 
 					    					itemHelmetUnequip, 
-					    					whereClauseHelmetUnequip, 
+					    					whereClauseHelmetUnequip,
 					    					whereArgsHelmetUnequip);
 					            	
 					            	//Sauvegarde des info du héro en BDD
@@ -264,8 +248,13 @@ public class ShopHelmetActivity extends SherlockActivity {
 					    			itemHero.put("helmet", myHelmet.getId());
 					    			
 					    			String[] whereArgsHero = { "1" };
-					    			db.update(HeroContract.TABLE, itemHero, 
-					    					whereClause, whereArgsHero);
+					    			
+					    			Tools.updateBDD(getApplicationContext(), 
+					    					HeroContract.TABLE, 
+					    					itemHero, 
+					    					whereClause, 
+					    					whereArgsHero);
+					    			
 					    			
 					    			//Sauvegarde de l'état "acheté" en BDD
 					    			ContentValues itemHelmet = 
@@ -277,8 +266,17 @@ public class ShopHelmetActivity extends SherlockActivity {
 					    			String[] whereArgsHelmet = { 
 					    					String.valueOf(myHelmet.getId()) };
 					    			
-					    			db.update(HelmetContract.TABLE, itemHelmet, 
-					    					whereClause, whereArgsHelmet);
+					    			Tools.updateBDD(getApplicationContext(), 
+					    					HelmetContract.TABLE, 
+					    					itemHelmet, 
+					    					whereClause, 
+					    					whereArgsHelmet);
+					    			
+					    			//On rafraichit la ListView avec les 
+					    			//nouveaux items
+					    			Tools.refreshListViewShopHelmet(
+					    					getApplicationContext(), myAdapter);
+					    			
 					            }
 				        	}
 					    })

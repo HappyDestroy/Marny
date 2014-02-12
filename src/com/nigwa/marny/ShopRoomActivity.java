@@ -98,8 +98,8 @@ public class ShopRoomActivity extends SherlockActivity {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.gold_info, menu);
 		MenuItem myMenu = menu.findItem(R.id.gold_info);
-		myMenu.setTitle(String.valueOf(myHero.getGold()) + getApplication().
-				getString(R.string.gold_text_info));
+		myMenu.setTitle(String.valueOf(myHero.getGold()) + getApplication()
+				.getString(R.string.gold_text_info));
 		return true;
 	}
 	

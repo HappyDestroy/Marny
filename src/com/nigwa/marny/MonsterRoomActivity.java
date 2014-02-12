@@ -51,7 +51,6 @@ public class MonsterRoomActivity extends SherlockActivity {
 	private MediaPlayer soudDeath = null;
 	private MediaPlayer soudFail = null;
 	private MediaPlayer soudCritic = null;
-	private int valeurProgress;
 	private int noDammageM; //Variable si aucun dommage du monstre
 	private int noDammageH; //Variable si aucun dommage du hero
 	@Override
@@ -144,27 +143,17 @@ public class MonsterRoomActivity extends SherlockActivity {
 								Toast.LENGTH_SHORT).show();
 					} else {
 						//Il prend une potion
-						 if ((hero_health.getMax() - health_left)
-								 < 25) {
-								health_left = myHero.getHealth() 
-										+ myHero.getHelmet().getHealthValue()
-										+ myHero.getShield().getHealthValue()
-										+ myHero.getWeapon().getHealthValue();
+						 if ((hero_health.getMax() - health_left) < 50) {
+								health_left = hero_health.getMax();
 								
-								hero_health.setProgress(hero_health.getMax());
-								
-							 valeurProgress = hero_health.getMax() - health_left;
-							 hero_health.setProgress(hero_health.getMax());
-
+								hero_health.setProgress(health_left);
 						 } else {
-
-							health_left += 25;
-							hero_health.setProgress(
-									hero_health.getProgress() + 25);
+							health_left += 50;
+							hero_health.setProgress(health_left);
 						 }
 
 						myHero.setPotion(myHero.getPotion() - 1);
-						label_monster.setText("Tu as pris une potion (+25 HP) "
+						label_monster.setText("Tu as pris une potion (+50 HP) "
 								+ "\n Au tour du monstre ...");
 						 
 						//Le monstre attaque
@@ -211,7 +200,6 @@ public class MonsterRoomActivity extends SherlockActivity {
 							 soudDeath = MediaPlayer.create(
 									 MonsterRoomActivity.this, R.raw.death);
 							 soudDeath.start();
-							 
 							 
 							 heroKO();
 						 }
@@ -268,7 +256,6 @@ public class MonsterRoomActivity extends SherlockActivity {
 		btn_attack.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
 				
 				//On calcul les dégats que peux faire le héro face au bouclier 
 				//du monstre
@@ -376,6 +363,8 @@ public class MonsterRoomActivity extends SherlockActivity {
 					//On active les boutons et on cache le sprite du monstre
 					btn_next.setEnabled(true);
 					btn_attack.setEnabled(false);
+					img_potion.setEnabled(false);
+					img_potion.setVisibility(View.INVISIBLE);
 					img_monster.setVisibility(View.INVISIBLE);
 				}
 			}

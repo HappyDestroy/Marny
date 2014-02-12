@@ -1,10 +1,13 @@
 package com.nigwa.marny;
 
+import java.util.ArrayList;
 import java.util.Random;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.ArrayAdapter;
 
 public class Tools {
 	
@@ -49,65 +52,77 @@ public class Tools {
 		db = dbHelper.getWritableDatabase();
 		
 		
-		Cursor c = db.query(HeroContract.TABLE , HeroContract.COLS, "id LIKE ?" 
-				,VALUES, null, null, null);
+		Cursor c = db.query(HeroContract.TABLE, HeroContract.COLS, "id LIKE ?",
+				VALUES, null, null, null);
 		c.moveToFirst();
 		
 		//On récupère le Hero depuis la BDD
 		do {
 			int valueHealth = c.getInt(
-					c.getColumnIndex(HeroContract.COL_HEALTH)) ;
+					c.getColumnIndex(HeroContract.COL_HEALTH));
 			int valueAttack = c.getInt(
-					c.getColumnIndex(HeroContract.COL_ATTACK)) ;
+					c.getColumnIndex(HeroContract.COL_ATTACK));
 			int valueArmor = c.getInt(
-					c.getColumnIndex(HeroContract.COL_ARMOR)) ;
+					c.getColumnIndex(HeroContract.COL_ARMOR));
 			int valueGold = c.getInt(
-					c.getColumnIndex(HeroContract.COL_GOLD)) ;
+					c.getColumnIndex(HeroContract.COL_GOLD));
 			int valueHelmet = c.getInt(
-					c.getColumnIndex(HeroContract.COL_HELMET)) ;
+					c.getColumnIndex(HeroContract.COL_HELMET));
 			int valueShield = c.getInt(
-					c.getColumnIndex(HeroContract.COL_SHIELD)) ;
+					c.getColumnIndex(HeroContract.COL_SHIELD));
 			int valueWeapon = c.getInt(
-					c.getColumnIndex(HeroContract.COL_WEAPON)) ;
+					c.getColumnIndex(HeroContract.COL_WEAPON));
 			int valuePotion = c.getInt(
-					c.getColumnIndex(HeroContract.COL_POTION)) ;
+					c.getColumnIndex(HeroContract.COL_POTION));
 	
 			//999 est l'id des equipements sans caractéritiques
 			if(valueHelmet == 999) {
 				myHelmet = new Helmet(999, 0, 0, 0, 0, 0, 1);
 			} else if(valueHelmet == 1) {
-				myHelmet = getHelmetFromBDD(myContext, "1");
+				String[] whereArgs = { "1" };
+				myHelmet = getHelmetFromBDD(myContext, "id = ?", whereArgs).get(0);
 			} else if (valueHelmet == 2) {
-				myHelmet = getHelmetFromBDD(myContext, "2");
+				String[] whereArgs = { "2" };
+				myHelmet = getHelmetFromBDD(myContext, "id = ?", whereArgs).get(0);
 			} else if (valueHelmet == 3) {
-				myHelmet = getHelmetFromBDD(myContext, "3");
+				String[] whereArgs = { "3" };
+				myHelmet = getHelmetFromBDD(myContext, "id = ?", whereArgs).get(0);
 			} else if (valueHelmet == 4) {
-				myHelmet = getHelmetFromBDD(myContext, "4");
+				String[] whereArgs = { "4" };
+				myHelmet = getHelmetFromBDD(myContext, "id = ?", whereArgs).get(0);
 			}
 			
 			
 			if(valueShield == 999) {
 				myShield = new Shield(999, 0, 0, 0, 0, 0, 1);
 			} else if(valueShield == 1) {
-				myShield = getShieldFromBDD(myContext, "1");
+				String[] whereArgs = { "1" };
+				myShield = getShieldFromBDD(myContext, "id = ?", whereArgs).get(0);
 			} else if (valueShield == 2) {
-				myShield = getShieldFromBDD(myContext, "2");
+				String[] whereArgs = { "2" };
+				myShield = getShieldFromBDD(myContext, "id = ?", whereArgs).get(0);
 			} else if (valueShield == 3) {
-				myShield = getShieldFromBDD(myContext, "3");
+				String[] whereArgs = { "3" };
+				myShield = getShieldFromBDD(myContext, "id = ?", whereArgs).get(0);
 			} else if (valueShield == 4) {
-				myShield = getShieldFromBDD(myContext, "4");
+				String[] whereArgs = { "4" };
+				myShield = getShieldFromBDD(myContext, "id = ?", whereArgs).get(0);
 			}
 			
 			if(valueWeapon == 999) {
 				myWeapon = new Weapon(999, 0, 0, 0, 0, 0, 1);
 			} else if(valueWeapon == 1) {
-				myWeapon = getWeaponFromBDD(myContext, "1");
+				String[] whereArgs = { "1" };
+				myWeapon = getWeaponFromBDD(myContext, "id = ?", whereArgs).get(0);
 			} else if (valueWeapon == 2) {
-				myWeapon = getWeaponFromBDD(myContext, "2");
+				String[] whereArgs = { "2" };
+				myWeapon = getWeaponFromBDD(myContext, "id = ?", whereArgs).get(0);
 			} else if (valueWeapon == 3) {
-				myWeapon = getWeaponFromBDD(myContext, "3");
+				String[] whereArgs = { "3" };
+				myWeapon = getWeaponFromBDD(myContext, "id = ?", whereArgs).get(0);
 			} else if (valueWeapon == 4) {
-				myWeapon = getWeaponFromBDD(myContext, "4");
+				String[] whereArgs = { "4" };
+				myWeapon = getWeaponFromBDD(myContext, "id = ?", whereArgs).get(0);
 			}
 				
 				myHero = new Hero(valueHealth, valueAttack, valueArmor, 
@@ -119,25 +134,22 @@ public class Tools {
 	}
 	
 	
-	public static Helmet getHelmetFromBDD(Context myContext, String idHelmet) {
+	public static ArrayList<Helmet> getHelmetFromBDD(Context myContext, String whereClause, String[] whereArgs) {
 		
 		SQLiteDatabase db;
 		SQLiteOpenHelperClass dbHelper;
-		Helmet myHelmet;
+		ArrayList<Helmet> myHelmets = new ArrayList<Helmet>();
 		
-		dbHelper = new SQLiteOpenHelperClass(
-				myContext, 
-				"myDB", 
-				null, 
-				1);
-	
+		dbHelper = new SQLiteOpenHelperClass(myContext, "myDB", null, 1);
+		
 		db = dbHelper.getWritableDatabase();
 		
-		String[] VALUES = { idHelmet };
 		Cursor c = db.query(
-				HelmetContract.TABLE, HelmetContract.COLS, "id LIKE ?"
-				, VALUES, null, null, null);
+				HelmetContract.TABLE, HelmetContract.COLS, whereClause, 
+				whereArgs, null, null, null);
+		
 		c.moveToFirst();
+		
 		do {
 			int valueID = c.getInt(c.getColumnIndex(HelmetContract.COL_ID));
 			
@@ -160,32 +172,31 @@ public class Tools {
 					HelmetContract.COL_ISEQUIP));
 			
 			
-			myHelmet = new Helmet(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice,isBuy, isEquip);
+			myHelmets.add(new Helmet(valueID, valueHealth, valueAttack, 
+					valueArmor, valuePrice,isBuy, isEquip));
 		} while ( c.moveToNext() );
 		
-		return myHelmet;
+		return myHelmets;
 	}
 	
 	
-	public static Shield getShieldFromBDD(Context myContext, String idShield) {
+	public static ArrayList<Shield> getShieldFromBDD(Context myContext, String whereClause, String[] whereArgs) {
 		
 		SQLiteDatabase db;
 		SQLiteOpenHelperClass dbHelper;
-		Shield myShield;
+		ArrayList<Shield> myShields = new ArrayList<Shield>();
 		
 		dbHelper = new SQLiteOpenHelperClass(
 				myContext, 
 				"myDB", 
 				null, 
 				1);
-	
+		
 		db = dbHelper.getWritableDatabase();
 		
-		String[] VALUES = { idShield };
 		Cursor c = db.query(
-				ShieldContract.TABLE, ShieldContract.COLS, "id LIKE ?"
-				, VALUES, null, null, null);
+				ShieldContract.TABLE, ShieldContract.COLS, whereClause
+				, whereArgs, null, null, null);
 		c.moveToFirst();
 		do {
 			int valueID = c.getInt(c.getColumnIndex(ShieldContract.COL_ID));
@@ -208,20 +219,20 @@ public class Tools {
 			int isEquip = c.getInt(c.getColumnIndex(
 					ShieldContract.COL_ISEQUIP));
 			
-			myShield = new Shield(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice,isBuy, isEquip);
+			myShields.add(new Shield(valueID, valueHealth, valueAttack, 
+					valueArmor, valuePrice,isBuy, isEquip));
 		} while ( c.moveToNext() );
 		
 		
-		return myShield;
+		return myShields;
 	}
 	
 	
-	public static Weapon getWeaponFromBDD(Context myContext, String idWeapon) {
+	public static ArrayList<Weapon> getWeaponFromBDD(Context myContext, String whereClause, String[] whereArgs) {
 		
 		SQLiteDatabase db;
 		SQLiteOpenHelperClass dbHelper;
-		Weapon myWeapon;
+		ArrayList<Weapon> myWeapons = new ArrayList<Weapon>();
 		
 		dbHelper = new SQLiteOpenHelperClass(
 				myContext, 
@@ -231,10 +242,9 @@ public class Tools {
 	
 		db = dbHelper.getWritableDatabase();
 		
-		String[] VALUES = { idWeapon };
 		Cursor c = db.query(
-				WeaponContract.TABLE, WeaponContract.COLS, "id LIKE ?"
-				, VALUES, null, null, null);
+				WeaponContract.TABLE, WeaponContract.COLS, whereClause
+				, whereArgs, null, null, null);
 		
 		c.moveToFirst();
 		do {
@@ -259,10 +269,74 @@ public class Tools {
 					ShieldContract.COL_ISEQUIP));
 			
 			
-			myWeapon = new Weapon(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice, isBuy, isEquip);
+			myWeapons.add(new Weapon(valueID, valueHealth, valueAttack, 
+					valueArmor, valuePrice, isBuy, isEquip));
 		} while ( c.moveToNext() );
 		
-		return myWeapon;
+		return myWeapons;
+	}
+	
+	/**
+	 * Permet de mettre à jour la BDD.
+	 * @param myContext - Le context de l'application
+	 * @param TABLE - La table a mettre à jour
+	 * @param ContentValues - Les valeurs à changer
+	 * @param whereClause - La clause "WHERE"
+	 * @param whereArgs - Les arguments pour la clause "WHERE"
+	 */
+	public static void updateBDD(Context myContext, String TABLE, 
+			ContentValues ContentValues, String whereClause, 
+			String[] whereArgs ) {
+		
+		SQLiteDatabase db;
+		SQLiteOpenHelperClass dbHelper;
+		
+		dbHelper = new SQLiteOpenHelperClass(myContext, "myDB", null, 1);
+	
+		db = dbHelper.getWritableDatabase();
+		
+		db.update(TABLE, ContentValues, whereClause, whereArgs);
+	}
+	
+	
+	public static void refreshListViewShopHelmet(Context myContext, 
+			ArrayAdapter<Helmet> myAdapter) {
+		
+		ArrayList<Helmet> myHelmets = new ArrayList<Helmet>();
+		
+		myAdapter.clear();
+		
+		myHelmets = Tools.getHelmetFromBDD(myContext, null, null);
+		
+		myAdapter.addAll(myHelmets);
+		myAdapter.notifyDataSetChanged();
+	}
+	
+	
+	public static void refreshListViewShopShield(Context myContext, 
+			ArrayAdapter<Shield> myAdapter) {
+		
+		ArrayList<Shield> myShields = new ArrayList<Shield>();
+		
+		myAdapter.clear();
+		
+		myShields = Tools.getShieldFromBDD(myContext, null, null);
+		
+		myAdapter.addAll(myShields);
+		myAdapter.notifyDataSetChanged();
+	}
+	
+	
+	public static void refreshListViewShopWeapon(Context myContext, 
+			ArrayAdapter<Weapon> myAdapter) {
+		
+		ArrayList<Weapon> myWeapons = new ArrayList<Weapon>();
+		
+		myAdapter.clear();
+		
+		myWeapons = Tools.getWeaponFromBDD(myContext, null, null);
+		
+		myAdapter.addAll(myWeapons);
+		myAdapter.notifyDataSetChanged();
 	}
 }

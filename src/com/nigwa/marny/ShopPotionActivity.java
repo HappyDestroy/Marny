@@ -47,9 +47,9 @@ public class ShopPotionActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				//On vérifie que le héros a assez d'argent
-				if(myHero.getGold() >= 25 ){
+				if(myHero.getGold() >= 50 ) {
 					myHero.setPotion(myHero.getPotion() + 1);
-					myHero.setGold(myHero.getGold() - 25);
+					myHero.setGold(myHero.getGold() - 50);
 					
 					Toast.makeText(ShopPotionActivity.this, 
 	            			R.string.succes_potion, 

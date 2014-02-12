@@ -14,9 +14,6 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,11 +29,10 @@ import android.widget.Toast;
 
 public class ShopWeaponActivity extends SherlockActivity {
 	
-	private static SQLiteDatabase db;
-	private static SQLiteOpenHelperClass dbHelper;
 	private ArrayList<Weapon> myWeapons;
 	private static Hero myHero;
 	private MediaPlayer soudKaching = null;
+	private Adapter myAdapter;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,44 +44,10 @@ public class ShopWeaponActivity extends SherlockActivity {
 		myHero = (Hero) getIntent().getSerializableExtra("hero");
 		
 		myWeapons = new ArrayList<Weapon>();
-		
-		dbHelper = new SQLiteOpenHelperClass(
-				this, 
-				"myDB", 
-				null, 
-				1);
-
-		db = dbHelper.getWritableDatabase();
+		myWeapons = Tools.getWeaponFromBDD(getApplicationContext(), null, null);
 		
 		
-		Cursor c = db.query(WeaponContract.TABLE , WeaponContract.COLS, null 
-				,null, null, null, null);
-		
-		
-		c.moveToFirst();
-		do {
-			int valueID = c.getInt(
-					c.getColumnIndex(WeaponContract.COL_ID));
-			int valueHealth = c.getInt(
-					c.getColumnIndex(WeaponContract.COL_HEALTHVALUE));
-			int valueAttack = c.getInt(
-					c.getColumnIndex(WeaponContract.COL_ATTACKVALUE));
-			int valueArmor = c.getInt(
-					c.getColumnIndex(WeaponContract.COL_ARMORVALUE));
-			int valuePrice = c.getInt(
-					c.getColumnIndex(WeaponContract.COL_PRICE));
-			int isBuy = c.getInt(
-					c.getColumnIndex(WeaponContract.COL_ISBUY));
-			int isEquip =  c.getInt(
-					c.getColumnIndex(WeaponContract.COL_ISEQUIP));
-
-			myWeapons.add(new Weapon(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice, isBuy, isEquip));
-			
-		} while ( c.moveToNext() );
-		
-		
-		Adapter myAdapter = new Adapter(this, R.layout.row_list, myWeapons);
+		myAdapter = new Adapter(this, R.layout.row_list, myWeapons);
 		
 		ListView myListViewWeapon = (ListView) findViewById(
 				R.id.listViewWeapon);
@@ -175,7 +137,8 @@ public class ShopWeaponActivity extends SherlockActivity {
 		    			
 		    			itemWeaponUnequip.put("isEquip", 0);
 		    			
-		    			db.update(WeaponContract.TABLE, 
+		    			Tools.updateBDD(getApplicationContext(), 
+		    					WeaponContract.TABLE, 
 		    					itemWeaponUnequip, 
 		    					whereClauseWeaponUnequip, 
 		    					whereArgsWeaponUnequip);
@@ -186,8 +149,12 @@ public class ShopWeaponActivity extends SherlockActivity {
 		    			itemHero.put("weapon", myWeapon.getId());
 
 		    			String[] whereArgsHero = { "1" };
-		    			db.update(HeroContract.TABLE, itemHero, 
-		    					whereClause, whereArgsHero);
+		    			
+		    			Tools.updateBDD(getApplicationContext(), 
+		    					HeroContract.TABLE, 
+		    					itemHero, 
+		    					whereClause, 
+		    					whereArgsHero);
 		    			
 		    			//On indique a l'item qu'il est dans l'état équipé
 		    			ContentValues itemWeaponEquip = 
@@ -198,9 +165,16 @@ public class ShopWeaponActivity extends SherlockActivity {
 		    			String[] whereArgsWeaponEquip = { 
 		    					String.valueOf(myWeapon.getId()) };
 		    			
-		    			db.update(WeaponContract.TABLE, itemWeaponEquip, 
+		    			Tools.updateBDD(getApplicationContext(), 
+		    					WeaponContract.TABLE, 
+		    					itemWeaponEquip, 
 		    					whereClause, 
 		    					whereArgsWeaponEquip);
+		    			
+		    			//On rafraichit la ListView avec les 
+		    			//nouveaux items
+		    			Tools.refreshListViewShopWeapon(
+		    					getApplicationContext(), myAdapter);
 		    			
 		        	} else {
 						new AlertDialog.Builder(v.getContext())
@@ -238,7 +212,8 @@ public class ShopWeaponActivity extends SherlockActivity {
 					    			
 					    			itemWeaponUnequip.put("isEquip", 0);
 					    			
-					    			db.update(WeaponContract.TABLE, 
+					    			Tools.updateBDD(getApplicationContext(), 
+					    					WeaponContract.TABLE, 
 					    					itemWeaponUnequip, 
 					    					whereClauseWeaponUnequip, 
 					    					whereArgsWeaponUnequip);
@@ -253,8 +228,12 @@ public class ShopWeaponActivity extends SherlockActivity {
 	
 					    			String whereClause = "id = ? ";
 					    			String[] whereArgs = { "1" };
-					    			db.update(HeroContract.TABLE, itemHero, 
-					    					whereClause, whereArgs);
+					    			
+					    			Tools.updateBDD(getApplicationContext(), 
+					    					HeroContract.TABLE, 
+					    					itemHero, 
+					    					whereClause, 
+					    					whereArgs);
 					    			
 					    			//Sauvegarde de l'état "acheté" dans la BDD
 					    			ContentValues itemWeapon = 
@@ -266,8 +245,17 @@ public class ShopWeaponActivity extends SherlockActivity {
 					    			String[] whereArgsWeapon = { 
 					    					String.valueOf(myWeapon.getId()) };
 					    			
-					    			db.update(WeaponContract.TABLE, itemWeapon, 
-					    					whereClause, whereArgsWeapon);
+					    			
+					    			Tools.updateBDD(getApplicationContext(), 
+					    					WeaponContract.TABLE, 
+					    					itemWeapon, 
+					    					whereClause, 
+					    					whereArgsWeapon);
+					    			
+					    			//On rafraichit la ListView avec les 
+					    			//nouveaux items
+					    			Tools.refreshListViewShopWeapon(
+					    					getApplicationContext(), myAdapter);
 					            }
 					        }
 					     })
@@ -293,7 +281,8 @@ public class ShopWeaponActivity extends SherlockActivity {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.gold_info, menu);
 		MenuItem myMenu = menu.findItem(R.id.gold_info);
-		myMenu.setTitle(String.valueOf(myHero.getGold()) + getApplication().getString(R.string.gold_text_info));
+		myMenu.setTitle(String.valueOf(myHero.getGold()) 
+				+ getApplication().getString(R.string.gold_text_info));
 		return true;
 	}
 	

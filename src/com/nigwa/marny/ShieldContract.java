@@ -6,7 +6,11 @@
  * 
  */
 package com.nigwa.marny;
-
+/**
+ * Schéma de la table Bouclier dans la BDD
+ * @author HappyDestroy
+ *
+ */
 public class ShieldContract {
 
 	public final static String TABLE = "shield";

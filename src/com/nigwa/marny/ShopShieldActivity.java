@@ -35,6 +35,9 @@ public class ShopShieldActivity extends SherlockActivity {
 	private Adapter myAdapter;
 	private MediaPlayer soudKaching = null;
 	
+	/**
+	 * Methode à la création de 'lactivity
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shopshield);
@@ -60,7 +63,11 @@ public class ShopShieldActivity extends SherlockActivity {
 	
 	
 	
-	
+	/**
+	 * Classe de l'adapter pour la ListView
+	 * @author HappyDestroy
+	 *
+	 */
 	private class Adapter extends ArrayAdapter<Shield>
 	{
 		private Context myContext;
@@ -281,7 +288,9 @@ public class ShopShieldActivity extends SherlockActivity {
 		}
 	}
 	
-	
+	/**
+	 * Création du menu de l'actionBar
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
@@ -292,7 +301,9 @@ public class ShopShieldActivity extends SherlockActivity {
 		return true;
 	}
 	
-	
+	/**
+	 * Sur le click d'un item de l'actionBar
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {

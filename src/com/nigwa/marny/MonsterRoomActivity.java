@@ -22,8 +22,6 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -43,16 +41,20 @@ public class MonsterRoomActivity extends SherlockActivity {
 
 	private Hero myHero;
 	private Monster myMonster;
-	private SQLiteDatabase db;
-	private SQLiteOpenHelperClass dbHelper;
 	private int health_left;
 	private int nb_room;
+	private int random_gold;
 	private MediaPlayer soudHurt = null;
 	private MediaPlayer soudDeath = null;
 	private MediaPlayer soudFail = null;
 	private MediaPlayer soudCritic = null;
 	private int noDammageM; //Variable si aucun dommage du monstre
 	private int noDammageH; //Variable si aucun dommage du hero
+	
+	
+	/**
+	 * Methode à la création de l'activity
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -269,7 +271,7 @@ public class MonsterRoomActivity extends SherlockActivity {
 				}
 				
 				int randomHurt = Tools.random(10);
-				//FAIL, SUCCES, CRITIC
+				//coup critique / echec
 				if (randomHurt == 0) {//FAIL
 					valueAttack = 0;
 					label_monster.setText("Le monstre a esquivé "
@@ -279,8 +281,9 @@ public class MonsterRoomActivity extends SherlockActivity {
 					soudFail.start();
 				} else if (randomHurt >= 9){//CRITIC
 					valueAttack = valueAttack * 2;
-					label_monster.setText("Coûp critique de " + valueAttack + 
+					label_monster.setText("Coup critique de " + valueAttack + 
 							" points de dégats \n Au tour du monstre ...");
+					
 					soudCritic = MediaPlayer.create(MonsterRoomActivity.this,
 							 R.raw.critic);
 					soudCritic.start();
@@ -355,7 +358,9 @@ public class MonsterRoomActivity extends SherlockActivity {
 						@Override
 						public void run() {
 							label_monster.setText(getApplication()
-									.getString(R.string.monster_ko));
+									.getString(R.string.monster_ko) 
+									+ "\n Tu as gagné " + random_gold 
+									+ " golds !" );
 							}
 					}, 600);
 					
@@ -366,6 +371,7 @@ public class MonsterRoomActivity extends SherlockActivity {
 					img_potion.setEnabled(false);
 					img_potion.setVisibility(View.INVISIBLE);
 					img_monster.setVisibility(View.INVISIBLE);
+					myHero.setGold(myHero.getGold() + random_gold);
 				}
 			}
 		});
@@ -376,6 +382,8 @@ public class MonsterRoomActivity extends SherlockActivity {
 			 heroKO();
 		 }
 	}
+	
+	
 	/**
 	 * Création du menu de l'actionBar
 	 */
@@ -385,6 +393,7 @@ public class MonsterRoomActivity extends SherlockActivity {
 		inflater.inflate(R.menu.main, menu);
 		return true;
 	}
+	
 
 	/**
 	 * Évènement d'un click sur un item de l'actionBar
@@ -404,10 +413,13 @@ public class MonsterRoomActivity extends SherlockActivity {
 		}
 		new AlertDialog.Builder(this)
 	    .setTitle(R.string.menu_info)
-	    .setMessage("Tu affrontes un "+monsterName
-	    		+"\n"+getApplication().getString(R.string.health)+" "+myMonster.getHealth()
-	    		+"\n"+getApplication().getString(R.string.attack)+""+myMonster.getAttack()
-	    		+"\n"+getApplication().getString(R.string.armor)+""+myMonster.getShield())
+	    .setMessage("Tu affrontes un "+monsterName+"\n"
+	    		+ getApplication().getString(R.string.health)+ " "
+	    		+ myMonster.getHealth() + "\n" 
+	    		+ getApplication().getString(R.string.attack) + " " 
+	    		+ myMonster.getAttack() + "\n" 
+	    		+ getApplication().getString(R.string.armor) + " " 
+	    		+ myMonster.getShield())
 	    .setPositiveButton(android.R.string.ok,
 	    		new DialogInterface.OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) { 
@@ -420,9 +432,13 @@ public class MonsterRoomActivity extends SherlockActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/**
+	 * Genère un monstre
+	 */
 	private void createMonster() {
 		//On tire un nombre entre 1 et 4 pour choisir le rang du monstre.
 		int random = 1;
+		
 		if(nb_room < 10) {
 			random = 1;
 		} else if (nb_room >= 10 && nb_room < 17)  {
@@ -433,46 +449,32 @@ public class MonsterRoomActivity extends SherlockActivity {
 			random = Tools.random(2, 4);
 		}
 		
-		String[] VALUES = { String.valueOf(random) };
+		switch(random) {
+		case 1 :
+			random_gold = Tools.random(1, 5);
+			break;
+		case 2 :
+			random_gold = Tools.random(5, 15);
+			break;
+		case 3 :
+			random_gold = Tools.random(10, 20);
+			break;
+		case 4 :
+			random_gold = 100;
+		}
 		
-		dbHelper = new SQLiteOpenHelperClass(
-				this, 
-				"myDB", 
-				null, 
-				1);
-
-		db = dbHelper.getWritableDatabase();
+		String[] whereArgs = { String.valueOf(random) };
 		
+		myMonster = Tools.getMonsterFromBDD(getApplicationContext(), 
+				"id = ?", whereArgs).get(0);
 		
-		Cursor c = db.query(MonsterContract.TABLE , MonsterContract.COLS, 
-				"id LIKE ?" ,VALUES, null, null, null);
-		
-		c.moveToFirst();
-		
-		do {
-			int valueRank = c.getInt(
-					c.getColumnIndex(MonsterContract.COL_RANK));
-			
-			int valueHealth = c.getInt(
-					c.getColumnIndex(MonsterContract.COL_HEALTH));
-			
-			int valueAttack = c.getInt(
-					c.getColumnIndex(MonsterContract.COL_ATTACK));
-			
-			int valueShielsd = c.getInt(
-					c.getColumnIndex(MonsterContract.COL_ARMOR));
-			
-			
-			myMonster = new Monster(valueRank, valueHealth, valueAttack, 
-					valueShielsd);
-			
-		} while ( c.moveToNext() );
 	}
 	
+	
+	/**
+	 * Gère la mort du héro
+	 */
 	private void heroKO() {
-		
-		
-		
 		new AlertDialog.Builder(MonsterRoomActivity.this)
 	    .setTitle(getApplication().getString(R.string.heroKO_title))
 	    .setMessage(getApplication().getString(R.string.heroKO_msg))
@@ -489,8 +491,12 @@ public class MonsterRoomActivity extends SherlockActivity {
 	
 							String whereClause = "id =? ";
 							String[] whereArgs = { "1" };
-							db.update(HeroContract.TABLE, itemHero, 
-									whereClause, whereArgs);
+							
+							Tools.updateBDD(getApplicationContext(), 
+									HeroContract.TABLE, 
+									itemHero, 
+									whereClause, 
+									whereArgs);
 			        	
 			        		MonsterRoomActivity.this.finish();
 			        }
@@ -502,7 +508,9 @@ public class MonsterRoomActivity extends SherlockActivity {
 	}
 	
 
-	//Empêcher l'utilisation du bouton retour
+	/**
+	 * Lors du click sur le bouton Back (Pour le desactiver)
+	 */
 	@Override
 	public void onBackPressed() {
 		Toast.makeText(this, getApplication().getString(R.string.btn_back), 

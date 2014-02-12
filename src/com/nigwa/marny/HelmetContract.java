@@ -7,6 +7,11 @@
  */
 package com.nigwa.marny;
 
+/**
+ * Schema de la table casque dans la BDD
+ * @author HappyDestroy
+ *
+ */
 public class HelmetContract {
 
 	public final static String TABLE = "helmet";

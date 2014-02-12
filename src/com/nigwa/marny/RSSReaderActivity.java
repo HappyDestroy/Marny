@@ -1,10 +1,7 @@
 package com.nigwa.marny;
  
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
  
 
@@ -188,9 +185,7 @@ public class RSSReaderActivity extends ListActivity {
 				
 				title.setText(data.title);
 				
-				/*SimpleDateFormat  dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-				Date myDate = format.parse(data.date);
-				date.setText("le " + dateFormat.format(myDate));*/
+				date.setText("le " + data.date);
 				description.setText(data.description);
 			}
 			

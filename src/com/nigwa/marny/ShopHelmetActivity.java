@@ -28,6 +28,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Classe gérant l'achat de bouclier
+ * @author HappyDestroy
+ *
+ */
 public class ShopHelmetActivity extends SherlockActivity {
 	
 	private ArrayList<Helmet> myHelmets;
@@ -35,11 +40,14 @@ public class ShopHelmetActivity extends SherlockActivity {
 	private Adapter myAdapter;
 	private MediaPlayer soudKaching = null;
 	
+	/**
+	 * Methode à la création de l'activity
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shophelmet);
 		
-        // affiche la petite flèche back
+        // affiche la flèche back
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		myHero = (Hero) getIntent().getSerializableExtra("hero");
@@ -57,7 +65,11 @@ public class ShopHelmetActivity extends SherlockActivity {
 	}
 	
 	
-	
+	/**
+	 * Classe de l'adapter pour la ListView
+	 * @author HappyDestroy
+	 *
+	 */
 	private class Adapter extends ArrayAdapter<Helmet>
 	{
 		private Context myContext;
@@ -90,6 +102,7 @@ public class ShopHelmetActivity extends SherlockActivity {
 			
 			final Helmet myHelmet = this.getItem(position);
 			
+			//Choix de l'image
 			switch(myHelmet.getId()) {
 			case 1 :
 				imgViewHelmet.setImageResource(R.drawable.helmet_miner);
@@ -105,7 +118,7 @@ public class ShopHelmetActivity extends SherlockActivity {
 				break;
 			}
 			
-			
+			//Changement de l'état des boutons
 			if (myHelmet.getIsEquip() == 1) {
 				btn_buy.setText(getContext().getString(R.string.equip));
 				btn_buy.setEnabled(false);
@@ -123,7 +136,9 @@ public class ShopHelmetActivity extends SherlockActivity {
 			valuePrice.setText(" "+String.valueOf(
 					myHelmet.getPrice()));
 			
-			
+			/**
+			 * Listenner sur le click du bouton pour acheter / équiper
+			 */
 			btn_buy.setOnClickListener(new OnClickListener() {
 				
 				@Override
@@ -296,7 +311,9 @@ public class ShopHelmetActivity extends SherlockActivity {
 		}
 	}
 	
-	
+	/**
+	 * Création du menu de l'actionBar
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
@@ -308,7 +325,9 @@ public class ShopHelmetActivity extends SherlockActivity {
 	}
 	
 	
-	
+	/**
+	 * Sur le click d'un item de l'actionBar
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {

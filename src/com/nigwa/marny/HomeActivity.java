@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
@@ -31,6 +30,9 @@ public class HomeActivity extends SherlockActivity {
 	private int health_left;
 	private MediaPlayer sound_grincement;
 	
+	/**
+	 * Methode à la création de l'activity
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,7 +54,9 @@ public class HomeActivity extends SherlockActivity {
 				+ myHero.getWeapon().getHealthValue();
 		
 		
-		//Button Shop
+		/**
+		 * Listener sur le click du bouton de la boutique
+		 */
 		btn_shop.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -70,7 +74,9 @@ public class HomeActivity extends SherlockActivity {
 			}
 		});
 		
-		//Button Hero
+		/**
+		 * Listener sur le click du bouton de la boutique
+		 */
 		btn_info_hero.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -148,6 +154,9 @@ public class HomeActivity extends SherlockActivity {
 		});
 	}
 
+	/**
+	 * Lorsque l'on retourne sur cette activity (A la mort du héro)
+	 */
 	@Override
 	protected void onResume() {
 		

@@ -70,5 +70,5 @@
     <string name="equip">Équipé</string>
     
     <string name="gold_text_info"> Golds</string>
-
+	<string name="info_monstre"> Informations du monstrer</string>
 </resources>

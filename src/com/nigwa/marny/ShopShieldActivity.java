@@ -15,6 +15,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ public class ShopShieldActivity extends SherlockActivity {
 	private ArrayList<Shield> myShields;
 	private Hero myHero;
 	private Adapter myAdapter;
+	private MediaPlayer soudKaching = null;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -198,11 +200,16 @@ public class ShopShieldActivity extends SherlockActivity {
 					            			R.string.msg_error, 
 					            			Toast.LENGTH_LONG).show();
 					            } else {
-					            	//Si le héros a assez de gold on le félicite
+					            	//Si le héros a assez de gold 
+					            	//on confirme son achat
 					            	Toast.makeText(v.getContext(), 
 					            			R.string.msg_congrat, 
 					            			Toast.LENGTH_LONG).show();
-					            	
+					            	//Son achat
+					            	soudKaching = MediaPlayer.create(
+					            			v.getContext(),
+											 R.raw.ka_chingsound);
+									soudKaching.start();
 					            	//On dit que l'ancien item n'est plus dans 
 					    			//l'état équipé
 					    			ContentValues itemShieldUnequip = 

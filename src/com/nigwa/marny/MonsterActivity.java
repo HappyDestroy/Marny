@@ -18,6 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 public class MonsterActivity extends SherlockActivity {
 
@@ -31,8 +34,8 @@ public class MonsterActivity extends SherlockActivity {
 	private MediaPlayer soudDeath = null;
 	private MediaPlayer soudFail = null;
 	private MediaPlayer soudCritic = null;
-	private int valeurProgress;
-	
+	private int noDammageM; //Variable si aucun dommage du monstre
+	private int noDammageH; //Variable si aucun dommage du hero
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -107,7 +110,9 @@ public class MonsterActivity extends SherlockActivity {
 		if(monster_health.getProgress() > 0) {
 			btn_next.setEnabled(false);
 		}
-		
+		//initialisation de la variable noDammage
+		noDammageM = 0;
+		noDammageH = 0;
 		hero_health.getProgress();
 		//Listener du click sur l'image de la potion
 		img_potion.setOnClickListener(new OnClickListener() {
@@ -122,16 +127,12 @@ public class MonsterActivity extends SherlockActivity {
 					} else {
 						//Il prend une potion
 						 if ((hero_health.getMax() - health_left) < 50) {
-								health_left = myHero.getHealth() 
-										+ myHero.getHelmet().getHealthValue()
-										+ myHero.getShield().getHealthValue()
-										+ myHero.getWeapon().getHealthValue();
+								health_left = hero_health.getMax();
 								
 								hero_health.setProgress(health_left);
 						 } else {
 							health_left += 50;
-							hero_health.setProgress(
-									hero_health.getProgress() + 50);
+							hero_health.setProgress(health_left);
 						 }
 
 						myHero.setPotion(myHero.getPotion() - 1);
@@ -148,6 +149,7 @@ public class MonsterActivity extends SherlockActivity {
 						
 						if(myMonster.getAttack() - valueDefendHero <= 0) {
 							health_lose = 0;
+							noDammageM = 1;
 						} else {
 							health_lose = myMonster.getAttack() 
 									- valueDefendHero;
@@ -246,6 +248,7 @@ public class MonsterActivity extends SherlockActivity {
 						- myMonster.getShield();
 				if(valueAttack < 0) {
 					valueAttack = 0;
+					noDammageH = 1;
 				}
 				
 				int randomHurt = Tools.random(10);
@@ -274,8 +277,10 @@ public class MonsterActivity extends SherlockActivity {
 				monster_health.setProgress(
 						monster_health.getProgress() - valueAttack);
 				
-
-				
+				if(noDammageM == 1 && noDammageH == 1)
+				{
+					heroKO();
+				}
 				//On vérifie qu'il reste de la vie au monstre, et il attaque
 				if(monster_health.getProgress() > 0) {
 					
@@ -288,6 +293,7 @@ public class MonsterActivity extends SherlockActivity {
 					
 					if(myMonster.getAttack() - valueDefendHero <= 0) {
 						health_lose = 0;
+						noDammageM = 1;
 					} else {
 						health_lose = myMonster.getAttack() - valueDefendHero;
 					}
@@ -353,7 +359,49 @@ public class MonsterActivity extends SherlockActivity {
 			 heroKO();
 		 }
 	}
-	
+	/**
+	 * Création du menu de l'actionBar
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		return true;
+	}
+
+	/**
+	 * Évènement d'un click sur un item de l'actionBar
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		String monsterName;
+		if(myMonster.getRank() == 1) {
+			monsterName = "Larbin";
+		} else if(myMonster.getRank() == 2) {
+			monsterName = "Soldat";
+			
+		}else if(myMonster.getRank() == 3) {
+			monsterName = "Capitaine";
+		}else {
+			monsterName = "Général";
+		}
+		new AlertDialog.Builder(this)
+	    .setTitle(R.string.menu_info)
+	    .setMessage("Tu affrontes un "+monsterName
+	    		+"\n"+getApplication().getString(R.string.health)+" "+myMonster.getHealth()
+	    		+"\n"+getApplication().getString(R.string.attack)+""+myMonster.getAttack()
+	    		+"\n"+getApplication().getString(R.string.armor)+""+myMonster.getShield())
+	    .setPositiveButton(android.R.string.ok,
+	    		new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int which) { 
+	            // Fermeture de la fenêtre
+	        }
+	     })
+	    .setIcon(R.drawable.ic_info_small)
+	     .show();
+		
+		return super.onOptionsItemSelected(item);
+	}
 	
 	private void createMonster() {
 		//On tire un nombre entre 1 et 4 pour choisir le rang du monstre.

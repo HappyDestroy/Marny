@@ -11,13 +11,13 @@ public class RSSParser extends DefaultHandler {
 	private final static String TAG_ITEM = "item";
 	private final static String[] xmltags = { "title", "link", "pubDate", 
 		"description" };
-         
+	
 	private RSSItem currentitem = null;
 	private ArrayList<RSSItem> itemarray = null;
 	private int currentindex = -1;
 	private boolean isParsing = false;
 	private StringBuilder builder = new StringBuilder();
-         
+	
 	public RSSParser(ArrayList<RSSItem> itemarray) {
 		super();
 		
@@ -40,7 +40,7 @@ public class RSSParser extends DefaultHandler {
 			Attributes attributes) throws SAXException {
 		
 		super.startElement(uri, localName, qName, attributes);
-                 
+		
 		if(localName.equalsIgnoreCase(TAG_ITEM)) {
 			currentitem = new RSSItem();
 			currentindex = -1;
@@ -56,7 +56,7 @@ public class RSSParser extends DefaultHandler {
 				builder = new StringBuilder();
 		}
 	}
-         
+	
 	@Override
 	public void endElement(String uri, String localName, String qName) 
 			throws SAXException {
@@ -85,7 +85,7 @@ public class RSSParser extends DefaultHandler {
 			}
 		}
 	}
- 
+	
 	private int itemIndexFromString(String tagname){
 		int itemindex = -1;
 		

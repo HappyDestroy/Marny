@@ -64,7 +64,7 @@
          Tu viens d\'acquérir un nouvel item !</string>
     <string name="succes_potion">Tu viens
          d\'acheter une potion</string>
-    <string name="buy_potion">La potion regénére 25HP pour 25 Golds. 
+    <string name="buy_potion">La potion regénére 50HP pour 50 Golds. 
         Combien en veux-tu ?</string>
     <string name="already_buy">Déjà acheté</string>
     <string name="equip">Équipé</string>

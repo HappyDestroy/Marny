@@ -47,9 +47,9 @@ public class ShopPotionActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				//On vérifie que le héros a assez d'argent
-				if(myHero.getGold() >= 25 ){
+				if(myHero.getGold() >= 50 ) {
 					myHero.setPotion(myHero.getPotion() + 1);
-					myHero.setGold(myHero.getGold() - 25);
+					myHero.setGold(myHero.getGold() - 50);
 					
 					Toast.makeText(ShopPotionActivity.this, 
 	            			R.string.succes_potion, 
@@ -95,10 +95,7 @@ public class ShopPotionActivity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	        case android.R.id.home:
-	            // app icon in action bar clicked; go home
-	            Intent intent = new Intent(ShopPotionActivity.this, ShopRoomActivity.class);
-	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	            startActivity(intent);
+	        	this.finish();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);

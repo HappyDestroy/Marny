@@ -1,15 +1,30 @@
 package com.nigwa.marny;
  
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
  
+
+
+
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
  
+
+
+
+
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
  
+
+
+
+
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -27,7 +42,7 @@ import android.widget.TextView;
 public class RSSReaderActivity extends ListActivity {
 	
 	private ArrayList<RSSItem> itemlist = null;
-	private RSSListAdaptor rssadaptor = null;
+	private RSSListAdaptor rssAdaptor = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,9 +62,10 @@ public class RSSReaderActivity extends ListActivity {
 				
 				RSSItem data = itemlist.get(position);
 				
-				Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(data.link));
+				Intent intentLien = new Intent(
+						Intent.ACTION_VIEW,Uri.parse(data.link));
 				
-				startActivity(intent);
+				startActivity(intentLien);
 	    }
 	
 	private void retrieveRSSFeed(String urlToRssFeed,ArrayList<RSSItem> list)
@@ -74,6 +90,7 @@ public class RSSReaderActivity extends ListActivity {
 		}
 	}
 	
+	
 	private class RetrieveRSSFeeds extends AsyncTask<Void, Void, Void>
 	{
 		private ProgressDialog progress = null;
@@ -83,8 +100,8 @@ public class RSSReaderActivity extends ListActivity {
 			retrieveRSSFeed("http://portesmonstrestresors.fr/feed/", 
                 		itemlist);
 			
-			rssadaptor = new RSSListAdaptor(RSSReaderActivity.this, 
-                		R.layout.rssitemview,itemlist);
+			rssAdaptor = new RSSListAdaptor(RSSReaderActivity.this, 
+                		R.layout.rssitemview, itemlist);
 			
 			return null;
         }
@@ -105,7 +122,7 @@ public class RSSReaderActivity extends ListActivity {
         
         @Override
         protected void onPostExecute(Void result) {
-        	setListAdapter(rssadaptor);
+        	setListAdapter(rssAdaptor);
         	
         	progress.dismiss();
         	
@@ -170,7 +187,10 @@ public class RSSReaderActivity extends ListActivity {
 						R.id.txtDescription);
 				
 				title.setText(data.title);
-				date.setText("on " + data.date);
+				
+				/*SimpleDateFormat  dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+				Date myDate = format.parse(data.date);
+				date.setText("le " + dateFormat.format(myDate));*/
 				description.setText(data.description);
 			}
 			

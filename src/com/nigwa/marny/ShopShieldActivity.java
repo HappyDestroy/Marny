@@ -15,9 +15,6 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,10 +29,9 @@ import android.widget.Toast;
 
 public class ShopShieldActivity extends SherlockActivity {
 	
-	private static SQLiteDatabase db;
-	private static SQLiteOpenHelperClass dbHelper;
 	private ArrayList<Shield> myShields;
-	private static Hero myHero;
+	private Hero myHero;
+	private Adapter myAdapter;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,43 +44,9 @@ public class ShopShieldActivity extends SherlockActivity {
 		
 		myShields = new ArrayList<Shield>();
 		
-		dbHelper = new SQLiteOpenHelperClass(
-				this, 
-				"myDB", 
-				null, 
-				1);
-
-		db = dbHelper.getWritableDatabase();
+		myShields = Tools.getShieldFromBDD(getApplicationContext(), null, null);
 		
-		
-		Cursor c = db.query(ShieldContract.TABLE , ShieldContract.COLS, null 
-				,null, null, null, null);
-		
-		
-		c.moveToFirst();
-		do {
-			int valueID = c.getInt(
-					c.getColumnIndex(ShieldContract.COL_ID));
-			int valueHealth = c.getInt(
-					c.getColumnIndex(ShieldContract.COL_HEALTHVALUE));
-			int valueAttack = c.getInt(
-					c.getColumnIndex(ShieldContract.COL_ATTACKVALUE));
-			int valueArmor = c.getInt(
-					c.getColumnIndex(ShieldContract.COL_ARMORVALUE));
-			int valuePrice = c.getInt(
-					c.getColumnIndex(ShieldContract.COL_PRICE));
-			int isBuy = c.getInt(
-					c.getColumnIndex(ShieldContract.COL_ISBUY));
-			int isEquip = c.getInt(
-					c.getColumnIndex(ShieldContract.COL_ISEQUIP));
-
-			myShields.add(new Shield(valueID, valueHealth, valueAttack, 
-					valueArmor, valuePrice, isBuy, isEquip));
-			
-		} while ( c.moveToNext() );
-		
-		
-		Adapter myAdapter = new Adapter(this, R.layout.row_list, myShields);
+		myAdapter = new Adapter(this, R.layout.row_list, myShields);
 		
 		ListView myListViewShield = (ListView) findViewById(
 				R.id.listViewShield);
@@ -97,7 +59,7 @@ public class ShopShieldActivity extends SherlockActivity {
 	
 	
 	
-	private static class Adapter extends ArrayAdapter<Shield>
+	private class Adapter extends ArrayAdapter<Shield>
 	{
 		private Context myContext;
 		private int myRessource;
@@ -177,19 +139,24 @@ public class ShopShieldActivity extends SherlockActivity {
 		    			
 		    			itemShieldUnequip.put("isEquip", 0);
 		    			
-		    			db.update(ShieldContract.TABLE, 
+		    			Tools.updateBDD(getApplicationContext(), 
+		    					ShieldContract.TABLE, 
 		    					itemShieldUnequip, 
 		    					whereClauseShieldUnequip, 
 		    					whereArgsShieldUnequip);
-		            	
+		    			
 		        		//On ajoute l'item au héro
 		    			ContentValues itemHero = new ContentValues();
 		    			
 		    			itemHero.put("helmet", myShield.getId());
 
 		    			String[] whereArgsHero = { "1" };
-		    			db.update(HeroContract.TABLE, itemHero, 
-		    					whereClause, whereArgsHero);
+		    			
+		    			Tools.updateBDD(getApplicationContext(), 
+		    					HeroContract.TABLE, 
+		    					itemHero, 
+		    					whereClause, 
+		    					whereArgsHero);
 		    			
 		    			//On indique a l'item qu'il est dans l'état équipé
 		    			ContentValues itemShieldEquip = 
@@ -200,9 +167,16 @@ public class ShopShieldActivity extends SherlockActivity {
 		    			String[] whereArgsShieldEquip = { 
 		    					String.valueOf(myShield.getId()) };
 		    			
-		    			db.update(ShieldContract.TABLE, itemShieldEquip, 
+		    			Tools.updateBDD(getApplicationContext(), 
+		    					ShieldContract.TABLE, 
+		    					itemShieldEquip, 
 		    					whereClause, 
 		    					whereArgsShieldEquip);
+		    			
+		    			//On rafraichit la ListView avec les 
+		    			//nouveaux items
+		    			Tools.refreshListViewShopShield(
+		    					getApplicationContext(), myAdapter);
 		    			
 		        	} else {
 			        		new AlertDialog.Builder(v.getContext())
@@ -236,22 +210,29 @@ public class ShopShieldActivity extends SherlockActivity {
 					    			
 					    			itemShieldUnequip.put("isEquip", 0);
 					    			
-					    			db.update(ShieldContract.TABLE, 
+					    			Tools.updateBDD(getApplicationContext(), 
+					    					ShieldContract.TABLE, 
 					    					itemShieldUnequip, 
 					    					whereClauseShieldUnequip, 
 					    					whereArgsShieldUnequip);
 					            	
 					        		
 					        		//On debite le héros
-					    			ContentValues itemHero = new ContentValues();
+					    			ContentValues itemHero = 
+					    					new ContentValues();
+					    			
 					    			itemHero.put("gold", myHero.getGold() - 
 					    					myShield.getPrice());
 					    			
 					    			itemHero.put("shield", myShield.getId());
 	
 					    			String[] whereArgs = { "1" };
-					    			db.update(HeroContract.TABLE, itemHero, 
-					    					whereClause, whereArgs);
+					    			
+					    			Tools.updateBDD(getApplicationContext(), 
+					    					HeroContract.TABLE, 
+					    					itemHero, 
+					    					whereClause, 
+					    					whereArgs);
 
 					    			//Sauvegarde de l'état "acheté" dans la BDD
 					    			ContentValues itemShield = 
@@ -263,8 +244,16 @@ public class ShopShieldActivity extends SherlockActivity {
 					    			String[] whereArgsShield = { 
 					    					String.valueOf(myShield.getId()) };
 					    			
-					    			db.update(ShieldContract.TABLE, itemShield, 
-					    					whereClause, whereArgsShield);
+					    			Tools.updateBDD(getApplicationContext(), 
+					    					ShieldContract.TABLE, 
+					    					itemShield, 
+					    					whereClause, 
+					    					whereArgsShield);
+					    			
+					    			//On rafraichit la ListView avec les 
+					    			//nouveaux items
+					    			Tools.refreshListViewShopShield(
+					    					getApplicationContext(), myAdapter);
 					            }
 					        }
 					     })
@@ -291,7 +280,8 @@ public class ShopShieldActivity extends SherlockActivity {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.gold_info, menu);
 		MenuItem myMenu = menu.findItem(R.id.gold_info);
-		myMenu.setTitle(String.valueOf(myHero.getGold()) + getApplication().getString(R.string.gold_text_info));
+		myMenu.setTitle(String.valueOf(myHero.getGold()) 
+				+ getApplication().getString(R.string.gold_text_info));
 		return true;
 	}
 	
@@ -300,10 +290,7 @@ public class ShopShieldActivity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	        case android.R.id.home:
-	            // app icon in action bar clicked; go home
-	            Intent intent = new Intent(ShopShieldActivity.this, ShopRoomActivity.class);
-	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	            startActivity(intent);
+	        	this.finish();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);

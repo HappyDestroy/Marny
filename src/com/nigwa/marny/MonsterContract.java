@@ -1,3 +1,10 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ *			***MonsterContract***
+ * Permet de schématiser la table du monstre dans la BDD
+ * 
+ */
 package com.nigwa.marny;
 
 public class MonsterContract {

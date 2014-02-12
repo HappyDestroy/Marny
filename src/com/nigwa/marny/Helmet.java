@@ -1,3 +1,15 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ * Création des objets Helmet
+ * int id : Rang du casque (1-4)
+ * int healthValue : Santé apportée par le casque
+ * int attackValue : Attack apportée par le casque
+ * int armorValue : Armure apportée par le casque
+ * int price : 		Prix du casque
+ * int isBuy :		Indique si le casque est acheté (1) ou non (0)
+ * int isEquip :	Indique si le casque est équipé (1) ou non (0)
+ */
 package com.nigwa.marny;
 
 import java.io.Serializable;

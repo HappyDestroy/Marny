@@ -1,3 +1,13 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ * Création des Monstres
+* int rank : 	Rang du Monstre
+* int health : 	Santé du Monstre
+* int attack : Attaque du Monstre
+* int armor :  Armur du Monstre
+*
+ */
 package com.nigwa.marny;
 
 public class Monster {

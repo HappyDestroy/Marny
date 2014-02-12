@@ -1,3 +1,13 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ ****RestRoomActivity****
+ * Cette activity permet d'entrer dans la pièce "RestRoom"
+ *  Elle regénere la vie du Héro.
+ *  
+ *  Permet de passer à une autre pièce
+ * 
+ */
 package com.nigwa.marny;
 
 import android.content.Intent;
@@ -49,7 +59,7 @@ public class RestRoomActivity extends SherlockActivity {
 				int myRandom = Tools.random(20);
 				if(myRandom >= 0 && myRandom <= 14) {
 					Intent intentMonsterRoom = new Intent(RestRoomActivity.this,
-							MonsterActivity.class);
+							MonsterRoomActivity.class);
 					
 					intentMonsterRoom.putExtra("hero", myHero);
 					intentMonsterRoom.putExtra("nb_room", nb_room);

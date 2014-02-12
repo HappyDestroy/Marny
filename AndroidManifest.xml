@@ -40,7 +40,7 @@
         </activity>
         
         <activity
-            android:name="com.nigwa.marny.MonsterActivity"
+            android:name="com.nigwa.marny.MonsterRoomActivity"
             android:label="@string/app_name"
             android:noHistory="true"
 			android:screenOrientation="portrait" >

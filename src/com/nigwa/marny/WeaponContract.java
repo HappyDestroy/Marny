@@ -1,3 +1,10 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ *			***WeaponContract***
+ * Permet de schématiser la table de l'arme dans la BDD
+ * 
+ */
 package com.nigwa.marny;
 
 public class WeaponContract {

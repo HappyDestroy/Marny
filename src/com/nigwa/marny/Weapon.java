@@ -1,3 +1,16 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ * Création des objets Armes
+ * int id : Rang de l'arme (1-4)
+ * int healthValue : Santé apportée par l'arme
+ * int attackValue : Attack apportée par l'arme
+ * int armorValue : Armure apportée par l'arme
+ * int price : 		Prix de l'arme
+ * int isBuy :		Indique si l'arme est acheté (1) ou non (0)
+ * int isEquip :	Indique si l'arme est équipé (1) ou non (0)
+ * 
+ */
 package com.nigwa.marny;
 
 import java.io.Serializable;

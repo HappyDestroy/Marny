@@ -1,3 +1,15 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ ****HomeActivity****
+ * Cette activity permet de commencer le jeu
+ * C'est la deuxième activity du project. Elle offre 3 choix :
+ * 
+ * - Ouvrir une porte
+ * - Accèder à la boutique
+ * - Visualiser informations du Héro
+ * 
+ */
 package com.nigwa.marny;
 
 import android.app.AlertDialog;
@@ -105,7 +117,7 @@ public class HomeActivity extends SherlockActivity {
 				int myRandom = Tools.random(20);
 				if(myRandom >= 0 && myRandom <= 14) {
 					Intent intentMonsterRoom = new Intent(HomeActivity.this,
-							MonsterActivity.class);
+							MonsterRoomActivity.class);
 					
 					intentMonsterRoom.putExtra("hero", myHero);
 					intentMonsterRoom.putExtra("nb_room", nb_room);

@@ -1,3 +1,10 @@
+/*
+ * Réalisé par Martin Cesbron et Nicolas Saboureau à l'IIA de Laval
+ * 
+ *			***ShieldContract***
+ * Permet de schématiser la table du bouclier dans la BDD
+ * 
+ */
 package com.nigwa.marny;
 
 public class ShieldContract {

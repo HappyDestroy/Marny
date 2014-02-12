@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+        android:background="@drawable/bg_home" >
 
     <TextView
         android:id="@+id/home_label_welcome"
@@ -12,7 +13,11 @@
         android:layout_marginTop="14dp"
         android:text="@string/home_welcome"
         android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:alpha="0.60"
+        android:background="#000000"
+        android:padding="5dp"
+        android:textColor="#FFFFFF"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
     <Button
@@ -41,8 +46,9 @@
         android:id="@+id/home_btn_info_hero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/home_btn_shop"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="34dp"
         android:text="@string/home_info_hero" />
 
 </RelativeLayout>

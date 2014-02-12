@@ -26,6 +26,10 @@ public class RestRoomActivity extends SherlockActivity {
 	private int nb_room;
 	private int health_left;
 	private MediaPlayer sound_power_up = null;
+	
+	/**
+	 * Methode à la création de l'activity
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,8 +56,10 @@ public class RestRoomActivity extends SherlockActivity {
 				+ myHero.getShield().getHealthValue()
 				+ myHero.getWeapon().getHealthValue();
 		
+		/**
+		 * Listenner sur le click du bouton pour changer de salle
+		 */
 		btn_next.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				int myRandom = Tools.random(20);
@@ -90,7 +96,9 @@ public class RestRoomActivity extends SherlockActivity {
 	}
 	
 
-	//Empêcher l'utilisation du bouton retour
+	/**
+	 * Lors du click sur le bouton Back (Pour le desactiver)
+	 */
 	@Override
 	public void onBackPressed() {
 		Toast.makeText(this, getApplication().getString(R.string.btn_back), 

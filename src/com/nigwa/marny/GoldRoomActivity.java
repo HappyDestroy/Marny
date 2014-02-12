@@ -104,7 +104,9 @@ public class GoldRoomActivity extends SherlockActivity {
 	}
 
 
-	//Empêcher l'utilisation du bouton retour
+	/**
+	 * Sur l'evènement du bouton "Back" (Pour le desactiver)
+	 */
 	@Override
 	public void onBackPressed() {
 		Toast.makeText(this, getApplication().getString(R.string.btn_back), 

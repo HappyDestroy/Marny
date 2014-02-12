@@ -7,6 +7,11 @@
  */
 package com.nigwa.marny;
 
+/**
+ * Schema de la table monstre dans la BDD
+ * @author HappyDestroy
+ *
+ */
 public class MonsterContract {
 
 	public final static String TABLE = "monster";

@@ -7,11 +7,21 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteOpenHelperClass extends SQLiteOpenHelper {
 
+	/**
+	 * Constructeur
+	 * @param context - Le context de l'application
+	 * @param name - Le nom de la BDD
+	 * @param factory
+	 * @param version - La version de la BDD
+	 */
 	public SQLiteOpenHelperClass(Context context, String name,
 			CursorFactory factory, int version) {
 		super(context, name, factory, version);
 	}
 
+	/**
+	 * Création de la BDD
+	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(HeroContract.SCHEMA);
@@ -21,6 +31,9 @@ public class SQLiteOpenHelperClass extends SQLiteOpenHelper {
 		db.execSQL(WeaponContract.SCHEMA);
 	}
 
+	/**
+	 * A la mise à jour de la BDD
+	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		if (oldVersion < newVersion) {

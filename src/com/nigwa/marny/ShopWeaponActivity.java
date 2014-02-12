@@ -27,6 +27,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Activity pour gérer l'achat d'armes
+ * @author HappyDestroy
+ *
+ */
 public class ShopWeaponActivity extends SherlockActivity {
 	
 	private ArrayList<Weapon> myWeapons;
@@ -34,6 +39,9 @@ public class ShopWeaponActivity extends SherlockActivity {
 	private MediaPlayer soudKaching = null;
 	private Adapter myAdapter;
 	
+	/**
+	 * Methode à la création de l'activity
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shopweapon);
@@ -55,6 +63,11 @@ public class ShopWeaponActivity extends SherlockActivity {
 		myListViewWeapon.setAdapter(myAdapter);
 	}
 	
+	/**
+	 * Classe de l'adapter pour la ListView
+	 * @author HappyDestroy
+	 *
+	 */
 	private class Adapter extends ArrayAdapter<Weapon>
 	{
 		private Context myContext;
@@ -276,6 +289,9 @@ public class ShopWeaponActivity extends SherlockActivity {
 		}
 	}
 	
+	/**
+	 * Création du menu de l'actionBar
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
@@ -287,6 +303,9 @@ public class ShopWeaponActivity extends SherlockActivity {
 	}
 	
 	
+	/**
+	 * Sur le click d'un item de l'actionBar
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {

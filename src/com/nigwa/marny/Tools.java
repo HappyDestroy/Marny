@@ -9,6 +9,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
 
+/**
+ * Classe d'outils accessible depuis partout
+ * @author HappyDestroy
+ *
+ */
 public class Tools {
 	
 	/**
@@ -33,6 +38,11 @@ public class Tools {
 	}
 	
 	
+	/**
+	 * Retourne un objet hero depuis la BDD
+	 * @param myContext - Le context de l'application
+	 * @return Le héro stocké en BDD
+	 */
 	public static Hero getHeroFromBDD(Context myContext) {
 		SQLiteDatabase db;
 		SQLiteOpenHelperClass dbHelper;
@@ -133,7 +143,13 @@ public class Tools {
 		return myHero;
 	}
 	
-	
+	/**
+	 * Methode qui retourne une collection de casque depuis la BDD
+	 * @param myContext - Le context de l'application
+	 * @param whereClause - La clause WHERE
+	 * @param whereArgs - Les arguments pour le WHERE
+	 * @return une collection de casque
+	 */
 	public static ArrayList<Helmet> getHelmetFromBDD(Context myContext, String whereClause, String[] whereArgs) {
 		
 		SQLiteDatabase db;
@@ -171,7 +187,7 @@ public class Tools {
 			int isEquip = c.getInt(c.getColumnIndex(
 					HelmetContract.COL_ISEQUIP));
 			
-			
+			//On ajoute le casque dans la collection
 			myHelmets.add(new Helmet(valueID, valueHealth, valueAttack, 
 					valueArmor, valuePrice,isBuy, isEquip));
 		} while ( c.moveToNext() );
@@ -179,7 +195,13 @@ public class Tools {
 		return myHelmets;
 	}
 	
-	
+	/**
+	 * Methode qui retrourne une collection de bouclier
+	 * @param myContext - Le context de l'application
+	 * @param whereClause - La clause WHERE
+	 * @param whereArgs - Les arguments pour la clause WHERE
+	 * @return une collection de bouclier
+	 */
 	public static ArrayList<Shield> getShieldFromBDD(Context myContext, String whereClause, String[] whereArgs) {
 		
 		SQLiteDatabase db;
@@ -218,7 +240,8 @@ public class Tools {
 			
 			int isEquip = c.getInt(c.getColumnIndex(
 					ShieldContract.COL_ISEQUIP));
-			
+		
+			//On ajoute le bouclier dans la collection
 			myShields.add(new Shield(valueID, valueHealth, valueAttack, 
 					valueArmor, valuePrice,isBuy, isEquip));
 		} while ( c.moveToNext() );
@@ -227,7 +250,13 @@ public class Tools {
 		return myShields;
 	}
 	
-	
+	/**
+	 * Methode qui permet de retourne une collection d'armes
+	 * @param myContext - Le context de l'application
+	 * @param whereClause - La clause WHERE
+	 * @param whereArgs - Les arguments pour la clause WHERE
+	 * @return une collection d'armes
+	 */
 	public static ArrayList<Weapon> getWeaponFromBDD(Context myContext, String whereClause, String[] whereArgs) {
 		
 		SQLiteDatabase db;
@@ -268,7 +297,7 @@ public class Tools {
 			int isEquip = c.getInt(c.getColumnIndex(
 					ShieldContract.COL_ISEQUIP));
 			
-			
+			//On ajoute l'arme dans la collection
 			myWeapons.add(new Weapon(valueID, valueHealth, valueAttack, 
 					valueArmor, valuePrice, isBuy, isEquip));
 		} while ( c.moveToNext() );
@@ -298,7 +327,11 @@ public class Tools {
 		db.update(TABLE, ContentValues, whereClause, whereArgs);
 	}
 	
-	
+	/**
+	 * Permet de rafraichir la listView des casques
+	 * @param myContext - Le context d l'application
+	 * @param myAdapter - L'arrayAdapter des casques
+	 */
 	public static void refreshListViewShopHelmet(Context myContext, 
 			ArrayAdapter<Helmet> myAdapter) {
 		
@@ -312,7 +345,11 @@ public class Tools {
 		myAdapter.notifyDataSetChanged();
 	}
 	
-	
+	/**
+	 * Permet de rafraichir la listView des boucliers
+	 * @param myContext - Le context de l'application
+	 * @param myAdapter - L'arrayAdapter des boucliers
+	 */
 	public static void refreshListViewShopShield(Context myContext, 
 			ArrayAdapter<Shield> myAdapter) {
 		
@@ -326,7 +363,11 @@ public class Tools {
 		myAdapter.notifyDataSetChanged();
 	}
 	
-	
+	/**
+	 * Permet de rafraichir les listView des armes
+	 * @param myContext - Le context de l'application
+	 * @param myAdapter - L'arrayAdapter des armes
+	 */
 	public static void refreshListViewShopWeapon(Context myContext, 
 			ArrayAdapter<Weapon> myAdapter) {
 		

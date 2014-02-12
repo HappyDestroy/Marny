@@ -7,6 +7,11 @@
  */
 package com.nigwa.marny;
 
+/**
+ * Schema de la table hero dans la BDD
+ * @author HappyDestroy
+ *
+ */
 public class HeroContract {
 
 	public final static String TABLE = "hero";

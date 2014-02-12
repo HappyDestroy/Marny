@@ -28,9 +28,18 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+/**
+ * Activity pour gérer l'achat de potion
+ * @author HappyDestroy
+ *
+ */
 public class ShopRoomActivity extends SherlockActivity {
 
 	private Hero myHero;
+	
+	/**
+	 * Methode à la création de l'activity
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shoproom);
@@ -49,6 +58,9 @@ public class ShopRoomActivity extends SherlockActivity {
 		listViewShopRoom.setAdapter(new ArrayAdapter<String>
 				(this, android.R.layout.simple_list_item_1, listeStrings));
 		
+		/**
+		 * Listenner sur un item de la listView
+		 */
 		listViewShopRoom.setOnItemClickListener(new OnItemClickListener() {
 			
 			@Override
@@ -93,6 +105,9 @@ public class ShopRoomActivity extends SherlockActivity {
 	}
 	
 	
+	/**
+	 * Création du menu de l'actionBar
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
@@ -104,6 +119,9 @@ public class ShopRoomActivity extends SherlockActivity {
 	}
 	
 
+	/**
+	 * Sur le click d'un item de l'actionBar
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {

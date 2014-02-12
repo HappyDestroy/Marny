@@ -7,6 +7,11 @@
  */
 package com.nigwa.marny;
 
+/**
+ * Schema de la table armes dans la BDD
+ * @author HappyDestroy
+ *
+ */
 public class WeaponContract {
 
 	public final static String TABLE = "weapon";

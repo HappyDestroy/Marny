@@ -53,6 +53,11 @@ public class MonsterRoomActivity extends SherlockActivity {
 	private MediaPlayer soudCritic = null;
 	private int noDammageM; //Variable si aucun dommage du monstre
 	private int noDammageH; //Variable si aucun dommage du hero
+	
+	
+	/**
+	 * Methode à la création de l'activity
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -269,7 +274,7 @@ public class MonsterRoomActivity extends SherlockActivity {
 				}
 				
 				int randomHurt = Tools.random(10);
-				//FAIL, SUCCES, CRITIC
+				//coup critique / echec
 				if (randomHurt == 0) {//FAIL
 					valueAttack = 0;
 					label_monster.setText("Le monstre a esquivé "
@@ -279,8 +284,9 @@ public class MonsterRoomActivity extends SherlockActivity {
 					soudFail.start();
 				} else if (randomHurt >= 9){//CRITIC
 					valueAttack = valueAttack * 2;
-					label_monster.setText("Coûp critique de " + valueAttack + 
+					label_monster.setText("Coup critique de " + valueAttack + 
 							" points de dégats \n Au tour du monstre ...");
+					
 					soudCritic = MediaPlayer.create(MonsterRoomActivity.this,
 							 R.raw.critic);
 					soudCritic.start();
@@ -376,6 +382,8 @@ public class MonsterRoomActivity extends SherlockActivity {
 			 heroKO();
 		 }
 	}
+	
+	
 	/**
 	 * Création du menu de l'actionBar
 	 */
@@ -385,6 +393,7 @@ public class MonsterRoomActivity extends SherlockActivity {
 		inflater.inflate(R.menu.main, menu);
 		return true;
 	}
+	
 
 	/**
 	 * Évènement d'un click sur un item de l'actionBar
@@ -420,6 +429,9 @@ public class MonsterRoomActivity extends SherlockActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/**
+	 * Genère un monstre
+	 */
 	private void createMonster() {
 		//On tire un nombre entre 1 et 4 pour choisir le rang du monstre.
 		int random = 1;
@@ -469,10 +481,11 @@ public class MonsterRoomActivity extends SherlockActivity {
 		} while ( c.moveToNext() );
 	}
 	
+	
+	/**
+	 * Gère la mort du héro
+	 */
 	private void heroKO() {
-		
-		
-		
 		new AlertDialog.Builder(MonsterRoomActivity.this)
 	    .setTitle(getApplication().getString(R.string.heroKO_title))
 	    .setMessage(getApplication().getString(R.string.heroKO_msg))
@@ -502,7 +515,9 @@ public class MonsterRoomActivity extends SherlockActivity {
 	}
 	
 
-	//Empêcher l'utilisation du bouton retour
+	/**
+	 * Lors du click sur le bouton Back (Pour le desactiver)
+	 */
 	@Override
 	public void onBackPressed() {
 		Toast.makeText(this, getApplication().getString(R.string.btn_back), 

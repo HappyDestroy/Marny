@@ -7,24 +7,25 @@ import android.content.Intent;
 import android.os.Bundle;
 
 public class SplashScreen extends SherlockActivity {
+	
 	/** Durée d'affichage du SplashScreen */
-   protected int _splashTime = 2000;
-   private ActionBar _actionBar;
+	protected int splashTime = 2000;
+   private ActionBar actionBar;
 
    private Thread splashTread;
 
-   /** Chargement de l'Activity */
+   /**
+    * A la création de l'activity
+    */
    @Override
    public void onCreate(Bundle savedInstanceState) 
    {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.splash);
 
-      _actionBar = getSupportActionBar();
-      _actionBar.hide();
+      actionBar = getSupportActionBar();
+      actionBar.hide();
       
-      final SplashScreen sPlashScreen = this; 
-
       /** Thread pour l'affichage du SplashScreen */
       splashTread = new Thread() 
       {
@@ -35,15 +36,15 @@ public class SplashScreen extends SherlockActivity {
             {
                  synchronized(this)
                  {
-                    wait(_splashTime);
+                    wait(splashTime);
                  }
              } catch(InterruptedException e) {} 
              finally 
              {
                 finish();
-                Intent i = new Intent();
-                i.setClass(sPlashScreen, MainActivity.class);
-                startActivity(i);
+                Intent myIntent = new Intent();
+                myIntent.setClass(SplashScreen.this, MainActivity.class);
+                startActivity(myIntent);
              }
           }
        };

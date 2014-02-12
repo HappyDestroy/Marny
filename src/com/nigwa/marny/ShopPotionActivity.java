@@ -16,18 +16,25 @@ import android.widget.Toast;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 
-
+/**
+ * Activity pour gérer l'achat de potion
+ * @author HappyDestroy
+ *
+ */
 public class ShopPotionActivity extends SherlockActivity {
 	private static SQLiteDatabase db;
 	private static SQLiteOpenHelperClass dbHelper;
 	private Hero myHero;
 	private MediaPlayer soudKaching = null;
 	
+	/**
+	 * Methode à la création de l'activity
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shoppotion);
 		
-        // affiche la petite flèche back
+        // affiche la flèche back
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		myHero = (Hero) getIntent().getSerializableExtra("hero");
@@ -41,6 +48,10 @@ public class ShopPotionActivity extends SherlockActivity {
 		
 		Button btn_buy = (Button) findViewById(R.id.potion_btn_buy);
 		
+		
+		/**
+		 * Listener sur le click du bouton pour acheter
+		 */
 		btn_buy.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -80,16 +91,22 @@ public class ShopPotionActivity extends SherlockActivity {
 		});
 	}
 	
+	/**
+	 * Création du menu de l'actionBar
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.gold_info, menu);
 		MenuItem myMenu = menu.findItem(R.id.gold_info);
-		myMenu.setTitle(String.valueOf(myHero.getGold()) + getApplication().getString(R.string.gold_text_info));
+		myMenu.setTitle(String.valueOf(myHero.getGold()) + 
+				getApplication().getString(R.string.gold_text_info));
 		return true;
 	}
 	
-	
+	/**
+	 * Sur le click d'un item de l'actionBar
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {

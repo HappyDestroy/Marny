@@ -250,27 +250,33 @@ public class ShopShieldActivity extends SherlockActivity {
 	
 					    			String[] whereArgs = { "1" };
 					    			
+					    			
 					    			Tools.updateBDD(getApplicationContext(), 
 					    					HeroContract.TABLE, 
 					    					itemHero, 
 					    					whereClause, 
 					    					whereArgs);
 
+					    			
 					    			//Sauvegarde de l'état "acheté" dans la BDD
 					    			ContentValues itemShield = 
 					    					new ContentValues();
 					    			
+					    			
 					    			itemShield.put("isBuy", 1);
 					    			itemShield.put("isEquip", 1);
 					    			
+					    			
 					    			String[] whereArgsShield = { 
 					    					String.valueOf(myShield.getId()) };
+					    			
 					    			
 					    			Tools.updateBDD(getApplicationContext(), 
 					    					ShieldContract.TABLE, 
 					    					itemShield, 
 					    					whereClause, 
 					    					whereArgsShield);
+					    			
 					    			
 					    			//On rafraichit la ListView avec les 
 					    			//nouveaux items
@@ -308,6 +314,7 @@ public class ShopShieldActivity extends SherlockActivity {
 				+ getApplication().getString(R.string.gold_text_info));
 		return true;
 	}
+	
 	
 	/**
 	 * Sur le click d'un item de l'actionBar

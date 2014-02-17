@@ -71,4 +71,9 @@
     
     <string name="gold_text_info"> Golds</string>
 	<string name="info_monstre"> Informations du monstrer</string>
+	
+	<string name="shakeroom">La porte à l\'air coincé &#8230; 
+	    Essaies de secouer ton appareil !</string>
+	    
+	<string name="door_open">Bravo ! La porte s\'est ouverte !</string>
 </resources>

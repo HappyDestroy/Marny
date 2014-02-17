@@ -3,8 +3,11 @@ package com.nigwa.marny;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.actionbarsherlock.app.SherlockActivity;
+
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
@@ -435,5 +438,53 @@ public class Tools {
 		
 		myAdapter.addAll(myWeapons);
 		myAdapter.notifyDataSetChanged();
+	}
+	
+	/**
+	 * Permet de choisir aléatoirement la prochaine salle à visiter
+	 * @param myActivity - L'activité courante
+	 * @param myHero - l'objet hero
+	 * @param nb_room - le nombre de pièce visité
+	 * @param health_left - la vie restante du héro
+	 */
+	public static void getNextRoom(SherlockActivity myActivity, Hero myHero, int nb_room, int health_left) {
+		int myRandom = Tools.random(21);
+		if(myRandom >= 0 && myRandom <= 13) {
+			Intent intentMonsterRoom = new Intent(myActivity,
+					MonsterRoomActivity.class);
+			
+			intentMonsterRoom.putExtra("hero", myHero);
+			intentMonsterRoom.putExtra("nb_room", nb_room);
+			intentMonsterRoom.putExtra("health_left", health_left);
+			
+			myActivity.startActivity(intentMonsterRoom);
+		} else if(myRandom >= 14 && myRandom <= 17 ) {
+			Intent intentGoldRoom = new Intent(myActivity,
+					GoldRoomActivity.class);
+			
+			intentGoldRoom.putExtra("hero", myHero);
+			intentGoldRoom.putExtra("nb_room", nb_room);
+			intentGoldRoom.putExtra("health_left", health_left);
+			
+			myActivity.startActivity(intentGoldRoom);
+		} else if (myRandom >= 18 && myRandom <= 19) {
+			Intent intentRestRoom = new Intent(myActivity,
+					RestRoomActivity.class);
+			
+			intentRestRoom.putExtra("hero", myHero);
+			intentRestRoom.putExtra("nb_room", nb_room);
+			intentRestRoom.putExtra("health_left", health_left);
+			
+			myActivity.startActivity(intentRestRoom);
+		} else {
+			Intent intentShakeRoom = new Intent(myActivity,
+					ShakeRoomActivity.class);
+			
+			intentShakeRoom.putExtra("hero", myHero);
+			intentShakeRoom.putExtra("nb_room", nb_room);
+			intentShakeRoom.putExtra("health_left", health_left);
+			
+			myActivity.startActivity(intentShakeRoom);
+		}
 	}
 }

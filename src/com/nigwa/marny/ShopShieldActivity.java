@@ -116,6 +116,7 @@ public class ShopShieldActivity extends SherlockActivity {
 				break;
 			}
 			
+			//Changement de l'état des boutons
 			if (myShield.getIsEquip() == 1) {
 				btn_buy.setText(getContext().getString(R.string.equip));
 				btn_buy.setEnabled(false);
@@ -123,6 +124,7 @@ public class ShopShieldActivity extends SherlockActivity {
 				btn_buy.setText(getContext().getString(R.string.already_buy));
 				btn_buy.setEnabled(true);
 			}
+			
 			valueHealth.setText(" + "+String.valueOf(
 					myShield.getHealthValue())+" HP");
 			valueAttack.setText(" + "+String.valueOf(
@@ -132,13 +134,18 @@ public class ShopShieldActivity extends SherlockActivity {
 			valuePrice.setText(" "+String.valueOf(
 					myShield.getPrice()));
 			
+			/**
+			 * Listenner sur le click du bouton pour acheter / équiper
+			 */
 			btn_buy.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(final View v) {
+					
 					String whereClause = "id = ? ";
 					final String whereClauseShieldUnequip = "isEQuip = ?";
 	    			final String[] whereArgsShieldUnequip = { "1" };
+	    			
 					//Si l'item est déjà acheté...
 					if(myShield.getIsBuy() == 1) {
 		        		//On dit que l'ancien item n'est plus dans 
@@ -157,7 +164,7 @@ public class ShopShieldActivity extends SherlockActivity {
 		        		//On ajoute l'item au héro
 		    			ContentValues itemHero = new ContentValues();
 		    			
-		    			itemHero.put("helmet", myShield.getId());
+		    			itemHero.put("shield", myShield.getId());
 
 		    			String[] whereArgsHero = { "1" };
 		    			
@@ -167,7 +174,8 @@ public class ShopShieldActivity extends SherlockActivity {
 		    					whereClause, 
 		    					whereArgsHero);
 		    			
-		    			//On indique a l'item qu'il est dans l'état équipé
+		    			//On indique au bouclier qu'il est dans l'état 
+		    			//équipé
 		    			ContentValues itemShieldEquip = 
 		    					new ContentValues();
 		    			

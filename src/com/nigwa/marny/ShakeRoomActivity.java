@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
@@ -70,6 +71,9 @@ public class ShakeRoomActivity extends SherlockActivity  {
 		});
 	}
 	
+	/**
+	 * Lors de la reprise de l'activity
+	 */
 	@Override
 	public void onResume()
 	{
@@ -77,11 +81,24 @@ public class ShakeRoomActivity extends SherlockActivity  {
 		super.onResume();
 	}
 	  
-	  
+
+	/**
+	 * Lors de la pause de l'activity
+	 */
 	@Override
 	public void onPause()
 	{
 		mShaker.pause();
 		super.onPause();
+	}
+	
+	/**
+	 * Sur l'evènement du bouton "Back" (Pour le desactiver)
+	 */
+	@Override
+	public void onBackPressed() {
+		Toast.makeText(this, getApplication().getString(R.string.btn_back), 
+				Toast.LENGTH_LONG).show();
+		return;
 	}
 }

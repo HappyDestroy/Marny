@@ -21,7 +21,7 @@ public class Tools {
 	
 	/**
 	 * Retourne un nombre aléatoire entre 0 et le nombre en paramètre
-	 * @param length - La valuer max du nombre aléatoire
+	 * @param length - La valeur max du nombre aléatoire
 	 * @return int - Un nombre aléatoire
 	 */
 	public static int random(int length) {

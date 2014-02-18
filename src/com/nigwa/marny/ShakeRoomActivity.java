@@ -1,6 +1,7 @@
 package com.nigwa.marny;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
@@ -16,7 +17,7 @@ public class ShakeRoomActivity extends SherlockActivity  {
 	private Hero myHero;
 	private int nb_room;
 	private int health_left;
-	
+	private MediaPlayer sound_grincement;
 	private ShakeListener mShaker;
 	
 	@Override
@@ -51,6 +52,9 @@ public class ShakeRoomActivity extends SherlockActivity  {
 		mShaker.setOnShakeListener(new ShakeListener.OnShakeListener () {
 			public void onShake() {
 				vibe.vibrate(200);
+				sound_grincement = MediaPlayer.create(
+						ShakeRoomActivity.this, R.raw.grincement);
+				sound_grincement.start();
 				btn_next.setEnabled(true);
 				txt_info.setText(getApplicationContext().getString(
 						R.string.door_open));

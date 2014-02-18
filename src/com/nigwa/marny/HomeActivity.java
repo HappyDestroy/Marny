@@ -75,7 +75,7 @@ public class HomeActivity extends SherlockActivity {
 		});
 		
 		/**
-		 * Listener sur le click du bouton de la boutique
+		 * Listener sur le click du bouton info du héro
 		 */
 		btn_info_hero.setOnClickListener(new OnClickListener() {
 			
@@ -112,7 +112,9 @@ public class HomeActivity extends SherlockActivity {
 			}
 		});
 		
-		//Button GO
+		/**
+		 * Listener sur le click du bouton GO
+		 */
 		btn_go.setOnClickListener(new OnClickListener() {
 
 			@Override

@@ -447,8 +447,10 @@ public class Tools {
 	 * @param nb_room - le nombre de pièce visité
 	 * @param health_left - la vie restante du héro
 	 */
-	public static void getNextRoom(SherlockActivity myActivity, Hero myHero, int nb_room, int health_left) {
-		int myRandom = Tools.random(21);
+	public static void getNextRoom(SherlockActivity myActivity, Hero myHero, 
+			int nb_room, int health_left) {
+		
+		int myRandom = Tools.random(23);
 		if(myRandom >= 0 && myRandom <= 13) {
 			Intent intentMonsterRoom = new Intent(myActivity,
 					MonsterRoomActivity.class);
@@ -476,7 +478,7 @@ public class Tools {
 			intentRestRoom.putExtra("health_left", health_left);
 			
 			myActivity.startActivity(intentRestRoom);
-		} else {
+		} else if(myRandom >= 20 && myRandom <= 21 ) {
 			Intent intentShakeRoom = new Intent(myActivity,
 					ShakeRoomActivity.class);
 			
@@ -485,6 +487,15 @@ public class Tools {
 			intentShakeRoom.putExtra("health_left", health_left);
 			
 			myActivity.startActivity(intentShakeRoom);
+		} else {
+			Intent intentCompassRoom = new Intent(myActivity,
+					CompassRoomActivity.class);
+			
+			intentCompassRoom.putExtra("hero", myHero);
+			intentCompassRoom.putExtra("nb_room", nb_room);
+			intentCompassRoom.putExtra("health_left", health_left);
+			
+			myActivity.startActivity(intentCompassRoom);
 		}
 	}
 }

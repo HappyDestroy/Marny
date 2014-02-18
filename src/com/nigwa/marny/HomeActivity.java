@@ -75,7 +75,7 @@ public class HomeActivity extends SherlockActivity {
 		});
 		
 		/**
-		 * Listener sur le click du bouton de la boutique
+		 * Listener sur le click du bouton info du héro
 		 */
 		btn_info_hero.setOnClickListener(new OnClickListener() {
 			
@@ -112,44 +112,14 @@ public class HomeActivity extends SherlockActivity {
 			}
 		});
 		
-		//Button GO
+		/**
+		 * Listener sur le click du bouton GO
+		 */
 		btn_go.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				//Tirage a usort de la prochaine salle à visiter
-				sound_grincement = MediaPlayer.create(HomeActivity.this, R.raw.grincement);
-				sound_grincement.start();
-				sound_grincement.release();
-				int myRandom = Tools.random(20);
-				if(myRandom >= 0 && myRandom <= 14) {
-					Intent intentMonsterRoom = new Intent(HomeActivity.this,
-							MonsterRoomActivity.class);
-					
-					intentMonsterRoom.putExtra("hero", myHero);
-					intentMonsterRoom.putExtra("nb_room", nb_room);
-					intentMonsterRoom.putExtra("health_left", health_left);
-					
-					startActivity(intentMonsterRoom);
-				} else if(myRandom >= 15 && myRandom <= 18 ) {
-					Intent intentGoldRoom = new Intent(HomeActivity.this,
-							GoldRoomActivity.class);
-					
-					intentGoldRoom.putExtra("hero", myHero);
-					intentGoldRoom.putExtra("nb_room", nb_room);
-					intentGoldRoom.putExtra("health_left", health_left);
-					
-					startActivity(intentGoldRoom);
-				} else {
-					Intent intentRestRoom = new Intent(HomeActivity.this,
-							RestRoomActivity.class);
-					
-					intentRestRoom.putExtra("hero", myHero);
-					intentRestRoom.putExtra("nb_room", nb_room);
-					intentRestRoom.putExtra("health_left", health_left);
-					
-					startActivity(intentRestRoom);
-				}
+				Tools.getNextRoom(HomeActivity.this, myHero, nb_room, health_left);
 			}
 		});
 	}

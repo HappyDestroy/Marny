@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_compassroom" >
+    
+    <TextView
+        android:id="@+id/compassroom_txtview_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:alpha="0.60"
+        android:background="#000000"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/compassroom"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF" />
+
+    <ImageView
+        android:id="@+id/compassroom_imgview_compass"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/empty"
+        android:src="@drawable/compass" />
+
+    <Button
+        android:id="@+id/compassroom_btn_next"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/compassroom_imgview_compass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="@string/next" />
+
+</RelativeLayout>

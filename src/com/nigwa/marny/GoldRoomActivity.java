@@ -10,7 +10,6 @@
  */
 package com.nigwa.marny;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -70,35 +69,7 @@ public class GoldRoomActivity extends SherlockActivity {
 		btn_next.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				int myRandom = Tools.random(20);
-				if(myRandom >= 0 && myRandom <= 14) {
-					Intent intentMonsterRoom = new Intent(GoldRoomActivity.this,
-							MonsterRoomActivity.class);
-					
-					intentMonsterRoom.putExtra("hero", myHero);
-					intentMonsterRoom.putExtra("nb_room", nb_room);
-					intentMonsterRoom.putExtra("health_left", health_left);
-					
-					startActivity(intentMonsterRoom);
-				} else if(myRandom >= 15 && myRandom <= 18 ) {
-					Intent intentGoldRoom = new Intent(GoldRoomActivity.this,
-							GoldRoomActivity.class);
-					
-					intentGoldRoom.putExtra("hero", myHero);
-					intentGoldRoom.putExtra("nb_room", nb_room);
-					intentGoldRoom.putExtra("health_left", health_left);
-					
-					startActivity(intentGoldRoom);
-				} else {
-					Intent intentRestRoom = new Intent(GoldRoomActivity.this,
-							RestRoomActivity.class);
-					
-					intentRestRoom.putExtra("hero", myHero);
-					intentRestRoom.putExtra("nb_room", nb_room);
-					intentRestRoom.putExtra("health_left", health_left);
-					
-					startActivity(intentRestRoom);
-				}
+				Tools.getNextRoom(GoldRoomActivity.this, myHero, nb_room, health_left);
 			}
 		});
 	}

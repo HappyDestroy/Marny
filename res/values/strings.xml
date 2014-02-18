@@ -71,4 +71,13 @@
     
     <string name="gold_text_info"> Golds</string>
 	<string name="info_monstre"> Informations du monstrer</string>
+	
+	<string name="shakeroom">La porte a l\'air coincée &#8230; 
+	    Essaies de secouer ton appareil !</string>
+	    
+	<string name="door_open">Bravo ! La porte s\'est ouverte !</string>
+	
+	<string name="compassroom">Mince ! Un labyrinthe. Utilises ta bousole pour 
+	    te sortir de là !</string>
+	<string name="exitfound">Bravo ! Tu as trouvé la sortie !</string>
 </resources>
